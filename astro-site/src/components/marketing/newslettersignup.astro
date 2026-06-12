@@ -1,0 +1,22 @@
+---
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+const isAr = lang === "ar";
+---
+<section class="section-py newsletter-section" aria-labelledby="newsletter-title">
+  <div class="container">
+    <div class="content-card newsletter-card">
+      <h2 id="newsletter-title" class="section-title">{isAr ? "اشترك في نصائح السفر" : "Get Travel Insights"}</h2>
+      <p class="section-desc">{isAr ? "رسائل قصيرة بالعربية حول الطقس والمواسم وأفضل المسارات للعائلات." : "Short email updates on seasons, route advice, and family-safe planning."}</p>
+      <form data-newsletter-form class="newsletter-form" novalidate>
+        <label for="newsletter-email" class="sr-only">{isAr ? "البريد الإلكتروني" : "Email"}</label>
+        <input id="newsletter-email" name="email" type="email" class="form-input" required placeholder={isAr ? "البريد الإلكتروني" : "Email address"} />
+        <button type="submit" class="btn-hero btn-hero-primary">{isAr ? "اشترك" : "Subscribe"}</button>
+      </form>
+      <p class="contact-disclosure" data-newsletter-status></p>
+    </div>
+  </div>
+</section>

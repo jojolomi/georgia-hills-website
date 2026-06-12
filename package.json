@@ -1,0 +1,48 @@
+{
+  "name": "georgiahills",
+  "private": true,
+  "scripts": {
+    "check": "node scripts/site-check.js",
+    "seo:engine": "node scripts/seo-engine.js",
+    "images:optimize": "node scripts/optimize-images.js",
+    "dev:astro": "npm --prefix astro-site run dev",
+    "build:astro": "npm --prefix astro-site run build",
+    "preview:astro": "npm --prefix astro-site run preview",
+    "dev:admin-v3": "npm --prefix admin-v3 run dev",
+    "build:admin-v3": "npm --prefix admin-v3 run build",
+    "build:admin-v3:hosting": "npm run build:admin-v3 && node scripts/prepare-admin-v3-hosting.js",
+    "preview:admin-v3": "npm --prefix admin-v3 run preview",
+    "seo:validate:hreflang": "node scripts/validate-hreflang.js astro-site/dist",
+    "seo:validate:schema": "node scripts/validate-schema.js astro-site/dist",
+    "seo:validate:links": "node scripts/check-broken-links.js astro-site/dist",
+    "seo:validate:keywords": "node scripts/audit/seo/check-keyword-entities.js astro-site/dist",
+    "seo:validate:legal": "node scripts/audit/seo/check-legal-links.js astro-site/dist",
+    "seo:validate": "npm run seo:validate:hreflang && npm run seo:validate:schema && npm run seo:validate:links && npm run seo:validate:keywords && npm run seo:validate:legal",
+    "perf:asset-budget": "node scripts/audit/perf/asset-budget.js astro-site/dist",
+    "ops:runtime-parity": "node scripts/audit/ops/check-runtime-parity.js",
+    "lighthouse:ci": "lhci autorun --config=.lighthouserc.json",
+    "test": "npm run check && npm --prefix functions test",
+    "test:crossbrowser": "playwright test",
+    "test:admin-v3": "npm run build:astro && npm run build:admin-v3:hosting && playwright test --config=playwright.admin-v3.config.js",
+    "test:admin-v3:auth": "npm run build:astro && npm run build:admin-v3:hosting && playwright test --config=playwright.admin-v3.auth.config.js",
+    "test:browserstack": "browserstack-node-sdk playwright test",
+    "ops:firebase-cost": "node scripts/audit/ops/check-firebase-cost-threshold.js"
+  },
+  "dependencies": {
+    "firebase": "^12.9.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@lhci/cli": "^0.15.0",
+    "@playwright/test": "^1.55.0",
+    "browserstack-node-sdk": "^1.35.6",
+    "eslint": "^10.4.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.6.0",
+    "http-server": "^14.1.1",
+    "prettier": "^3.8.4",
+    "sharp": "^0.34.5",
+    "vitest": "^4.1.8"
+  }
+}

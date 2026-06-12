@@ -1,0 +1,15 @@
+---
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+const isAr = lang === "ar";
+---
+<section class="trust-strip" aria-label={isAr ? "عناصر الثقة" : "Trust highlights"}>
+  <div class="container trust-strip-grid">
+    <p class="trust-chip"><i class="fa-solid fa-id-card"></i> {isAr ? "مرخص رسميًا في جورجيا" : "Licensed in Georgia"}</p>
+    <p class="trust-chip"><i class="fa-solid fa-stopwatch"></i> {isAr ? "متوسط الرد 10 دقائق" : "Avg. response in 10 minutes"}</p>
+    <p class="trust-chip"><i class="fa-solid fa-shield-heart"></i> {isAr ? "برامج عائلية آمنة" : "Family-safe curated routes"}</p>
+  </div>
+</section>

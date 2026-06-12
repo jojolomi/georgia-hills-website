@@ -1,0 +1,8 @@
+---
+interface Props {
+  lang: "en" | "ar";
+}
+const { lang } = Astro.props;
+const isAr = lang === "ar";
+---
+<nav id="navbar" class="navbar" aria-label={isAr ? "التنقل الرئيسي" : "Primary navigation"}></nav>

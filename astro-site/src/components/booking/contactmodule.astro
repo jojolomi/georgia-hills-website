@@ -1,0 +1,60 @@
+---
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+const isAr = lang === "ar";
+---
+<section class="contact-module section-py" id="lead-contact">
+  <div class="container contact-module-grid">
+    <article class="content-card">
+      <h2 class="section-title">{isAr ? "تواصل سريع للحجز" : "Fast Booking Contact"}</h2>
+      <p class="section-desc">{isAr ? "واتساب مباشر أو نموذج ثنائي اللغة مع طلب اتصال." : "Direct WhatsApp or bilingual form with callback request."}</p>
+      <a href="https://wa.me/995579088537" class="btn-hero btn-hero-primary" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i> {isAr ? "احجز عبر واتساب" : "Book via WhatsApp"}
+      </a>
+    </article>
+
+    <article class="content-card">
+      <form id="leadContactForm" data-lead-form novalidate>
+        <div class="form-grid">
+          <div>
+            <label class="form-label" for="lead-name">{isAr ? "الاسم" : "Name"}</label>
+            <input id="lead-name" class="form-input" name="name" required />
+          </div>
+          <div>
+            <label class="form-label" for="lead-phone">{isAr ? "رقم واتساب" : "WhatsApp"}</label>
+            <input id="lead-phone" class="form-input" name="phone" required />
+          </div>
+          <div>
+            <label class="form-label" for="lead-intent">{isAr ? "نوع الطلب" : "Request Type"}</label>
+            <select id="lead-intent" class="form-select" name="intent">
+              <option value="family">{isAr ? "عائلي" : "Family"}</option>
+              <option value="honeymoon">{isAr ? "شهر عسل" : "Honeymoon"}</option>
+              <option value="women_only">{isAr ? "نساء فقط" : "Women-only"}</option>
+              <option value="halal">{isAr ? "برنامج حلال" : "Halal plan"}</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label" for="lead-callback">{isAr ? "اتصال هاتفي" : "Callback"}</label>
+            <select id="lead-callback" class="form-select" name="callback">
+              <option value="no">{isAr ? "لا" : "No"}</option>
+              <option value="yes">{isAr ? "نعم" : "Yes"}</option>
+            </select>
+          </div>
+          <div class="col-span-full">
+            <label class="form-label" for="lead-notes">{isAr ? "ملاحظات" : "Notes"}</label>
+            <textarea id="lead-notes" class="form-textarea" rows="3" name="notes"></textarea>
+          </div>
+        </div>
+        <p class="contact-disclosure">
+          {isAr
+            ? "بالإرسال، أنت توافق على التواصل بخصوص الحجز. الدفع يتم بعد تأكيد العرض."
+            : "By submitting, you agree to booking follow-up. Payment is handled after quote confirmation."}
+        </p>
+        <button class="btn-submit" type="submit">{isAr ? "إرسال الطلب" : "Submit request"}</button>
+      </form>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,61 @@
+---
+interface Props {
+  lang: "en" | "ar";
+}
+const { lang } = Astro.props;
+const isAr = lang === "ar";
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <div class="footer-brand-icon"><i class="fa-solid fa-mountain"></i></div>
+          <span class="footer-brand-text">Georgia Hills</span>
+        </div>
+        <p style="color:var(--color-gray-300); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem;">
+          {isAr ? "حلول نقل احترافية في جورجيا مع تركيز على الأمان والراحة والخبرة المحلية." : "Professional transport and driver services across Georgia with a focus on comfort, safety, and local expertise."}
+        </p>
+      </div>
+      <div>
+        <h3>{isAr ? "روابط سريعة" : "Quick Links"}</h3>
+        <ul>
+          <li><a href={isAr ? "/arabic.html" : "/"}>{isAr ? "الرئيسية" : "Home"}</a></li>
+          <li><a href={isAr ? "/services-ar.html" : "/services.html"}>{isAr ? "الخدمات" : "Services"}</a></li>
+          <li><a href={isAr ? "/guide-ar.html" : "/guide.html"}>{isAr ? "الدليل" : "Guide"}</a></li>
+          <li><a href={isAr ? "/booking-ar.html" : "/booking.html"}>{isAr ? "احجز الآن" : "Book Now"}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>{isAr ? "الثقة والقانون" : "Trust & Legal"}</h3>
+        <ul>
+          <li><a href={isAr ? "/privacy-ar.html" : "/privacy.html"}>{isAr ? "الخصوصية" : "Privacy"}</a></li>
+          <li><a href={isAr ? "/terms-ar.html" : "/terms.html"}>{isAr ? "الشروط" : "Terms"}</a></li>
+          <li><a href={isAr ? "/cancellation-ar.html" : "/cancellation.html"}>{isAr ? "الإلغاء" : "Cancellation"}</a></li>
+          <li><a href={isAr ? "/insurance-ar.html" : "/insurance.html"}>{isAr ? "التأمين" : "Insurance"}</a></li>
+          <li><a href={isAr ? "/licensing-ar.html" : "/licensing.html"}>{isAr ? "الترخيص" : "Licensing"}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>{isAr ? "اتصل بنا" : "Contact"}</h3>
+        <ul style="color:var(--color-gray-400);">
+          <li class="footer-contact-item"><i class="fa-solid fa-phone text-accent"></i> <span dir="ltr">+995 579 08 85 37</span></li>
+          <li class="footer-contact-item"><i class="fa-brands fa-whatsapp text-accent"></i> <span dir="ltr">+995 579 08 85 37</span></li>
+          <li class="footer-contact-item"><i class="fa-solid fa-envelope text-accent"></i> info@georgiahills.com</li>
+          <li class="footer-contact-item">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" data-social="instagram"><i class="fa-brands fa-instagram text-accent"></i> Instagram</a>
+          </li>
+          <li class="footer-contact-item">
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" data-social="tiktok"><i class="fa-brands fa-tiktok text-accent"></i> TikTok</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-map-container">
+          <a href={isAr ? "/office-ar.html" : "/office.html"} class="footer-map-overlay"><i class="fa-solid fa-map-location-dot"></i> <span>{isAr ? "موقعنا" : "Our Location"}</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; <span id="year">2026</span> Georgia Hills. {isAr ? "جميع الحقوق محفوظة." : "All rights reserved."}</div>
+  </div>
+</footer>

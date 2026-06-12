@@ -1,0 +1,40 @@
+---
+interface Props {
+  lang: "en" | "ar";
+  fallbackIntent?: "family" | "luxury_couple" | "women_friendly";
+}
+
+const { lang, fallbackIntent = "family" } = Astro.props;
+const isAr = lang === "ar";
+
+const variants = {
+  family: {
+    title: isAr ? "رحلات عائلية خاصة في جورجيا" : "Private Family Trips in Georgia",
+    subtitle: isAr
+      ? "برنامج مريح للأطفال والعائلة مع سائق عربي ودعم واتساب سريع."
+      : "Comfort-first itinerary for families with private driver and rapid WhatsApp support."
+  },
+  luxury_couple: {
+    title: isAr ? "تجارب فاخرة للأزواج في جورجيا" : "Luxury Couple Experiences in Georgia",
+    subtitle: isAr
+      ? "مسارات رومانسية وإقامة راقية وتنقل خاص بدون تعقيد."
+      : "Romantic routes, premium stays, and private transfers without friction."
+  },
+  women_friendly: {
+    title: isAr ? "جولات نسائية مريحة وآمنة" : "Women-Friendly Travel in Georgia",
+    subtitle: isAr
+      ? "تنسيق عملي للمجموعات النسائية مع أولويات الخصوصية والأمان."
+      : "Practical planning for women groups with privacy and safety priorities."
+  }
+} as const;
+
+const initial = variants[fallbackIntent];
+---
+<div class="hero-content hero-variant" data-hero-variant data-default-intent={fallbackIntent}>
+  <h1 class="hero-title" data-hero-title>{initial.title}</h1>
+  <p class="hero-subtitle" data-hero-subtitle>{initial.subtitle}</p>
+  <div class="hero-buttons">
+    <a href={isAr ? "/booking-ar.html" : "/booking.html"} class="btn-hero btn-hero-primary">{isAr ? "احجز الآن" : "Book now"}</a>
+    <a href="https://wa.me/995579088537" class="btn-hero btn-hero-secondary" target="_blank" rel="noopener noreferrer">{isAr ? "تواصل واتساب" : "WhatsApp"}</a>
+  </div>
+</div>

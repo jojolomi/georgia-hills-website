@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BookingForm from "../components/BookingForm.astro";
+import TrustStrip from "../components/trust/TrustStrip.astro";
+import PackageComparison from "../components/booking/PackageComparison.astro";
+import ContactModule from "../components/booking/ContactModule.astro";
+import BookingEnhancements from "../components/booking/BookingEnhancements.astro";
+import SocialProof from "../components/trust/SocialProof.astro";
+import NewsletterSignup from "../components/marketing/NewsletterSignup.astro";
+import { bookingEnMeta as meta } from "../config/seo";
+import { getCorePageCopy } from "../lib/cms";
+
+const bookingCopy = getCorePageCopy("booking", "en", {
+  heroTitle: "Book Your Trip",
+  heroSubtitle: "Fast quote. Clear price. Confirm on WhatsApp in minutes.",
+  sectionTitle: "Complete Booking Request",
+  sectionSubtitle: "Response time: usually within 10 minutes."
+});
+---
+<BaseLayout lang="en" dir="ltr" meta={meta}>
+  <TrustStrip lang="en" />
+  <BookingForm
+    lang="en"
+    copy={{
+      heroTitle: bookingCopy.heroTitle,
+      heroSubtitle: bookingCopy.heroSubtitle,
+      bookingHeading: bookingCopy.sectionTitle,
+      responseTime: bookingCopy.sectionSubtitle
+    }}
+  />
+  <PackageComparison lang="en" />
+  <BookingEnhancements lang="en" />
+  <SocialProof lang="en" />
+  <ContactModule lang="en" />
+  <NewsletterSignup lang="en" />
+</BaseLayout>

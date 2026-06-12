@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SecondaryPage from "../components/SecondaryPage.astro";
+import { secondaryPages, getSecondaryPageBySlug } from "../config/secondary-pages";
+import { buildSecondaryMeta } from "../config/seo";
+import { mergeSecondaryWithCms } from "../lib/cms";
+
+export function getStaticPaths() {
+  return secondaryPages.map((page) => ({
+    params: { slug: page.slug }
+  }));
+}
+
+const slug = String(Astro.params.slug || "");
+const page = getSecondaryPageBySlug(slug);
+
+if (!page) {
+  throw new Error(`Unknown page slug: ${slug}`);
+}
+
+const resolvedPage = mergeSecondaryWithCms(page);
+const pairedCanonical = resolvedPage.pairedSlug ? getSecondaryPageBySlug(resolvedPage.pairedSlug)?.canonical : undefined;
+const meta = buildSecondaryMeta(resolvedPage, pairedCanonical);
+---
+<BaseLayout lang={resolvedPage.lang} dir={resolvedPage.dir} meta={meta}>
+  <SecondaryPage page={resolvedPage} />
+</BaseLayout>

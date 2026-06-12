@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BookingForm from "../components/BookingForm.astro";
+import TrustStrip from "../components/trust/TrustStrip.astro";
+import PackageComparison from "../components/booking/PackageComparison.astro";
+import ContactModule from "../components/booking/ContactModule.astro";
+import BookingEnhancements from "../components/booking/BookingEnhancements.astro";
+import SocialProof from "../components/trust/SocialProof.astro";
+import NewsletterSignup from "../components/marketing/NewsletterSignup.astro";
+import { bookingArMeta as meta } from "../config/seo";
+import { getCorePageCopy } from "../lib/cms";
+
+const bookingCopy = getCorePageCopy("booking-ar", "ar", {
+  heroTitle: "احجز رحلتك",
+  heroSubtitle: "عرض سريع وسعر واضح وتأكيد عبر واتساب.",
+  sectionTitle: "أكمل طلب الحجز",
+  sectionSubtitle: "وقت الرد غالباً خلال 10 دقائق."
+});
+---
+<BaseLayout lang="ar" dir="rtl" meta={meta}>
+  <TrustStrip lang="ar" />
+  <BookingForm
+    lang="ar"
+    copy={{
+      heroTitle: bookingCopy.heroTitle,
+      heroSubtitle: bookingCopy.heroSubtitle,
+      bookingHeading: bookingCopy.sectionTitle,
+      responseTime: bookingCopy.sectionSubtitle
+    }}
+  />
+  <PackageComparison lang="ar" />
+  <BookingEnhancements lang="ar" />
+  <SocialProof lang="ar" />
+  <ContactModule lang="ar" />
+  <NewsletterSignup lang="ar" />
+</BaseLayout>

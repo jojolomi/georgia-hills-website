@@ -1,0 +1,19 @@
+# Keep legacy market folder URLs working with Astro file-format output
+/ae/ /ae.html 200
+/sa/ /sa.html 200
+/qa/ /qa.html 200
+/kw/ /kw.html 200
+/eg/ /eg.html 200
+
+# Canonicalize duplicate market entrypoints
+/ae/index.html /ae.html 301
+/sa/index.html /sa.html 301
+/qa/index.html /qa.html 301
+/kw/index.html /kw.html 301
+/eg/index.html /eg.html 301
+
+/ae /ae.html 301
+/sa /sa.html 301
+/qa /qa.html 301
+/kw /kw.html 301
+/eg /eg.html 301

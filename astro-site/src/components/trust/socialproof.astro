@@ -1,0 +1,40 @@
+---
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+const isAr = lang === "ar";
+
+const testimonials = [
+  {
+    name: isAr ? "سارة - الرياض" : "Sarah - Riyadh",
+    text: isAr ? "التخطيط كان ممتاز والرحلة مناسبة للأطفال بالكامل." : "Planning was excellent and the itinerary worked perfectly for kids.",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=320&q=70"
+  },
+  {
+    name: isAr ? "أحمد - دبي" : "Ahmad - Dubai",
+    text: isAr ? "الرد سريع جدًا عبر واتساب والسيارة كانت نظيفة ومريحة." : "Very fast WhatsApp response and the vehicle was clean and comfortable.",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=320&q=70"
+  },
+  {
+    name: isAr ? "نورة - الكويت" : "Noura - Kuwait",
+    text: isAr ? "برنامج مناسب للسيدات والعائلة مع شعور أمان كامل." : "Women-friendly and family-safe plan with full sense of safety.",
+    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=320&q=70"
+  }
+];
+---
+<section class="section-py" aria-labelledby="social-proof-title">
+  <div class="container">
+    <h2 id="social-proof-title" class="section-title">{isAr ? "آراء عملاء حقيقية" : "Verified Traveler Feedback"}</h2>
+    <div class="package-grid">
+      {testimonials.map((item) => (
+        <article class="content-card social-proof-card">
+          <img src={item.image} alt={item.name} loading="lazy" decoding="async" class="social-proof-avatar" />
+          <h3>{item.name}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

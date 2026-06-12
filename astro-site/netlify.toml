@@ -1,0 +1,28 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/ae/"
+  to = "/ae.html"
+  status = 200
+
+[[redirects]]
+  from = "/sa/"
+  to = "/sa.html"
+  status = 200
+
+[[redirects]]
+  from = "/qa/"
+  to = "/qa.html"
+  status = 200
+
+[[redirects]]
+  from = "/kw/"
+  to = "/kw.html"
+  status = 200
+
+[[redirects]]
+  from = "/eg/"
+  to = "/eg.html"
+  status = 200

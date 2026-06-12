@@ -1,0 +1,28 @@
+---
+import type { MarketConfig } from "../config/markets";
+
+interface Props {
+  market: MarketConfig;
+}
+
+const { market } = Astro.props;
+---
+<section class="section-py" style="padding-top:8rem; padding-bottom:4rem;">
+  <div class="container">
+    <div class="content-card" style="padding:2rem;">
+      <h1 class="section-title">{market.heading}</h1>
+      <p class="section-desc">{market.body}</p>
+      <iframe
+        title="Georgia destination map"
+        src="https://www.google.com/maps?q=Georgia+country&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        style="width:100%; min-height:280px; border:0; border-radius:0.75rem; margin-top:1rem;"
+      ></iframe>
+      <div class="hero-buttons" style="margin-top:2rem;">
+        <a href="/booking-ar.html" class="btn-hero btn-hero-primary">احجز الآن</a>
+        <a href="https://wa.me/995579088537" class="btn-hero btn-hero-secondary" target="_blank" rel="noopener noreferrer">تواصل واتساب</a>
+      </div>
+    </div>
+  </div>
+</section>

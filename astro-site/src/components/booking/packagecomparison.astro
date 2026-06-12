@@ -1,0 +1,46 @@
+---
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+const isAr = lang === "ar";
+
+const plans = [
+  {
+    id: "standard",
+    title: isAr ? "Standard" : "Standard",
+    text: isAr ? "تنقلات أساسية مع تخطيط يومي عملي." : "Essential private transfers with practical day planning."
+  },
+  {
+    id: "luxury",
+    title: isAr ? "Luxury" : "Luxury",
+    text: isAr ? "مركبة أرقى ومسارات محسنة للأزواج." : "Higher-tier vehicle and elevated couple-focused routes."
+  },
+  {
+    id: "vip_family",
+    title: isAr ? "VIP Family Concierge" : "VIP Family Concierge",
+    text: isAr ? "تنسيق عائلي كامل مع أولوية الدعم." : "Full family concierge with priority support response."
+  }
+];
+---
+<section class="section-py package-comparison" aria-labelledby="package-comparison-title">
+  <div class="container">
+    <h2 id="package-comparison-title" class="section-title">{isAr ? "مقارنة الباقات" : "Package Comparison"}</h2>
+    <div class="package-grid">
+      {plans.map((plan) => (
+        <article class="content-card package-card">
+          <h3>{plan.title}</h3>
+          <p>{plan.text}</p>
+          <a
+            href={isAr ? "/booking-ar.html" : "/booking.html"}
+            class="btn-hero btn-hero-primary package-cta"
+            data-book-plan={plan.id}
+          >
+            {isAr ? "احجز هذه الخطة" : "Book this plan"}
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

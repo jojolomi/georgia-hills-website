@@ -1,0 +1,20 @@
+run_settings:
+  project_name: GeorgiaHills
+  build_name: BrowserStack Cross Browser Smoke
+  timezone: UTC
+platforms:
+  - os: OS X
+    os_version: Ventura
+    browser: Chrome
+    browser_version: latest
+  - os: OS X
+    os_version: Ventura
+    browser: Safari
+    browser_version: latest
+  - os: Windows
+    os_version: 11
+    browser: Edge
+    browser_version: latest
+parallels_per_platform: 1
+browserstackLocal: false
+framework: playwright

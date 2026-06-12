@@ -1,0 +1,92 @@
+---
+interface Props {
+  lang: "en" | "ar";
+  copy?: {
+    heroTitle?: string;
+    heroSubtitle?: string;
+    bookingHeading?: string;
+    responseTime?: string;
+  };
+}
+
+const { lang, copy = {} } = Astro.props;
+const isAr = lang === "ar";
+
+const t = {
+  heroTitle: copy.heroTitle || (isAr ? "احجز رحلتك" : "Book Your Trip"),
+  heroSubtitle: copy.heroSubtitle || (isAr ? "عرض سريع وسعر واضح وتأكيد عبر واتساب." : "Fast quote. Clear price. Confirm on WhatsApp in minutes."),
+  bookingHeading: copy.bookingHeading || (isAr ? "أكمل طلب الحجز" : "Complete Booking Request"),
+  responseTime: copy.responseTime || (isAr ? "وقت الرد غالباً خلال 10 دقائق." : "Response time: usually within 10 minutes."),
+  back: isAr ? "السابق" : "Back",
+  next: isAr ? "التالي" : "Continue",
+  submit: isAr ? "إرسال عبر واتساب" : "Send via WhatsApp",
+  consent: isAr ? "أوافق على التواصل معي بخصوص طلب الحجز." : "I agree to be contacted about this booking request."
+};
+---
+<section class="hero" style="height:45vh; min-height:320px;">
+  <div class="hero-bg-container"><img src="/image-1024.webp" class="hero-img" alt={isAr ? "احجز في جورجيا" : "Book in Georgia"} loading="eager" decoding="async" /><div class="hero-overlay"></div></div>
+  <div class="hero-content"><h1 class="hero-title">{t.heroTitle}</h1><p class="hero-subtitle">{t.heroSubtitle}</p></div>
+</section>
+
+<section id="booking" class="booking-section">
+  <div class="container relative z-10">
+    <div class="reveal text-center" style="margin-bottom:1rem; color:white;">
+      <h2 class="font-bold" style="font-size:2rem; margin-bottom:0.5rem;">{t.bookingHeading}</h2>
+      <p class="opacity-80">{t.responseTime}</p>
+    </div>
+    <div class="booking-card reveal">
+      <div class="booking-stepper" aria-label={isAr ? "خطوات الحجز" : "Booking steps"} style="margin-bottom:1.25rem;">
+        <div style="display:flex; gap:0.5rem; justify-content:center; margin-bottom:0.75rem;">
+          <button type="button" class="step-pill active" id="step-pill-1">1. {isAr ? "البيانات" : "Contact"}</button>
+          <button type="button" class="step-pill" id="step-pill-2">2. {isAr ? "الرحلة" : "Trip"}</button>
+          <button type="button" class="step-pill" id="step-pill-3">3. {isAr ? "التأكيد" : "Confirm"}</button>
+        </div>
+        <div style="height:6px; background:var(--color-gray-200); border-radius:999px; overflow:hidden;">
+          <div id="bookingStepProgress" style="height:100%; width:33%; background:var(--color-primary); transition:width 0.25s ease;"></div>
+        </div>
+      </div>
+      <form id="bookingForm" novalidate>
+        <input type="text" id="companyWebsite" name="companyWebsite" autocomplete="off" tabindex="-1" aria-hidden="true" class="hidden" />
+        <input type="hidden" id="bookingStepState" value="1" />
+        <div class="form-grid">
+          <div class="booking-step" data-step="1">
+            <div><label for="name" class="form-label">{isAr ? "الاسم الكامل" : "Full Name"}</label><input type="text" id="name" name="user_name" class="form-input" autocomplete="name" /></div>
+            <div><label for="phone" class="form-label">{isAr ? "رقم واتساب" : "WhatsApp Number"}</label><input type="tel" id="phone" name="user_phone" class="form-input" autocomplete="tel" /></div>
+            <div><label for="travelIntent" class="form-label">{isAr ? "هدف الرحلة" : "Travel Intent"}</label>
+              <select id="travelIntent" class="form-select">
+                <option value="family">{isAr ? "رحلة عائلية" : "Family Trip"}</option>
+                <option value="honeymoon">{isAr ? "شهر عسل" : "Honeymoon"}</option>
+                <option value="women_only">{isAr ? "مجموعة نسائية" : "Women-Only Group"}</option>
+                <option value="halal">{isAr ? "برنامج حلال" : "Halal-Focused Itinerary"}</option>
+                <option value="luxury">{isAr ? "جولة فاخرة خاصة" : "Luxury Private Tour"}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="booking-step hidden" data-step="2">
+            <div class="form-row-responsive">
+              <div><label for="vehicle" class="form-label">{isAr ? "نوع السيارة" : "Vehicle"}</label><select id="vehicle" class="form-select" data-booking-estimate-trigger><option value="Sedan">Sedan</option><option value="Minivan">Minivan</option></select></div>
+              <div><label for="passengers" class="form-label">{isAr ? "عدد الركاب" : "Passengers"}</label><input type="number" id="passengers" min="1" class="form-input" /></div>
+            </div>
+            <div><label class="form-label">{isAr ? "نوع الخدمة" : "Service Type"}</label><div class="radio-group"><label class="radio-label"><input type="radio" name="driver" value="with_driver" checked class="radio-input hidden" /><span class="radio-content">{isAr ? "مع سائق" : "With Driver"}</span></label><label class="radio-label"><input type="radio" name="driver" value="no_driver" class="radio-input hidden" /><span class="radio-content">{isAr ? "قيادة ذاتية" : "Self Drive"}</span></label></div></div>
+            <div class="col-span-full"><label for="dateRange" class="form-label">{isAr ? "تواريخ الرحلة" : "Trip Dates"}</label><input type="text" id="dateRange" class="form-input" /></div>
+            <div id="price-estimate" class="hidden price-estimate-box"><div><span style="font-size:0.875rem; font-weight:700; color:var(--color-gray-600);">{isAr ? "السعر التقريبي:" : "Estimated Total:"}</span> <span style="font-size:1.5rem; font-weight:800; color:var(--color-primary);" class="price-display" id="total-price-display">0 GEL</span></div><div id="trip-duration" class="text-sm text-gray-600 mt-1" style="font-weight:600;"></div></div>
+          </div>
+
+          <div class="booking-step hidden" data-step="3">
+            <div class="col-span-full"><label for="notes" class="form-label">{isAr ? "ملاحظات" : "Notes"}</label><textarea id="notes" rows="3" class="form-textarea"></textarea></div>
+            <div class="col-span-full"><label style="display:flex; align-items:flex-start; gap:0.5rem;"><input type="checkbox" id="bookingConsent" style="margin-top:0.2rem;" /><span style="font-size:0.85rem; color:var(--color-gray-600);">{t.consent}</span></label><span class="error-text hidden" id="consentError">{isAr ? "يرجى تأكيد الموافقة" : "Please confirm consent"}</span></div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:0.75rem; margin-top:0.75rem;">
+          <button type="button" id="stepPrev" class="action-btn hidden">{t.back}</button>
+          <button type="button" id="stepNext" class="action-btn">{t.next}</button>
+        </div>
+        <p id="intentCtaHint" style="margin-top:0.65rem; color:var(--color-gray-500); font-size:0.9rem;">{isAr ? "عرض مخصص حسب هدف رحلتك." : "Tailored quote for your selected travel intent."}</p>
+        <button type="submit" id="submitBtn" class="btn-submit hidden"><span id="btnText">{t.submit}</span><i id="btnIcon" class="fa-brands fa-whatsapp" style="font-size:1.5rem;"></i><div id="btnSpinner" class="hidden"><i class="fa-solid fa-circle-notch animate-spin"></i></div></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div id="successModal" class="hidden modal-overlay"><div class="modal-content"><button type="button" data-close-modal="successModal" class="modal-close">&times;</button><div class="modal-icon-circle"><i class="fa-solid fa-check" style="font-size:2rem;"></i></div><h3 class="modal-title">{isAr ? "العرض جاهز" : "Quote Ready!"}</h3><p class="modal-desc">{isAr ? "تم تجهيز التفاصيل للإرسال." : "Your trip details are ready to send."}</p><a id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer" class="modal-btn"><i class="fa-brands fa-whatsapp" style="font-size:1.25rem;"></i> <span>{isAr ? "فتح واتساب" : "Open WhatsApp"}</span></a></div></div>

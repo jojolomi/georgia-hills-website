@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /destinations/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /articles/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /bookings/{docId} {
+      allow create: if false;
+      allow read, update, delete: if false;
+    }
+
+    match /settings/{docId} {
+      allow read: if (
+        docId == 'navbar'
+        || docId == 'contact'
+        || docId == 'global'
+        || docId.matches('^page_.*$')
+      );
+      allow write: if false;
+    }
+
+    match /cms_pages/{pageId} {
+      allow read: if false;
+      allow write: if false;
+      match /revisions/{revisionId} {
+        allow read, write: if false;
+      }
+    }
+
+    match /admin_logs/{docId} {
+      allow read, write: if false;
+    }
+
+    match /analytics_booking_daily/{docId} {
+      allow read, write: if false;
+    }
+
+    match /rate_limits/{docId} {
+      allow read, write: if false;
+    }
+
+    match /{document=**} {
+      allow read: if false;
+      allow write: if false;
+    }
+  }
+}

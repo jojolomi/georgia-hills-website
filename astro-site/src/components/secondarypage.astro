@@ -1,0 +1,29 @@
+---
+import type { SecondaryPage } from "../config/secondary-pages";
+import DestinationMedia from "./travel/DestinationMedia.astro";
+import SocialProof from "./trust/SocialProof.astro";
+import NewsletterSignup from "./marketing/NewsletterSignup.astro";
+
+interface Props {
+  page: SecondaryPage;
+}
+
+const { page } = Astro.props;
+const mediaSlugs = new Set(["tbilisi", "tbilisi-ar", "batumi", "batumi-ar", "kazbegi", "kazbegi-ar"]);
+const isLegal = /(privacy|terms|cancellation|insurance|licensing|office|reviews-policy)/.test(page.slug);
+---
+<section class="section-py" style="padding-top:8rem; padding-bottom:4rem;">
+  <div class="container">
+    <div class="content-card" style="padding:2rem;">
+      <h1 class="section-title">{page.heading}</h1>
+      <p class="section-desc">{page.body}</p>
+      <div class="hero-buttons" style="margin-top:2rem;">
+        <a href={page.ctaPrimaryHref} class="btn-hero btn-hero-primary">{page.ctaPrimaryLabel}</a>
+        <a href={page.ctaSecondaryHref} class="btn-hero btn-hero-secondary" target="_blank" rel="noopener noreferrer">{page.ctaSecondaryLabel}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{mediaSlugs.has(page.slug) && <DestinationMedia lang={page.lang} slug={page.slug} />}
+{!isLegal && <SocialProof lang={page.lang} />}
+<NewsletterSignup lang={page.lang} />

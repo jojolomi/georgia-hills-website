@@ -1,0 +1,16 @@
+{
+  "name": "georgiahills-astro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "content:sync": "node scripts/sync-firestore-content.mjs",
+    "content:sync:contentful": "node scripts/sync-contentful-content.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.2.0",
+    "firebase-admin": "^13.0.0"
+  }
+}

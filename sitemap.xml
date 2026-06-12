@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://georgiahills.com/404.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/404.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/404.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/about-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/about.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/about-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/about.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/about-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/ae/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/ae/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/ae/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/arabic.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/arabic.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1024.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/tbilisi-old-town-1024.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Tbilisi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Kazbegi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Martvili.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Signagi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Sedan.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Minivan.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/article-7-days-georgia-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/article-7-days-georgia.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/article-7-days-georgia-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/article-7-days-georgia.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/article-7-days-georgia.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/article-7-days-georgia-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/article-georgian-food-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/article-georgian-food.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/article-georgian-food-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/article-georgian-food.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/article-georgian-food.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/article-georgian-food-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/article-is-georgia-safe-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/article-is-georgia-safe.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/article-is-georgia-safe-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/article-is-georgia-safe.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/article-is-georgia-safe.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/article-is-georgia-safe-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/batumi-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/batumi.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/batumi-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/Batumi.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/batumi.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/batumi.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/batumi-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/Batumi.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/blog-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/blog.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/blog-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/blog.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/blog-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/booking-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/booking.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/booking-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1024.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/booking.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/booking.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/booking-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1024.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/contact-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/contact-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/contact-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/destination.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/destination.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/destination.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/destinations-hub-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/destinations-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/destinations-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/destinations-hub.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/destinations-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/destinations-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/eg/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/eg/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/eg/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/family-travel-hub-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/family-travel-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/family-travel-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/family-travel-hub.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/family-travel-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/family-travel-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/guide-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/guide.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/guide-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/guide.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/guide.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/guide-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/halal-travel-hub-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/halal-travel-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/halal-travel-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/halal-travel-hub.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/halal-travel-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/halal-travel-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/honeymoon-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/honeymoon.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/honeymoon-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/honeymoon.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/honeymoon.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/honeymoon-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/arabic.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1024.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/tbilisi-old-town-1024.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Tbilisi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Kazbegi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Martvili.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Signagi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Sedan.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Minivan.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/itineraries-hub-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/itineraries-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/itineraries-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/itineraries-hub.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/itineraries-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/itineraries-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/kazbegi-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/kazbegi.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/kazbegi-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/Kazbegi.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/kazbegi.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/kazbegi.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/kazbegi-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/Kazbegi.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/kw/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/kw/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/kw/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/legal.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/legal.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/legal.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/martvili-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/martvili.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/martvili-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/Martvili.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/martvili.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/martvili.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/martvili-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/Martvili.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/qa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/qa/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/qa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/sa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/sa/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/sa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/safety-hub-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/safety-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/safety-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/safety-hub.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/safety-hub.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/safety-hub-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/services-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/services.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/services-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/services.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/services-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/image-1600.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/signagi-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/signagi.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/signagi-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/Signagi.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/signagi.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/signagi.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/signagi-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/Signagi.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/tbilisi-ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/tbilisi.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/tbilisi-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://georgiahills.com/Batumi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Kazbegi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Martvili.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Tbilisi.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://georgiahills.com/tbilisi.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georgiahills.com/tbilisi.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://georgiahills.com/tbilisi-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georgiahills.com/" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://georgiahills.com/Batumi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Kazbegi.webp</image:loc></image:image>
+    <image:image><image:loc>https://georgiahills.com/Martvili.webp</image:loc></image:image>
+  </url>
+</urlset>

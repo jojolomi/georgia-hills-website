@@ -1,0 +1,84 @@
+---
+interface Props {
+  lang: "en" | "ar";
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const isAr = lang === "ar";
+const baseSlug = slug.replace(/-ar$/, "");
+
+type MediaConfig = {
+  gallery: Array<{ src: string; altAr: string; altEn: string }>;
+  map: string;
+  lat: number;
+  lon: number;
+  videoId: string;
+};
+
+const mediaMap: Record<string, MediaConfig> = {
+  tbilisi: {
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1539656206689-d4198db85834?auto=format&fit=crop&w=1200&q=70&fm=webp", altAr: "المدينة القديمة في تبليسي", altEn: "Old Tbilisi streets" },
+      { src: "https://images.unsplash.com/photo-1549466540-349079f2913e?auto=format&fit=crop&w=1200&q=70&fm=webp", altAr: "إطلالة بانورامية على تبليسي", altEn: "Tbilisi panorama" },
+      { src: "https://images.unsplash.com/photo-1569947936662-81438903c734?auto=format&fit=crop&w=1200&q=70&fm=webp", altAr: "جسر السلام في تبليسي", altEn: "Peace Bridge in Tbilisi" }
+    ],
+    map: "https://www.google.com/maps?q=Tbilisi,Georgia&output=embed",
+    lat: 41.7151,
+    lon: 44.8271,
+    videoId: "_8z6E1g9h1Y"
+  },
+  batumi: {
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&w=1200&q=70&fm=webp", altAr: "كورنيش باتومي", altEn: "Batumi Boulevard" },
+      { src: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=70&fm=webp", altAr: "واجهة باتومي البحرية", altEn: "Batumi seafront" },
+      { src: "https://images.unsplash.com/photo-1539656206689-d4198db85834?auto=format&fit=crop&w=1200&q=70&fm=webp", altAr: "وسط باتومي", altEn: "Downtown Batumi" }
+    ],
+    map: "https://www.google.com/maps?q=Batumi,Georgia&output=embed",
+    lat: 41.6168,
+    lon: 41.6367,
+    videoId: "V0QxVQ_8YfA"
+  },
+  kazbegi: {
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1549466540-349079f2913e?auto=format&fit=crop&w=1200&q=70&fm=webp", altAr: "جبال كازبيجي", altEn: "Kazbegi mountains" },
+      { src: "https://images.unsplash.com/photo-1560965377-63a236087b32?auto=format&fit=crop&w=1200&q=70&fm=webp", altAr: "كنيسة جيرجيتي", altEn: "Gergeti Trinity Church" },
+      { src: "https://images.unsplash.com/photo-1601758634230-14e0bb3ad5ea?auto=format&fit=crop&w=1200&q=70&fm=webp", altAr: "طريق كازبيجي", altEn: "Kazbegi route" }
+    ],
+    map: "https://www.google.com/maps?q=Stepantsminda,Georgia&output=embed",
+    lat: 42.6564,
+    lon: 44.6433,
+    videoId: "tkv9R4I5A7E"
+  }
+};
+
+const media = mediaMap[baseSlug] || mediaMap.tbilisi;
+---
+<section class="section-py" aria-labelledby="destination-media-title">
+  <div class="container">
+    <h2 id="destination-media-title" class="section-title">{isAr ? "الصور والخريطة والفيديو" : "Gallery, Map, and Video"}</h2>
+    <div class="media-grid">
+      {media.gallery.map((item) => (
+        <figure class="content-card media-tile">
+          <img src={item.src} loading="lazy" decoding="async" alt={isAr ? item.altAr : item.altEn} class="media-image" />
+        </figure>
+      ))}
+    </div>
+
+    <div class="media-grid" style="margin-top:1rem;">
+      <article class="content-card">
+        <h3>{isAr ? "موقع الوجهة" : "Destination Map"}</h3>
+        <iframe title={isAr ? "خريطة الوجهة" : "Destination map"} src={media.map} loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%; min-height:320px; border:0; border-radius:0.75rem;"></iframe>
+      </article>
+      <article class="content-card">
+        <h3>{isAr ? "فيديو تعريفي" : "Travel Preview Video"}</h3>
+        <iframe title={isAr ? "فيديو عن الوجهة" : "Destination video"} loading="lazy" style="width:100%; min-height:320px; border:0; border-radius:0.75rem;" src={`https://www.youtube.com/embed/${media.videoId}?cc_load_policy=1&cc_lang_pref=ar&rel=0`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </article>
+    </div>
+
+    <article class="content-card weather-card" data-weather-widget data-lat={media.lat} data-lon={media.lon} style="margin-top:1rem;">
+      <h3>{isAr ? "حالة الطقس الحالية" : "Current Weather"}</h3>
+      <p><strong data-weather-temp>--</strong> <span data-weather-state>{isAr ? "جاري التحميل" : "Loading"}</span></p>
+    </article>
+  </div>
+</section>

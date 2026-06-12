@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MarketLanding from "../../components/MarketLanding.astro";
+import { getMarketByCode } from "../../config/markets";
+import { buildMarketMeta } from "../../config/seo";
+import { mergeMarketWithCms } from "../../lib/cms";
+
+const rawMarket = getMarketByCode("qa");
+if (!rawMarket) throw new Error("Missing market config: qa");
+const market = mergeMarketWithCms(rawMarket);
+const meta = buildMarketMeta(market);
+---
+<BaseLayout lang="ar" dir="rtl" meta={meta}>
+  <MarketLanding market={market} />
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+const isAr = lang === "ar";
+---
+<section class="section-py" aria-labelledby="booking-tools-title">
+  <div class="container booking-tools-grid">
+    <article class="content-card">
+      <h2 id="booking-tools-title" class="section-title">{isAr ? "الحجز والدفع" : "Booking and Deposit"}</h2>
+      <p class="section-desc">{isAr ? "احجز موعد مكالمة سريعة أو ادفع عربون الحجز عبر Stripe بعد تأكيد العرض." : "Schedule a call or pay a secure deposit with Stripe after quote confirmation."}</p>
+      <div class="hero-buttons">
+        <a href="https://calendar.google.com" data-calendar-cta target="_blank" rel="noopener noreferrer" class="btn-hero btn-hero-secondary">{isAr ? "احجز موعد" : "Book calendar slot"}</a>
+        <a href="https://buy.stripe.com/test_14A9AU6u77Qv0x23cc" data-stripe-cta target="_blank" rel="noopener noreferrer" class="btn-hero btn-hero-primary">{isAr ? "ادفع العربون" : "Pay deposit"}</a>
+      </div>
+      <p class="contact-disclosure">{isAr ? "الدفع يتم بعد مراجعة الخطة النهائية وتأكيد الشروط." : "Deposit is requested only after final itinerary and terms confirmation."}</p>
+    </article>
+
+    <article class="content-card">
+      <h3>{isAr ? "تابعنا" : "Follow Us"}</h3>
+      <div class="hero-buttons">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="btn-hero btn-hero-secondary" data-social="instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="btn-hero btn-hero-secondary" data-social="tiktok"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="btn-hero btn-hero-secondary" data-social="youtube"><i class="fa-brands fa-youtube"></i> YouTube</a>
+      </div>
+    </article>
+  </div>
+</section>

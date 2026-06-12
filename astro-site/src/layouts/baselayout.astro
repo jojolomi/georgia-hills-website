@@ -1,0 +1,49 @@
+---
+import SeoHead from "../components/seo/SeoHead.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import type { SeoContract } from "../components/seo/contract";
+
+interface Props {
+  lang: "en" | "ar";
+  dir: "ltr" | "rtl";
+  meta: SeoContract;
+  hideFooter?: boolean;
+}
+
+const { lang, dir, meta, hideFooter = false } = Astro.props;
+const skipText = lang === "ar" ? "تخطي إلى المحتوى" : "Skip to content";
+const integrations = {
+  hotjarId: import.meta.env.PUBLIC_HOTJAR_ID || "",
+  hotjarSv: import.meta.env.PUBLIC_HOTJAR_SV || "6",
+  tidioKey: import.meta.env.PUBLIC_TIDIO_KEY || "",
+  newsletterEndpoint: import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || "",
+  stripePaymentLink: import.meta.env.PUBLIC_STRIPE_PAYMENT_LINK || "",
+  bookingCalendarLink: import.meta.env.PUBLIC_BOOKING_CALENDAR_LINK || ""
+};
+---
+<!doctype html>
+<html lang={lang} dir={dir} class="scroll-smooth">
+  <head>
+    <SeoHead seo={meta} />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">{skipText}</a>
+    <SiteHeader lang={lang} />
+    <main id="main-content">
+      <slot />
+    </main>
+    {!hideFooter && <SiteFooter lang={lang} />}
+    <script src="/astro-ui.js" defer></script>
+    <script src="/shared-navbar.js" defer></script>
+    <script src="/core-ui.js" defer></script>
+    <script src="/booking.js" defer></script>
+    <script src="/seo-localization.js" defer></script>
+    <script src="/destination.js" defer></script>
+    <script is:inline define:vars={{ integrations }}>
+      window.GHIntegrations = integrations;
+    </script>
+    <script src="/marketing.js" defer></script>
+    <script src="/script.js" defer></script>
+  </body>
+</html>
