@@ -320,7 +320,7 @@
                         <i class="fa-solid fa-map-location-dot step-icon"></i>
                     </div>
                     <h3 id="step1-title" class="step-title">Choose Your Trip</h3>
-                    <p id="step1-desc" class="step-text">Select a destination or customizing your own daily itinerary.</p>
+                    <p id="step1-desc" class="step-text">Select a destination or customize your own daily itinerary.</p>
                 </div>
                 <!-- Step 2 -->
                 <div class="step-card reveal" style="transition-delay: 100ms;">
@@ -747,21 +747,21 @@
                             <!-- Added Language Preference -->
                             <div>
                                 <label for="prefLang" class="form-label">Preferred Language</label>
-                                <select id="prefLang" class="form-select">
+                                <select id="prefLang" name="pref_lang" class="form-select">
                                     <option value="English">English</option>
                                     <option value="Arabic">Arabic</option>
                                 </select>
                             </div>
                             <div>
                                 <label for="vehicle" class="form-label">Vehicle</label>
-                                <select id="vehicle" onchange="BookingManager.updateEstimate()" class="form-select">
+                                <select id="vehicle" name="vehicle" onchange="BookingManager.updateEstimate()" class="form-select">
                                     <option value="Sedan">Sedan</option>
                                     <option value="Minivan">Minivan</option>
                                 </select>
                             </div>
                             <div>
                                 <label for="passengers" class="form-label">Passengers</label>
-                                <input type="number" id="passengers" min="1" inputmode="numeric" pattern="[0-9]*" class="form-input" placeholder="2"> 
+                                <input type="number" id="passengers" name="passengers" min="1" inputmode="numeric" pattern="[0-9]*" class="form-input" placeholder="2"> 
                                 <span class="error-text hidden" id="passengersError">Min 1 passenger</span>
                             </div>
                         </div>
@@ -869,7 +869,7 @@
                         <li class="footer-contact-item"><i class="fa-solid fa-phone text-accent"></i> <a href="tel:+995579088537" dir="ltr">+995 579 08 85 37</a></li>
                         <li class="footer-contact-item"><i class="fa-brands fa-whatsapp text-accent"></i> <a href="https://wa.me/995579088537" target="_blank" rel="noopener noreferrer" dir="ltr">+995 579 08 85 37</a></li>
                         <li class="footer-contact-item"><i class="fa-solid fa-envelope text-accent"></i> <a href="mailto:info@georgiahills.com">info@georgiahills.com</a></li>
-                        <li class="footer-contact-item"><i class="fa-solid fa-location-dot text-accent"></i> <span>123 Rustaveli Ave, Tbilisi, GE</span></li>
+                        <li class="footer-contact-item"><i class="fa-solid fa-location-dot text-accent"></i> <span>Rustaveli Ave, Tbilisi, Georgia</span></li>
                     </ul>
                 </div>
                 <!-- Map -->
