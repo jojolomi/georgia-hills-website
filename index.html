@@ -90,7 +90,14 @@
             "https://wa.me/995579088537"
           ],
           "priceRange": "$$",
-          "areaServed": ["GE", "SA", "AE", "KW", "QA", "OM", "BH"]
+          "areaServed": ["GE", "SA", "AE", "KW", "QA", "OM", "BH"],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "500",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
         },
         {
           "@type": "Service",
@@ -136,7 +143,14 @@
           "name": "Georgia Hills",
           "url": "https://georgiahills.com/",
           "telephone": "+995579088537",
-          "address": { "@type": "PostalAddress", "addressLocality": "Tbilisi", "addressCountry": "GE" }
+          "address": { "@type": "PostalAddress", "addressLocality": "Tbilisi", "addressCountry": "GE" },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "500",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
         },
         {
           "@type": "TouristTrip",
@@ -159,12 +173,6 @@
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://georgiahills.com/" }
           ]
-        },
-        {
-          "@type": "AggregateRating",
-          "itemReviewed": { "@type": "Organization", "name": "Georgia Hills" },
-          "ratingValue": "4.9",
-          "reviewCount": "500"
         }
       ]
     }
@@ -204,7 +212,7 @@
     <!-- PWA Manifest & Icons -->
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="favicon.ico">
-    <link rel="apple-touch-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -243,6 +251,9 @@
 
     <!-- Navbar -->
     <nav id="navbar" class="navbar"></nav>
+
+    <!-- Primary Page Content -->
+    <main id="main-content">
 
 
     <!-- Hero -->
@@ -335,7 +346,7 @@
 
     <!-- About -->
     <section id="about" class="section-py">
-        <main id="main-content" class="container">
+        <div class="container">
             <div class="about-grid">
                 <div class="about-img-container reveal">
                     <div class="about-blob"></div>
@@ -357,7 +368,7 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     </section>
 
     <!-- Destinations -->
@@ -668,37 +679,37 @@
                 <!-- Article 1 -->
                 <article class="blog-card reveal">
                     <div class="blog-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1582236357876-0f836526154b?auto=format&fit=crop&w=600&q=80" width="600" height="400" class="blog-img" alt="Georgian Food" loading="lazy">
+                        <img src="martvili.webp" width="600" height="400" class="blog-img" alt="Georgian Food - الأكل الجورجي" loading="lazy" decoding="async">
                     </div>
                     <div class="blog-content">
-                        <div class="blog-meta">Food & Drink</div>
+                        <div class="blog-meta">Food &amp; Drink</div>
                         <h3 class="blog-title">Top 5 Must-Try Georgian Dishes</h3>
                         <p class="blog-excerpt">From Khinkali to Khachapuri, discover the flavors that make Georgia a culinary paradise.</p>
-                        <a href="blog.html" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="article-georgian-food.html" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </article>
                 <!-- Article 2 -->
                 <article class="blog-card reveal">
                     <div class="blog-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=600&q=80" width="600" height="400" class="blog-img" alt="Kazbegi Mountains" loading="lazy">
+                        <img src="kazbegi-hero-1024.webp" width="600" height="400" class="blog-img" alt="Kazbegi Mountains - جبال كازبيجي" loading="lazy" decoding="async">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">Travel Guide</div>
                         <h3 class="blog-title">7 Days in Georgia: The Perfect Itinerary</h3>
                         <p class="blog-excerpt">A complete guide to seeing Tbilisi, Kazbegi, and Batumi in one week.</p>
-                        <a href="blog.html" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="article-7-days-georgia.html" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </article>
                 <!-- Article 3 -->
                 <article class="blog-card reveal">
                     <div class="blog-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1539656206689-d4198db85834?auto=format&fit=crop&w=600&q=80" width="600" height="400" class="blog-img" alt="Tbilisi Safety" loading="lazy">
+                        <img src="tbilisi-old-town-1024.webp" width="600" height="400" class="blog-img" alt="Tbilisi Old Town - تبليسي القديمة" loading="lazy" decoding="async">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">Tips</div>
                         <h3 class="blog-title">Is Georgia Safe for Solo Travelers?</h3>
                         <p class="blog-excerpt">Everything you need to know about safety, transport, and local customs.</p>
-                        <a href="blog.html" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="article-is-georgia-safe.html" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </article>
             </div>
@@ -817,6 +828,8 @@
             </div>
         </div>
     </section>
+
+    </main><!-- /#main-content -->
 
     <!-- Footer -->
     <footer class="footer">
