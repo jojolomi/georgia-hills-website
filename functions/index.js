@@ -21,7 +21,7 @@ const {
 
 admin.initializeApp();
 
-const REGION = "europe-west1";
+const REGION = "us-central1";
 const DEFAULT_ALLOWED_ORIGINS = [
   "https://georgiahills.com",
   "https://www.georgiahills.com",
@@ -192,7 +192,7 @@ async function requireRole(req, res, roles) {
 
 function isOwnerUid(decoded) {
   const ownerUid = sanitizeString(process.env.ADMIN_OWNER_UID || "", 128);
-  if (!ownerUid) return true;
+  if (!ownerUid) return false;
   return sanitizeString(decoded?.uid || "", 128) === ownerUid;
 }
 
@@ -423,7 +423,7 @@ function buildBookingPayload(input = {}, req) {
 
   if (!consent) return { valid: false, message: "Consent is required" };
   if (name.length < 2) return { valid: false, message: "Invalid name" };
-  if (phone.length < 4) return { valid: false, message: "Invalid phone" };
+  if (phone.length < 8 || phone.length > 25 || !/^\+?[0-9\s\-\(\)]+$/.test(phone)) return { valid: false, message: "Invalid phone" };
   if (service.length < 2) return { valid: false, message: "Invalid service" };
 
   return {
@@ -525,7 +525,7 @@ async function writeSecurityAlert(eventType, req, details = {}, user = null) {
 }
 
 async function verifyAdminAppCheck(req) {
-  const required = parseBoolEnv(process.env.ADMIN_REQUIRE_APP_CHECK, false);
+  const required = parseBoolEnv(process.env.ADMIN_REQUIRE_APP_CHECK, true);
   if (!required) {
     return { ok: true, required: false, appId: null };
   }
@@ -624,6 +624,21 @@ exports.createBookingLead = onRequest(
     if (req.method !== "POST") {
       res.status(405).json({ ok: false, error: "method_not_allowed" });
       return;
+    }
+
+    const requireAppCheck = parseBoolEnv(process.env.REQUIRE_APP_CHECK, false);
+    if (requireAppCheck) {
+      const token = sanitizeString(req.get("x-firebase-appcheck") || "", 2000);
+      if (!token) {
+        res.status(401).json({ ok: false, error: "missing_app_check" });
+        return;
+      }
+      try {
+        await admin.appCheck().verifyToken(token);
+      } catch (error) {
+        res.status(401).json({ ok: false, error: "invalid_app_check" });
+        return;
+      }
     }
 
     const body = req.body || {};
@@ -1291,7 +1306,7 @@ exports.adminApi = onRequest(
       }
     } catch (error) {
       logger.error("adminApi failed", { action, error: error.message });
-      res.status(500).json({ ok: false, error: "server_error", message: error.message });
+      res.status(500).json({ ok: false, error: "server_error", message: "An internal server error occurred" });
     }
   }
 );

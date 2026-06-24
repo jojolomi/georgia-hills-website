@@ -10,7 +10,7 @@
     "content:sync:contentful": "node scripts/sync-contentful-content.mjs"
   },
   "dependencies": {
-    "astro": "^5.2.0",
-    "firebase-admin": "^13.0.0"
+    "astro": "^6.4.7",
+    "firebase-admin": "^14.0.0"
   }
 }

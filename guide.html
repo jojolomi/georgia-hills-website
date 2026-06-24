@@ -1,254 +1,311 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    <link rel="preload" as="style" href="style.min.css?v=16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <meta name="robots" content="index, follow, max-image-preview:large">
-    <title>Travel Guide & FAQ | Georgia Hills</title>
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <title>Travel Guide & FAQ | Georgia Hills Private Travel</title>
     <meta name="description" content="Travel guide for Georgia with visa info, best seasons, halal food tips, and frequently asked questions.">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://georgiahills.com/guide.html">
-        <meta property="og:title" content="Travel Guide & FAQ | Georgia Hills">
-        <meta property="og:description" content="Essential travel advice for Georgia with practical FAQ and local tips.">
-        <meta property="og:image" content="https://georgiahills.com/image-1600.webp">
-        <link rel="alternate" hreflang="en" href="https://georgiahills.com/guide.html" />
-        <link rel="alternate" hreflang="ar" href="https://georgiahills.com/guide-ar.html" />
-        <link rel="alternate" hreflang="x-default" href="https://georgiahills.com/guide.html" />
+    <link rel="alternate" hreflang="en" href="https://georgiahills.com/guide.html" />
+    <link rel="alternate" hreflang="ar" href="https://georgiahills.com/guide-ar.html" />
+    <link rel="alternate" hreflang="x-default" href="https://georgiahills.com/guide.html" />
     <link rel="canonical" href="https://georgiahills.com/guide.html">
-        <script type="application/ld+json">
-        {
-            "@context":"https://schema.org",
-            "@type":"FAQPage",
-            "mainEntity":[
-                {"@type":"Question","name":"Do I need to pay in advance?","acceptedAnswer":{"@type":"Answer","text":"No. Payment can be made at trip start unless otherwise agreed."}},
-                {"@type":"Question","name":"Can I request an Arabic-speaking driver?","acceptedAnswer":{"@type":"Answer","text":"Yes, subject to availability. Mention this in your request."}},
-                {"@type":"Question","name":"Are fuel and parking included?","acceptedAnswer":{"@type":"Answer","text":"Included for driver service unless clearly excluded in custom quote."}}
-            ]
+    <link rel="stylesheet" href="style.min.css?v=16">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="shared-navbar.min.js" defer></script>
+    <script src="script.min.js" defer></script>
+    <style>
+        /* Premium Guide Polish */
+        .premium-guide-container {
+            background: #fafaf9;
+            padding: 5rem 0 8rem;
         }
-        </script>
-    <style>:root{--color-gray-400:#9CA3AF}.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{left:0;top:0;width:auto;height:auto;padding:.5rem;background:#111;color:#fff;z-index:9999}.navbar{position:relative;z-index:50;background:transparent}.container{max-width:1200px;margin-left:auto;margin-right:auto;padding:0 1rem}</style>
-    <link rel="stylesheet" href="style.css?v=15">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <script src="shared-navbar.js" defer></script>
-    <script src="script.js" defer></script>
+        .premium-guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .premium-guide-card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .premium-guide-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: #C29B57;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .premium-guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+            border-color: #e2e8f0;
+        }
+        .premium-guide-card:hover::before {
+            transform: scaleX(1);
+        }
+        .premium-guide-icon {
+            width: 4rem;
+            height: 4rem;
+            background: #f8fafc;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #C29B57;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.4s ease, background 0.4s ease;
+        }
+        .premium-guide-card:hover .premium-guide-icon {
+            transform: scale(1.1) rotate(-5deg);
+            background: rgba(194, 155, 87, 0.1);
+        }
+        .premium-guide-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .premium-guide-text {
+            color: #64748b;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        .premium-guide-text strong {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        /* FAQ Polish */
+        .premium-faq-section {
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 5rem 4rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            max-width: 900px;
+            margin: 6rem auto 0;
+            border: 1px solid #f1f5f9;
+        }
+        .faq-item {
+            border-bottom: 1px solid #f1f5f9;
+            padding: 1.5rem 0;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-item summary {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #0f172a;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item summary:hover {
+            color: #C29B57;
+        }
+        .faq-icon {
+            color: #C29B57;
+            transition: transform 0.3s ease;
+            font-size: 1rem;
+        }
+        .faq-item[open] .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            margin-top: 1.25rem;
+            color: #64748b;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            padding-right: 2rem;
+        }
+        @media(max-width: 768px) {
+            .premium-faq-section { padding: 3rem 1.5rem; }
+            .faq-answer { padding-right: 0; }
+        }
+    </style>
 </head>
-<body class="secondary-page page-about page-guide">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    <div id="network-toast"><i class="fa-solid fa-wifi-slash"></i> <span>You are offline</span></div>
+<body class="secondary-page page-guide">
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="text-center">
-            <div class="preloader-circle animate-bounce">
-                <img src="favicon.ico" width="80" height="80" style="object-fit:contain;" alt="Georgia Hills Logo" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden')">
-                <i class="fa-solid fa-mountain-sun text-primary hidden" style="font-size:2.25rem;"></i>
-            </div>
-            <div class="preloader-text">Loading</div>
-        </div>
-    </div>
-
-    <!-- Navbar -->
     <nav id="navbar" class="navbar"></nav>
 
-    <!-- Premium Hero -->
-    <section class="about-premium-hero" aria-labelledby="guide-title">
-        <div class="about-premium-hero-bg" aria-hidden="true"></div>
-        <div class="hero-overlay-gradient"></div>
-        <div class="container hero-content-container">
-            <div class="hero-text-content fade-in-up">
-                <span class="hero-badge"><i class="fa-solid fa-book-open"></i> Travel Guide</span>
-                <h1 class="section-title about-premium-title" id="guide-title">
-                    Essential Tips for<br>
-                    <span class="text-gradient-gold">Georgia.</span>
-                </h1>
-                <p class="section-desc about-premium-subtitle">
-                    Everything you need to know for a smooth journey.
-                    <span class="highlight-text">Visa rules, best seasons, and local advice.</span>
-                </p>
-                
-                <div class="hero-actions">
-                    <a href="#faq" class="btn-hero-primary">
-                        <span>Read FAQ</span>
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </a>
-                    <a href="services.html" class="btn-hero-secondary">
-                        <i class="fa-solid fa-car"></i> Our Services
-                    </a>
-                </div>
+    <!-- Perfected Hero Section -->
+    <header class="abt-hero">
+        <div class="abt-hero-bg" style="background-image: url('image-1600.webp'); background-position: center; opacity: 0.5;"></div>
+        <div class="abt-hero-glow abt-hero-glow--left"></div>
+        <div class="abt-hero-glow abt-hero-glow--right"></div>
+        <div class="container abt-hero-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <span class="abt-hero-label" style="margin: 0 auto 1.5rem;">
+                <i class="fa-solid fa-passport"></i> Travel Guide
+            </span>
+            <h1 class="abt-hero-title">
+                Essential Tips for <span class="abt-hero-accent">Georgia.</span>
+            </h1>
+            <p class="abt-hero-desc" style="margin: 0 auto 2rem;">Everything you need to know for a smooth journey. Visa rules, best seasons, and local advice.</p>
+            <div style="display: flex; justify-content: center; gap: 1rem;">
+                <a href="#faq" class="abt-hero-btn-primary" style="text-decoration: none;">
+                    Read FAQ <i class="fa-solid fa-arrow-down"></i>
+                </a>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- Trust Strip -->
-    <section class="trust-strip-pro about-brand-strip" aria-label="Why trust our guide">
-        <div class="container trust-strip-inner">
-            <span class="trust-item-pro"><i class="fa-solid fa-check-circle text-accent"></i> Verified Info</span>
-            <span class="trust-item-pro"><i class="fa-solid fa-calendar-check text-accent"></i> Updated 2026</span>
-            <span class="trust-item-pro"><i class="fa-solid fa-user-shield text-accent"></i> Local Experts</span>
+    <main class="premium-guide-container">
+        
+        <div class="container text-center" style="margin-bottom: 4rem; max-width: 1200px; margin-left: auto; margin-right: auto; padding: 0 1.5rem;">
+            <span style="color: #C29B57; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem;">Plan Your Trip</span>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: #0f172a; margin-top: 0.5rem;">Before You Arrive</h2>
+            <div style="width: 60px; height: 3px; background: #C29B57; margin: 1rem auto 0; border-radius: 2px;"></div>
         </div>
-    </section>
 
-    <!-- Main Content -->
-    <section class="section-py about-premium-content">
-        <main class="container" id="main-content">
+        <!-- Polished Guide Grid -->
+        <div class="premium-guide-grid">
             
-            <!-- Section Title -->
-            <div class="about-section-intro">
-                <span class="eyebrow-text">Plan Your Trip</span>
-                <h2 class="display-heading">Before You Arrive</h2>
-                <p class="lead-text">Key information to help you prepare for your Georgian adventure.</p>
+            <div class="premium-guide-card">
+                <div class="premium-guide-icon"><i class="fa-solid fa-passport"></i></div>
+                <h3 class="premium-guide-title">Visa Policy</h3>
+                <p class="premium-guide-text">Citizens of GCC countries (UAE, Saudi Arabia, Kuwait, Oman, Qatar, Bahrain) can enter Georgia <strong>visa-free</strong> for up to 1 full year.</p>
             </div>
 
-            <!-- Guide Grid (Reusing About Features Styling) -->
-            <div class="about-feature-grid" style="margin-bottom:4rem;">
-                
-                <!-- Visa -->
-                <div class="feature-card">
-                    <div class="feature-icon-pro"><i class="fa-solid fa-passport"></i></div>
-                    <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:0.75rem;">Visa Policy</h3>
-                    <p style="color:var(--color-gray-600); font-size:0.95rem; line-height:1.6;">
-                        Citizens of GCC countries (UAE, Saudi Arabia, Kuwait, Oman, Qatar, Bahrain) can enter Georgia <strong>visa-free</strong> for up to 1 year.
-                    </p>
-                </div>
-
-                <!-- Weather -->
-                <div class="feature-card">
-                    <div class="feature-icon-pro"><i class="fa-solid fa-cloud-sun"></i></div>
-                    <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:0.75rem;">Best Time to Visit</h3>
-                    <p style="color:var(--color-gray-600); font-size:0.95rem; line-height:1.6;">
-                        <strong>Spring (Apr-Jun)</strong> and <strong>Autumn (Sep-Oct)</strong> offer the mildest weather. Winter is perfect for skiing in Gudauri or Bakuriani.
-                    </p>
-                </div>
-
-                <!-- Food -->
-                <div class="feature-card">
-                    <div class="feature-icon-pro"><i class="fa-solid fa-utensils"></i></div>
-                    <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:0.75rem;">Halal Food</h3>
-                    <p style="color:var(--color-gray-600); font-size:0.95rem; line-height:1.6;">
-                        Halal restaurants are widely available in Tbilisi (especially Marjanishvili area) and Batumi. Georgian cuisine also offers many vegetarian dishes.
-                    </p>
-                </div>
-
-                <!-- Money -->
-                <div class="feature-card">
-                    <div class="feature-icon-pro"><i class="fa-solid fa-money-bill-wave"></i></div>
-                    <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:0.75rem;">Currency</h3>
-                    <p style="color:var(--color-gray-600); font-size:0.95rem; line-height:1.6;">
-                        The currency is the <strong>Georgian Lari (GEL)</strong>. Cards are widely accepted in cities, but carry cash for rural areas.
-                    </p>
-                </div>
+            <div class="premium-guide-card">
+                <div class="premium-guide-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+                <h3 class="premium-guide-title">Best Time to Visit</h3>
+                <p class="premium-guide-text"><strong>Spring (Apr-Jun)</strong> and <strong>Autumn (Sep-Oct)</strong> offer the mildest weather. Winter is perfect for skiing in Gudauri.</p>
             </div>
 
-            <!-- FAQ Section -->
-            <div id="faq" class="content-card" style="padding:3rem 2rem; background:#f8fafc; border:none; border-radius:1.5rem;">
-                <div class="text-center" style="margin-bottom:3rem;">
-                    <span class="eyebrow-text">Common Questions</span>
-                    <h2 class="section-heading">Frequently Asked Questions</h2>
+            <div class="premium-guide-card">
+                <div class="premium-guide-icon"><i class="fa-solid fa-utensils"></i></div>
+                <h3 class="premium-guide-title">Halal Food</h3>
+                <p class="premium-guide-text">Halal restaurants are widely available in Tbilisi (especially Marjanishvili) and Batumi. Georgian cuisine is also incredibly vegetarian-friendly.</p>
+            </div>
+
+            <div class="premium-guide-card">
+                <div class="premium-guide-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+                <h3 class="premium-guide-title">Currency</h3>
+                <p class="premium-guide-text">The local currency is the <strong>Georgian Lari (GEL)</strong>. Cards are widely accepted in cities, but carry some cash for rural areas like Kazbegi.</p>
+            </div>
+            
+            <div class="premium-guide-card">
+                <div class="premium-guide-icon"><i class="fa-solid fa-wifi"></i></div>
+                <h3 class="premium-guide-title">Connectivity</h3>
+                <p class="premium-guide-text">Buy a local SIM (Magti or Silknet) at the airport for fast 4G internet. Our premium minivans also come equipped with onboard Wi-Fi.</p>
+            </div>
+
+            <div class="premium-guide-card">
+                <div class="premium-guide-icon"><i class="fa-solid fa-shield-heart"></i></div>
+                <h3 class="premium-guide-title">Safety</h3>
+                <p class="premium-guide-text">Georgia is consistently ranked as one of the <strong>safest countries in the world</strong> for tourists. Violent crime against travelers is extremely rare.</p>
+            </div>
+
+        </div>
+
+        <!-- Polished FAQ Section -->
+        <div class="container" style="padding: 0 1.5rem;">
+            <div id="faq" class="premium-faq-section">
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <span style="color: #C29B57; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem;">Common Questions</span>
+                    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #0f172a; margin-top: 0.5rem;">Frequently Asked Questions</h2>
                 </div>
                 
-                <div class="faq-container" style="max-width:800px; margin:0 auto;">
-                    <details class="faq-item" open style="background:white; border:1px solid #e2e8f0; margin-bottom:1rem; border-radius:1rem; overflow:hidden;">
-                        <summary class="faq-header" style="padding:1.5rem; font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-                            <span style="font-size:1.1rem; color:var(--color-dark);">Do I need to pay in advance?</span>
-                            <i class="fa-solid fa-chevron-down" style="color:var(--color-primary); transition:transform 0.3s;"></i>
-                        </summary>
-                        <div class="faq-answer" style="padding:0 1.5rem 1.5rem 1.5rem; color:var(--color-gray-600); line-height:1.7;">
-                            No. Payment can be made at trip start unless otherwise agreed. We value trust and flexibility.
-                        </div>
-                    </details>
+                <details class="faq-item" open>
+                    <summary>
+                        <span>Do I need to pay in advance?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </summary>
+                    <div class="faq-answer">
+                        No. Payment can be made at trip start unless otherwise agreed. We value trust and flexibility, so we do not require upfront deposits for standard tours.
+                    </div>
+                </details>
 
-                    <details class="faq-item" style="background:white; border:1px solid #e2e8f0; margin-bottom:1rem; border-radius:1rem; overflow:hidden;">
-                        <summary class="faq-header" style="padding:1.5rem; font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-                            <span style="font-size:1.1rem; color:var(--color-dark);">Can I request an Arabic-speaking driver?</span>
-                            <i class="fa-solid fa-chevron-down" style="color:var(--color-primary); transition:transform 0.3s;"></i>
-                        </summary>
-                        <div class="faq-answer" style="padding:0 1.5rem 1.5rem 1.5rem; color:var(--color-gray-600); line-height:1.7;">
-                            Yes. We have a team of drivers who speak Arabic, English, and Russian. Please mention your language preference when booking, and we will do our best to assign a suitable driver (subject to availability).
-                        </div>
-                    </details>
+                <details class="faq-item">
+                    <summary>
+                        <span>Can I request an Arabic-speaking driver?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </summary>
+                    <div class="faq-answer">
+                        Yes. We have a team of drivers who speak Arabic, English, and Russian. Please mention your language preference when booking, and we will do our best to assign a suitable driver (subject to availability).
+                    </div>
+                </details>
 
-                    <details class="faq-item" style="background:white; border:1px solid #e2e8f0; margin-bottom:1rem; border-radius:1rem; overflow:hidden;">
-                        <summary class="faq-header" style="padding:1.5rem; font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-                            <span style="font-size:1.1rem; color:var(--color-dark);">Are fuel and parking included?</span>
-                            <i class="fa-solid fa-chevron-down" style="color:var(--color-primary); transition:transform 0.3s;"></i>
-                        </summary>
-                        <div class="faq-answer" style="padding:0 1.5rem 1.5rem 1.5rem; color:var(--color-gray-600); line-height:1.7;">
-                            Yes. Our prices are <strong>all-inclusive</strong>. They cover the vehicle, driver service, fuel, parking fees, and driver's accommodation/meals (for multi-day tours). You only pay for your own hotels, food, and entry tickets.
-                        </div>
-                    </details>
+                <details class="faq-item">
+                    <summary>
+                        <span>Are fuel and parking included?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </summary>
+                    <div class="faq-answer">
+                        Yes. Our prices are <strong>all-inclusive</strong>. They cover the vehicle, driver service, fuel, parking fees, and driver's accommodation/meals (for multi-day tours). You only pay for your own hotels, food, and entry tickets.
+                    </div>
+                </details>
 
-                    <details class="faq-item" style="background:white; border:1px solid #e2e8f0; margin-bottom:1rem; border-radius:1rem; overflow:hidden;">
-                        <summary class="faq-header" style="padding:1.5rem; font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-                            <span style="font-size:1.1rem; color:var(--color-dark);">What vehicles do you offer?</span>
-                            <i class="fa-solid fa-chevron-down" style="color:var(--color-primary); transition:transform 0.3s;"></i>
-                        </summary>
-                        <div class="faq-answer" style="padding:0 1.5rem 1.5rem 1.5rem; color:var(--color-gray-600); line-height:1.7;">
-                            We maintain a modern fleet of:<br>
-                            • <strong>Sedans</strong> (Toyota Camry/Prius class) for 1-3 passengers.<br>
-                            • <strong>Minivans</strong> (Mercedes Vito/V-Class) for 4-7 passengers.<br>
-                            All vehicles are equipped with AC, comfortable seats, and are strictly non-smoking.
-                        </div>
-                    </details>
-                </div>
+                <details class="faq-item">
+                    <summary>
+                        <span>What vehicles do you offer?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </summary>
+                    <div class="faq-answer">
+                        We maintain a modern, premium fleet of:<br>
+                        • <strong>Sedans</strong> (Toyota Camry/Prius class) for 1-3 passengers.<br>
+                        • <strong>Minivans</strong> (Mercedes V-Class / Vito) for 4-7 passengers.<br>
+                        All vehicles are equipped with climate control, leather seats, and are strictly non-smoking.
+                    </div>
+                </details>
             </div>
+        </div>
 
-            <!-- CTA -->
-            <div class="abt-cta-section" style="margin-top:4rem; border-radius:2rem; text-align:center;">
-                <h2 class="abt-cta-title">Ready to Explore Georgia?</h2>
-                <p class="abt-cta-desc">Book your private driver today and enjoy a hassle-free vacation.</p>
-                <div class="abt-cta-buttons">
-                    <a href="booking.html" class="abt-cta-btn-primary">Book Now</a>
-                    <a href="https://wa.me/995579088537" class="abt-cta-btn-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                </div>
-            </div>
-
-        </main>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; padding: 4rem 0;">
                 <div>
-                    <div class="footer-brand">
-                        <div class="footer-brand-icon"><i class="fa-solid fa-mountain"></i></div>
-                        <span class="footer-brand-text">Georgia Hills</span>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; color: #fff; font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700;">
+                        <i class="fa-solid fa-mountain" style="color: #C29B57;"></i>
+                        <span>Georgia Hills</span>
                     </div>
-                    <p style="color:var(--color-gray-300); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem;">Professional transport solutions in Georgia focused on safety, comfort, and local expertise.</p>
-                    <div class="footer-social">
-                        <a href="https://instagram.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://facebook.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <button onclick="App.share()" class="social-btn" aria-label="Share Website"><i class="fa-solid fa-share-nodes"></i></button>
-                    </div>
+                    <p style="color: var(--color-gray-300); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Professional transport solutions in Georgia focused on safety, comfort, and local expertise.</p>
                 </div>
                 <div>
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="guide.html">Guide</a></li>
-                        <li><a href="booking.html">Book Now</a></li>
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Quick Links</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="index.html" style="color: var(--color-gray-400); text-decoration: none;">Home</a></li>
+                        <li><a href="services.html" style="color: var(--color-gray-400); text-decoration: none;">Services</a></li>
+                        <li><a href="blog.html" style="color: var(--color-gray-400); text-decoration: none;">Blog</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3>Contact</h3>
-                    <ul style="color:var(--color-gray-400);">
-                        <li class="footer-contact-item"><i class="fa-solid fa-phone text-accent"></i> <a href="tel:+995579088537" dir="ltr" style="color:inherit;">+995 579 08 85 37</a></li>
-                        <li class="footer-contact-item"><i class="fa-brands fa-whatsapp text-accent"></i> <a href="https://wa.me/995579088537" target="_blank" rel="noopener noreferrer" dir="ltr" style="color:inherit;">+995 579 08 85 37</a></li>
-                        <li class="footer-contact-item"><i class="fa-solid fa-envelope text-accent"></i> info@georgiahills.com</li>
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Contact</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem; color: var(--color-gray-400);">
+                        <li><i class="fa-solid fa-phone" style="color: #C29B57; width: 20px;"></i> <a href="tel:+995579088537" dir="ltr" style="color: inherit; text-decoration: none;">+995 579 08 85 37</a></li>
+                        <li><i class="fa-brands fa-whatsapp" style="color: #C29B57; width: 20px;"></i> <a href="https://wa.me/995579088537" target="_blank" rel="noopener noreferrer" dir="ltr" style="color: inherit; text-decoration: none;">+995 579 08 85 37</a></li>
                     </ul>
-                </div>
-                <div>
-                    <div class="footer-map-container">
-                        <span class="footer-map-overlay"><i class="fa-solid fa-map-location-dot"></i> <span>Our Location</span></span>
-                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">&copy; <span id="year">2026</span> Georgia Hills. All rights reserved.</div>
         </div>
     </footer>
 </body>

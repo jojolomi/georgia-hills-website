@@ -1,35 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preload" as="style" href="style.min.css?v=16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Georgia Hills Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="firebase-config.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Georgia Hills — Admin Panel</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Firebase Config (optional external) -->
+    <script src="firebase-config.js" onerror="console.log('No external firebase-config.js')"></script>
+
+    <!-- Admin Styles -->
     <link rel="stylesheet" href="admin.css">
-    <style>
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans h-screen overflow-hidden">
-    <div id="app" class="h-full">
-        <div class="flex items-center justify-center min-h-screen">
-            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600"></div>
+<body>
+    <div id="app">
+        <!-- Initial loading state -->
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <span class="spinner-text">Loading Admin Panel…</span>
         </div>
     </div>
+
+    <!-- Toast container (always in DOM) -->
+    <div id="toast-container"></div>
+
+    <!-- Modal overlay + panel -->
+    <div id="modal-backdrop" class="modal-backdrop"></div>
+    <div id="modal-panel" class="modal-panel"></div>
+    <!-- Mobile sidebar overlay -->
+    <div id="sb-overlay" class="sb-overlay" onclick="window.Admin && Admin.closeMobileSidebar()"></div>
+
     <script>
-        // Admin should always use fresh scripts/config; avoid stale SW cache issues.
+        // Unregister service workers so admin always gets fresh code
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations()
-                .then((regs) => Promise.all(regs.map((r) => r.unregister())))
+                .then(regs => Promise.all(regs.map(r => r.unregister())))
                 .catch(() => {});
         }
     </script>
-    <script type="module" src="admin-v2.js"></script>
+    <script type="module" src="admin-v2.js?v=2"></script>
 </body>
 </html>
 

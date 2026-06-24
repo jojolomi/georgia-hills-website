@@ -1,84 +1,156 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    <link rel="preload" as="style" href="style.min.css?v=16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>About Us | Georgia Hills</title>
+    <title>About Us | Georgia Hills Private Travel</title>
     <meta name="description" content="Learn about Georgia Hills, our service standards, and why families choose us for transport in Georgia.">
     
-    <link rel="stylesheet" href="style.css?v=25">
+    <link rel="stylesheet" href="style.min.css?v=16">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
-        .premium-hero-bg {
-            background-image: url('kazbegi-hero-1600.webp') !important;
-            background-position: center 30% !important;
-            opacity: 0.9 !important;
-            filter: brightness(0.7) !important; 
-        }
-    </style>
-    <script src="shared-navbar.js" defer></script>
-    <script src="script.js" defer></script>
+    <script src="shared-navbar.min.js" defer></script>
+    <script src="script.min.js" defer></script>
 </head>
-<body class="page-destination secondary-page light-premium">
+<body class="page-about">
 
     <nav id="navbar" class="navbar"></nav>
 
-    <header class="premium-hero">
-        <div class="premium-hero-bg"></div>
-        <div class="premium-hero-vignette"></div>
-        
-        <div class="premium-hero-content reveal-item">
-            <div class="hero-badge"><i class="fa-solid fa-users" style="color: #C29B57;"></i> Meet Georgia Hills</div>
-            <h1 class="premium-title">Your Trusted Guide.</h1>
-            <p class="premium-subtitle">We founded Georgia Hills with one goal: providing authentic Georgian hospitality with family-focused transport standards.</p>
-            
-            <a href="#story" class="btn-premium hero-btn">Discover Our Story <i class="fa-solid fa-arrow-down" style="margin-left: 0.5rem;"></i></a>
-        </div>
-
-        <div class="scroll-indicator">
-            <span class="scroll-text">Scroll to Discover</span>
-            <div class="scroll-line"></div>
+    <!-- Hero Section -->
+    <header class="abt-hero">
+        <div class="abt-hero-bg"></div>
+        <div class="abt-hero-glow abt-hero-glow--left"></div>
+        <div class="abt-hero-glow abt-hero-glow--right"></div>
+        <div class="container abt-hero-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <span class="abt-hero-label">
+                <i class="fa-solid fa-star"></i> Premium Private Travel
+            </span>
+            <h1 class="abt-hero-title">
+                More than drivers.<br>We are your <span class="abt-hero-accent">Hosts in Georgia.</span>
+            </h1>
+            <p class="abt-hero-desc">We provide premium private driver services and carefully curated itineraries in Georgia with a strict focus on comfort, safety, and authentic hospitality.</p>
+            <div class="abt-hero-actions">
+                <a href="booking.html" class="abt-hero-btn-primary" style="text-decoration: none;">
+                    Book Your Trip <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="destinations-hub.html" class="abt-hero-btn-ghost" style="text-decoration: none;">
+                    View Destinations
+                </a>
+            </div>
         </div>
     </header>
 
-    <main class="premium-grid" id="story">
-        
-        <!-- Story Section -->
-        <div class="soft-card col-12 reveal-item" style="padding: 4rem; overflow: hidden; background: #fff;">
-            <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-                <span style="color: #C29B57; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; display: block; margin-bottom: 1rem;">Our Mission</span>
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #112d1e; margin-bottom: 2rem;">More than drivers.<br>We are your hosts in Georgia.</h2>
-                <p style="font-size: 1.15rem; color: #475569; line-height: 1.8; margin-bottom: 1.5rem;">At Georgia Hills, we believe the best way to see the country is through the eyes of a local friend. Founded by a team of passionate travel experts, we strive to elevate the standards of private transport in Georgia.</p>
-                <p style="font-size: 1.15rem; color: #475569; line-height: 1.8; margin-bottom: 1.5rem;">We noticed many visitors were treated as just "another trip". We wanted to offer something different: <strong>Genuine Care</strong>. From the moment you arrive in Tbilisi until your final departure, we are dedicated to your comfort, safety, and enjoyment.</p>
-                <p style="font-size: 1.15rem; color: #475569; line-height: 1.8;">We don't just take you from point A to B. We share the best hidden restaurants, stop for photos at the most beautiful viewpoints, and ensure your family feels completely safe every step of the way.</p>
+    <!-- Stats Bar -->
+    <div class="container relative" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; z-index: 10;">
+        <div class="abt-stats-bar">
+            <div class="abt-stat">
+                <span class="abt-stat-value">5+</span>
+                <span class="abt-stat-label">Years Experience</span>
+            </div>
+            <div class="abt-stat">
+                <span class="abt-stat-value">1,200+</span>
+                <span class="abt-stat-label">Happy Families</span>
+            </div>
+            <div class="abt-stat">
+                <span class="abt-stat-value">24/7</span>
+                <span class="abt-stat-label">Dedicated Support</span>
+            </div>
+            <div class="abt-stat">
+                <span class="abt-stat-value">100%</span>
+                <span class="abt-stat-label">Privacy Focused</span>
             </div>
         </div>
+    </div>
 
-        <!-- Trust Features -->
-        <div class="soft-card col-4 reveal-item" style="padding: 3rem; background: #fafafa; border-top: 3px solid #C29B57;">
-            <div style="font-size: 2.5rem; color: #C29B57; margin-bottom: 1.5rem;"><i class="fa-solid fa-shield-halved"></i></div>
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; color: #112d1e; margin-bottom: 1rem;">Safety First Policy</h3>
-            <p style="color: #475569; line-height: 1.6;">Our fleet undergoes rigorous daily inspections. Our drivers are trained in advanced mountain navigation. Your family's safety is our highest priority.</p>
+    <!-- Our Story Section -->
+    <section class="abt-section abt-story" id="story" style="padding: 5rem 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <div class="abt-story-grid">
+                <div class="abt-story-image">
+                    <img src="image-640.webp" alt="Georgia Hills Private Tours" loading="lazy" />
+                    <div class="abt-story-badge">
+                        <i class="fa-solid fa-shield-check"></i> Licensed & Verified
+                    </div>
+                </div>
+                <div>
+                    <h2 class="abt-heading">Our Story</h2>
+                    <p class="abt-text">
+                        Georgia Hills started with a simple vision: to elevate the standard of private transport in Georgia. We noticed many visitors were treated as just "another trip". We wanted to offer something fundamentally different: Genuine Care.
+                    </p>
+                    <p class="abt-text">
+                        Today, we are proud to be the premier choice for GCC travelers and families seeking absolute comfort, strict privacy, and exceptional service from arrival to departure. We don't just take you from point A to B; we curate an experience.
+                    </p>
+                    <div class="abt-highlight-strip">
+                        <div class="abt-highlight"><i class="fa-solid fa-check-circle"></i> Modern, immaculately clean vehicles</div>
+                        <div class="abt-highlight"><i class="fa-solid fa-check-circle"></i> Professional English-speaking drivers</div>
+                        <div class="abt-highlight"><i class="fa-solid fa-check-circle"></i> Flexible, family-friendly route planning</div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="soft-card col-4 reveal-item" style="padding: 3rem; background: #fafafa; border-top: 3px solid #C29B57;">
-            <div style="font-size: 2.5rem; color: #C29B57; margin-bottom: 1.5rem;"><i class="fa-solid fa-car-rear"></i></div>
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; color: #112d1e; margin-bottom: 1rem;">Premium Fleet</h3>
-            <p style="color: #475569; line-height: 1.6;">Travel in the latest models designed for comfort. Impeccably clean interiors, climate control, and Wi-Fi included.</p>
+    <!-- Values Section -->
+    <section class="abt-section abt-values-section" style="padding: 5rem 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <h2 class="abt-heading abt-heading--center" style="text-align: center;">Our Core Values</h2>
+            <p class="abt-text" style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">
+                We adhere to the highest quality standards to ensure an unforgettable and stress-free journey in Georgia.
+            </p>
+            <div class="abt-values-grid">
+                <div class="abt-value-card">
+                    <div class="abt-value-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Safety First</h3>
+                    <p>Our fleet undergoes rigorous daily inspections. Our drivers are trained in advanced mountain navigation. Your family's safety is our highest priority.</p>
+                </div>
+                <div class="abt-value-card">
+                    <div class="abt-value-icon"><i class="fa-solid fa-eye-slash"></i></div>
+                    <h3>Absolute Privacy</h3>
+                    <p>We guarantee complete privacy throughout your trip. Our drivers are discreet and deeply respect our guests' cultural traditions and personal space.</p>
+                </div>
+                <div class="abt-value-card">
+                    <div class="abt-value-icon"><i class="fa-solid fa-gem"></i></div>
+                    <h3>Premium Quality</h3>
+                    <p>Travel in the latest models designed for luxury. From climate control to onboard amenities, we care about the smallest details to deliver perfection.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="soft-card col-4 reveal-item" style="padding: 3rem; background: #fafafa; border-top: 3px solid #C29B57;">
-            <div style="font-size: 2.5rem; color: #C29B57; margin-bottom: 1.5rem;"><i class="fa-solid fa-headset"></i></div>
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; color: #112d1e; margin-bottom: 1rem;">24/7 Concierge</h3>
-            <p style="color: #475569; line-height: 1.6;">Real humans, ready to assist you on WhatsApp anytime. No automated bots, just dedicated support when you need it.</p>
+    <!-- Process Section -->
+    <section class="abt-section abt-process-section" style="padding: 5rem 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <h2 class="abt-heading abt-heading--center" style="text-align: center;">How We Work</h2>
+            <div class="abt-process-grid" style="margin-top: 3rem;">
+                <div class="abt-process-step">
+                    <div class="abt-step-number">1</div>
+                    <h3 style="font-weight: 700; margin: 1rem 0 0.5rem; color: var(--color-dark);">Contact Us</h3>
+                    <p class="abt-text" style="font-size: 0.9rem;">Share your travel dates, group size, and preferences with our support team.</p>
+                </div>
+                <div class="abt-process-step" style="background: transparent; border: none; align-self: center; display: flex; justify-content: center;">
+                    <i class="fa-solid fa-arrow-right" style="font-size: 2rem; color: #e2e8f0;"></i>
+                </div>
+                <div class="abt-process-step">
+                    <div class="abt-step-number">2</div>
+                    <h3 style="font-weight: 700; margin: 1rem 0 0.5rem; color: var(--color-dark);">Get Your Plan</h3>
+                    <p class="abt-text" style="font-size: 0.9rem;">We'll design a custom route tailored to you and provide a clear, transparent quote.</p>
+                </div>
+                <div class="abt-process-step" style="background: transparent; border: none; align-self: center; display: flex; justify-content: center;">
+                    <i class="fa-solid fa-arrow-right" style="font-size: 2rem; color: #e2e8f0;"></i>
+                </div>
+                <div class="abt-process-step">
+                    <div class="abt-step-number">3</div>
+                    <h3 style="font-weight: 700; margin: 1rem 0 0.5rem; color: var(--color-dark);">Enjoy Georgia</h3>
+                    <p class="abt-text" style="font-size: 0.9rem;">Relax as your private driver handles the navigation, logistics, and local translations.</p>
+                </div>
+            </div>
         </div>
-        
-    </main>
+    </section>
     
     <footer class="footer" style="background: #020617; padding-top: 5rem; padding-bottom: 2rem; color: #94a3b8; font-family: 'Outfit', sans-serif;">
-        <div style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
                 <div>
                     <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; color: #fff; font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700;">
@@ -95,3 +167,4 @@
     </footer>
 </body>
 </html>
+

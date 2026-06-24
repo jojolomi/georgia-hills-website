@@ -1,0 +1,94 @@
+{
+  "budgets": {
+    "maxAssetKB": 800,
+    "maxPageKB": 1200,
+    "failOnBreach": false
+  },
+  "topAssets": [
+    {
+      "file": "image-1600.webp",
+      "kb": 204.7
+    },
+    {
+      "file": "image-1600.avif",
+      "kb": 172.9
+    },
+    {
+      "file": "style.css",
+      "kb": 153.7
+    },
+    {
+      "file": "script.js",
+      "kb": 106.5
+    },
+    {
+      "file": "image-1024.webp",
+      "kb": 105.5
+    },
+    {
+      "file": "image-1024.avif",
+      "kb": 95.4
+    },
+    {
+      "file": "image-640.webp",
+      "kb": 48.5
+    },
+    {
+      "file": "favicon.ico",
+      "kb": 44.5
+    },
+    {
+      "file": "image-640.avif",
+      "kb": 43.9
+    },
+    {
+      "file": "sitemap.xml",
+      "kb": 17.4
+    }
+  ],
+  "topPages": [
+    {
+      "file": "booking-ar.html",
+      "kb": 19.7
+    },
+    {
+      "file": "booking.html",
+      "kb": 18.7
+    },
+    {
+      "file": "tbilisi-ar.html",
+      "kb": 11.9
+    },
+    {
+      "file": "kazbegi-ar.html",
+      "kb": 11.9
+    },
+    {
+      "file": "batumi-ar.html",
+      "kb": 11.9
+    },
+    {
+      "file": "tbilisi.html",
+      "kb": 11.1
+    },
+    {
+      "file": "batumi.html",
+      "kb": 11.1
+    },
+    {
+      "file": "kazbegi.html",
+      "kb": 11.1
+    },
+    {
+      "file": "itineraries-hub-ar.html",
+      "kb": 10.2
+    },
+    {
+      "file": "halal-travel-hub-ar.html",
+      "kb": 10.1
+    }
+  ],
+  "overAsset": [],
+  "overPages": [],
+  "generatedAt": "2026-06-13T12:50:39.467Z"
+}

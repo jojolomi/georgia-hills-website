@@ -2601,11 +2601,11 @@ html[lang="ar"] {
 /* Button Shine Animations */
 .btn-hero-primary, .btn-hero-secondary, .action-btn, .btn-book { position: relative; overflow: hidden; }
 .btn-hero-primary::after, .btn-hero-secondary::after, .action-btn::after, .btn-book::after {
-    content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    content: ''; position: absolute; top: 0; left: 0; width: 50%; height: 100%;
     background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-    transform: skewX(-25deg); animation: buttonShine 6s infinite;
+    transform: translateX(-200%) skewX(-25deg); animation: buttonShine 6s infinite;
 }
-@keyframes buttonShine { 0% { left: -100%; } 15% { left: 200%; } 100% { left: 200%; } }
+@keyframes buttonShine { 0% { transform: translateX(-200%) skewX(-25deg); } 15% { transform: translateX(300%) skewX(-25deg); } 100% { transform: translateX(300%) skewX(-25deg); } }
 
 /* Universal Section Padding & Headings */
 .section-py { padding-top: 7rem; padding-bottom: 7rem; }
@@ -2870,11 +2870,11 @@ p, .section-desc, .step-text, .feature-text, .tour-desc {
     background: #0b1f15 !important;
 }
 .btn-premium::after {
-    content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    content: ''; position: absolute; top: 0; left: 0; width: 50%; height: 100%;
     background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
-    transform: skewX(-20deg); animation: premium-shine 6s infinite;
+    transform: translateX(-200%) skewX(-20deg); animation: premium-shine 6s infinite;
 }
-@keyframes premium-shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+@keyframes premium-shine { 0% { transform: translateX(-200%) skewX(-20deg); } 20% { transform: translateX(300%) skewX(-20deg); } 100% { transform: translateX(300%) skewX(-20deg); } }
 
 /* Staggered Load Animation */
 .reveal-item { opacity: 0; transform: translateY(30px); }

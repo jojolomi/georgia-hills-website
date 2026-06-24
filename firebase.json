@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "astro-site/dist",
+    "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -30,7 +30,7 @@
     ],
     "headers": [
       {
-        "source": "**/*.@(js|css|webp|avif|png|jpg|jpeg|svg|woff2)",
+        "source": "**/*.@(js|css|webp|avif|png|jpg|jpeg|svg|woff2|ico)",
         "headers": [
           {
             "key": "Cache-Control",

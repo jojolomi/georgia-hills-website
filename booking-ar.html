@@ -1,179 +1,235 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <link rel="preload" as="style" href="style.min.css?v=16">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <title>احجز سائق خاص في جورجيا | Georgia Hills</title>
-  <meta name="description" content="احجز رحلتك في جورجيا مع تأكيد سريع عبر واتساب وأسعار واضحة.">
+  <meta name="description" content="احجز سائقك الخاص في جورجيا مع تأكيد فوري عبر واتساب. أسعار شفافة ودعم على مدار الساعة.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://georgiahills.com/booking-ar.html">
   <meta property="og:title" content="احجز سائق خاص في جورجيا | Georgia Hills">
-  <meta property="og:description" content="احجز تنقلاتك في تبليسي وكازبيجي وباتومي بسرعة وراحة.">
+  <meta property="og:description" content="أمّن رحلتك في تبليسي، كازبيجي، باتومي، والمزيد بتأكيد سريع.">
   <meta property="og:image" content="https://georgiahills.com/image-1600.webp">
   <link rel="canonical" href="https://georgiahills.com/booking-ar.html">
   <link rel="alternate" hreflang="en" href="https://georgiahills.com/booking.html" />
   <link rel="alternate" hreflang="ar" href="https://georgiahills.com/booking-ar.html" />
   <link rel="alternate" hreflang="x-default" href="https://georgiahills.com/booking.html" />
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.min.css?v=16">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-  <script src="shared-navbar.js" defer></script>
-    <script src="script.js" defer></script>
+  <script src="shared-navbar.min.js" defer></script>
+  <script src="script.min.js" defer></script>
 </head>
-<body>
+<body style="font-family: 'Cairo', sans-serif;">
   <a href="#main-content" class="skip-link">تخطي إلى المحتوى</a>
   <nav id="navbar" class="navbar"></nav>
   <main id="main-content">
-<section class="hero" style="height:45vh; min-height:320px;">
-    <div class="hero-bg-container"><img src="image-1024.webp" class="hero-img" alt="احجز في جورجيا" loading="eager" decoding="async"><div class="hero-overlay"></div></div>
-    <div class="hero-content"><h1 class="hero-title">احجز رحلتك</h1><p class="hero-subtitle">عرض سريع وسعر واضح وتأكيد عبر واتساب.</p></div>
-  </section>
-
-  <section class="section-py" style="padding-bottom:0;">
-    <div class="container">
-      <div class="content-card" style="padding:2rem; margin-bottom:2rem;">
-        <h2 class="section-heading">قبل إرسال الطلب</h2>
-        <div class="process-grid">
-          <article class="process-card"><span class="process-step">1</span><h3 class="process-title">أرسل المسار والتواريخ</h3><p class="process-text">اذكر الوصول والمغادرة والوجهات الرئيسية.</p></article>
-          <article class="process-card"><span class="process-step">2</span><h3 class="process-title">استلم عرض واضح</h3><p class="process-text">نوضح نوع السيارة وما يشمله السعر والتكلفة التقريبية.</p></article>
-          <article class="process-card"><span class="process-step">3</span><h3 class="process-title">تأكيد عبر واتساب</h3><p class="process-text">نؤكد السائق والجدول النهائي قبل بداية الرحلة.</p></article>
-        </div>
-      </div>
+  
+  <!-- Premium Hero Section -->
+  <section class="booking-hero">
+    <div class="booking-hero-bg"></div>
+    <div class="booking-hero-overlay"></div>
+    <div class="booking-hero-content" style="font-family: 'Cairo', sans-serif;">
+      <div class="hero-badge"><i class="fa-solid fa-check-circle"></i> نقل فاخر</div>
+      <h1 class="booking-hero-title" style="font-family: inherit;">أمّن رحلتك</h1>
+      <p class="booking-hero-subtitle" style="font-family: inherit;">سائقون محترفون، أسعار شفافة، وتأكيد فوري عبر واتساب.</p>
     </div>
   </section>
 
-  <section id="booking" class="booking-section">
-    <div class="container relative z-10">
-      <div class="reveal text-center" style="margin-bottom:1rem; color:white;">
-        <h2 class="font-bold" style="font-size:2rem; margin-bottom:0.5rem;">أكمل طلب الحجز</h2>
-        <p class="opacity-80">وقت الرد غالباً خلال 10 دقائق.</p>
-      </div>
-      <div class="booking-card reveal">
-        <div class="booking-stepper" aria-label="خطوات الحجز" style="margin-bottom:1.25rem;">
-          <div style="display:flex; gap:0.5rem; justify-content:center; margin-bottom:0.75rem;">
-            <button type="button" class="step-pill active" id="step-pill-1">1. البيانات</button>
-            <button type="button" class="step-pill" id="step-pill-2">2. الرحلة</button>
-            <button type="button" class="step-pill" id="step-pill-3">3. التأكيد</button>
-          </div>
-          <div style="height:6px; background:var(--color-gray-200); border-radius:999px; overflow:hidden;">
-            <div id="bookingStepProgress" style="height:100%; width:33%; background:var(--color-primary); transition:width 0.25s ease;"></div>
+  <!-- Main Content Area -->
+  <section class="booking-content-section" style="font-family: 'Cairo', sans-serif;">
+    <div class="container">
+      <div class="booking-grid-layout">
+        
+        <!-- Right Column (RTL): Premium Form -->
+        <div class="booking-main-column">
+          <div class="booking-card-premium reveal">
+            <div class="booking-header">
+              <h2 style="font-family: inherit; font-weight: 800;">اطلب عرض سعر</h2>
+              <p>املأ التفاصيل أدناه. نرد عادة خلال 10 دقائق.</p>
+            </div>
+            
+            <form id="bookingForm" onsubmit="BookingManager.handleSubmit(event)" novalidate>
+              <input type="text" id="companyWebsite" name="companyWebsite" autocomplete="off" tabindex="-1" aria-hidden="true" class="hidden">
+              
+              <div class="form-grid-premium">
+                <div class="form-group">
+                  <label for="name" class="form-label-premium">الاسم الكامل</label>
+                  <div class="input-wrapper">
+                    <i class="fa-regular fa-user input-icon"></i>
+                    <input type="text" id="name" name="user_name" class="form-input-premium" placeholder="اسمك" autocomplete="name">
+                  </div>
+                  <span class="error-text hidden" id="nameError">الاسم مطلوب</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone" class="form-label-premium">رقم واتساب</label>
+                  <div class="input-wrapper">
+                    <i class="fa-brands fa-whatsapp input-icon"></i>
+                    <input type="tel" id="phone" name="user_phone" class="form-input-premium" placeholder="+995 5xx xx xx xx" autocomplete="tel" dir="ltr">
+                  </div>
+                  <span class="error-text hidden" id="phoneError">رقم صحيح مطلوب</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="vehicle" class="form-label-premium">نوع السيارة</label>
+                  <div class="input-wrapper">
+                    <i class="fa-solid fa-car input-icon"></i>
+                    <select id="vehicle" onchange="BookingManager.updateEstimate()" class="form-input-premium">
+                      <option value="Sedan">سيدان (1-3 ركاب)</option>
+                      <option value="Minivan">ميني فان (4-7 ركاب)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="passengers" class="form-label-premium">الركاب</label>
+                  <div class="input-wrapper">
+                    <i class="fa-solid fa-users input-icon"></i>
+                    <input type="number" id="passengers" min="1" class="form-input-premium" placeholder="2">
+                  </div>
+                  <span class="error-text hidden" id="passengersError">راكب واحد كحد أدنى</span>
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label-premium">تفضيل الخدمة</label>
+                  <div class="radio-group-premium">
+                    <label class="radio-option">
+                      <input type="radio" name="driver" value="with_driver" checked>
+                      <span class="radio-tile">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <span>مع سائق</span>
+                      </span>
+                    </label>
+                    <label class="radio-option">
+                      <input type="radio" name="driver" value="no_driver">
+                      <span class="radio-tile">
+                        <i class="fa-solid fa-car-side"></i>
+                        <span>قيادة ذاتية</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="dateRange" class="form-label-premium">تواريخ الرحلة <span id="dates-helper" class="text-primary text-xs font-normal mr-2 hidden"></span></label>
+                  <div class="input-wrapper">
+                    <i class="fa-regular fa-calendar input-icon"></i>
+                    <input type="text" id="dateRange" class="form-input-premium" placeholder="اختر تواريخ الاستلام والتسليم">
+                  </div>
+                  <span class="error-text hidden" id="dateError">اختر التواريخ</span>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="notes" class="form-label-premium">مسار الرحلة / ملاحظات</label>
+                  <textarea id="notes" rows="3" class="form-input-premium" placeholder="مثال: استقبال في مطار تبليسي، القيادة إلى كازبيجي..."></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="bookingConsent">
+                    <span>أوافق على استلام عرض سعر عبر واتساب.</span>
+                  </label>
+                  <span class="error-text hidden" id="consentError">يرجى التأكيد</span>
+                </div>
+              </div>
+
+              <div id="price-estimate" class="price-estimate-premium hidden">
+                <div class="estimate-row">
+                  <span>الإجمالي التقديري</span>
+                  <span class="estimate-price" id="total-price-display" dir="ltr">0 GEL</span>
+                </div>
+                <div id="trip-duration" class="estimate-sub"></div>
+              </div>
+
+              <button type="submit" id="submitBtn" class="btn-submit-premium">
+                <span id="btnText">احصل على السعر عبر واتساب</span>
+                <i id="btnIcon" class="fa-brands fa-whatsapp"></i>
+                <div id="btnSpinner" class="hidden"><i class="fa-solid fa-circle-notch animate-spin"></i></div>
+              </button>
+            </form>
           </div>
         </div>
-        <form id="bookingForm" onsubmit="BookingManager.handleSubmit(event)" novalidate>
-          <input type="text" id="companyWebsite" name="companyWebsite" autocomplete="off" tabindex="-1" aria-hidden="true" class="hidden">
-          <input type="hidden" id="bookingStepState" value="1">
-          <div class="form-grid">
-            <div class="booking-step" data-step="1">
-              <div><label for="name" class="form-label">الاسم الكامل</label><input type="text" id="name" name="user_name" class="form-input" autocomplete="name" placeholder="الاسم"><span class="error-text hidden" id="nameError">يرجى إدخال الاسم</span></div>
-              <div><label for="phone" class="form-label">رقم واتساب</label><input type="tel" id="phone" name="user_phone" class="form-input" autocomplete="tel" placeholder="+995 579 08 85 37"><span class="error-text hidden" id="phoneError">أدخل رقمًا صحيحًا</span></div>
-              <div><label for="travelIntent" class="form-label">هدف الرحلة</label>
-                <select id="travelIntent" class="form-select">
-                  <option value="family">رحلة عائلية</option>
-                  <option value="honeymoon">شهر عسل</option>
-                  <option value="women_only">مجموعة نسائية</option>
-                  <option value="halal">برنامج حلال</option>
-                  <option value="luxury">جولة فاخرة خاصة</option>
-                </select>
+
+        <!-- Left Column (RTL): Info & Trust -->
+        <div class="booking-sidebar-column">
+          
+          <!-- Process Widget -->
+          <div class="sidebar-widget">
+            <h3 style="font-family: inherit; font-weight: 800;">عملية الحجز</h3>
+            <div class="vertical-steps">
+              <div class="v-step">
+                <div class="v-step-icon">1</div>
+                <div class="v-step-content">
+                  <h4 style="font-family: inherit; font-weight: 700;">إرسال التفاصيل</h4>
+                  <p>أرسل لنا مسارك وتواريخك.</p>
+                </div>
               </div>
-              <div>
-                <label class="form-label">تفضيلات إضافية</label>
-                <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
-                  <label class="radio-label" style="padding:0.45rem 0.75rem;"><input id="segFamily" type="checkbox" class="hidden"> <span class="radio-content">مناسب للعوائل</span></label>
-                  <label class="radio-label" style="padding:0.45rem 0.75rem;"><input id="segWomen" type="checkbox" class="hidden"> <span class="radio-content">مناسب للنساء</span></label>
-                  <label class="radio-label" style="padding:0.45rem 0.75rem;"><input id="segHalal" type="checkbox" class="hidden"> <span class="radio-content">وجبات حلال</span></label>
-                  <label class="radio-label" style="padding:0.45rem 0.75rem;"><input id="segLuxury" type="checkbox" class="hidden"> <span class="radio-content">سيارة فاخرة</span></label>
+              <div class="v-step">
+                <div class="v-step-icon">2</div>
+                <div class="v-step-content">
+                  <h4 style="font-family: inherit; font-weight: 700;">استلام السعر</h4>
+                  <p>سنرسل لك سعراً واضحاً عبر واتساب.</p>
+                </div>
+              </div>
+              <div class="v-step">
+                <div class="v-step-icon">3</div>
+                <div class="v-step-content">
+                  <h4 style="font-family: inherit; font-weight: 700;">التأكيد</h4>
+                  <p>وافق لتأكيد حجز سائقك.</p>
                 </div>
               </div>
             </div>
-            <div class="booking-step hidden" data-step="2">
-              <div class="form-row-responsive">
-                <div><label for="vehicle" class="form-label">نوع السيارة</label><select id="vehicle" onchange="BookingManager.updateEstimate()" class="form-select"><option value="Sedan">سيدان</option><option value="Minivan">ميني فان</option></select></div>
-                <div><label for="passengers" class="form-label">عدد الركاب</label><input type="number" id="passengers" min="1" class="form-input" placeholder="2"><span class="error-text hidden" id="passengersError">الحد الأدنى راكب واحد</span></div>
-              </div>
-              <div><label class="form-label">نوع الخدمة</label><div class="radio-group"><label class="radio-label"><input type="radio" name="driver" value="with_driver" checked class="radio-input hidden"><span class="radio-content">مع سائق</span></label><label class="radio-label"><input type="radio" name="driver" value="no_driver" class="radio-input hidden"><span class="radio-content">قيادة ذاتية</span></label></div></div>
-              <div class="col-span-full"><label for="dateRange" class="form-label">تواريخ الرحلة <span id="dates-helper" class="text-primary text-xs font-normal ml-2 hidden"></span></label><input type="text" id="dateRange" class="form-input" placeholder="اختر تواريخ الاستلام والتسليم"><span class="error-text hidden" id="dateError">يرجى تحديد التواريخ</span></div>
-              <div id="price-estimate" class="hidden price-estimate-box"><div><span style="font-size:0.875rem; font-weight:700; color:var(--color-gray-600);">السعر التقريبي:</span> <span style="font-size:1.5rem; font-weight:800; color:var(--color-primary);" class="price-display" id="total-price-display">0 GEL</span></div><div id="trip-duration" class="text-sm text-gray-600 mt-1" style="font-weight:600;"></div></div>
-            </div>
-            <div class="booking-step hidden" data-step="3">
-              <div class="col-span-full"><label for="notes" class="form-label">ملاحظات</label><textarea id="notes" rows="3" class="form-textarea"></textarea></div>
-              <div class="content-card" style="padding:1rem; margin:0.75rem 0 0.25rem 0;">
-                <h3 style="font-size:1rem; margin-bottom:0.65rem;">عناصر الثقة عالية النية</h3>
-                <div style="display:grid; gap:0.5rem;">
-                  <div class="trust-item"><i class="fa-solid fa-badge-check text-success"></i> تقييمات موثقة: أكثر من 500 رحلة</div>
-                  <div class="trust-item"><i class="fa-solid fa-shield-check text-success"></i> خدمة مرخصة ومؤمنة</div>
-                  <div class="trust-item"><i class="fa-solid fa-headset text-success"></i> اتفاقية دعم: متوسط أول رد خلال 10 دقائق</div>
-                </div>
-              </div>
-              <div class="col-span-full"><label style="display:flex; align-items:flex-start; gap:0.5rem;"><input type="checkbox" id="bookingConsent" style="margin-top:0.2rem;"><span style="font-size:0.85rem; color:var(--color-gray-600);">أوافق على التواصل معي بخصوص طلب الحجز.</span></label><span class="error-text hidden" id="consentError">يرجى تأكيد الموافقة</span></div>
-            </div>
           </div>
-          <div style="display:flex; justify-content:space-between; gap:0.75rem; margin-top:0.75rem;">
-            <button type="button" id="stepPrev" class="action-btn hidden">السابق</button>
-            <button type="button" id="stepNext" class="action-btn">التالي</button>
-          </div>
-          <p id="intentCtaHint" style="margin-top:0.65rem; color:var(--color-gray-500); font-size:0.9rem;">عرض مخصص حسب هدف رحلتك.</p>
-          <button type="submit" id="submitBtn" class="btn-submit hidden"><span id="btnText">إرسال عبر واتساب</span><i id="btnIcon" class="fa-brands fa-whatsapp" style="font-size:1.5rem;"></i><div id="btnSpinner" class="hidden"><i class="fa-solid fa-circle-notch animate-spin"></i></div></button>
-        </form>
-      </div>
-    </div>
-  </section>
 
-  <section class="section-py" style="padding-top:2rem;">
-    <div class="container">
-      <div class="content-card" style="padding:2rem; margin-bottom:2rem;">
-        <h2 class="section-heading">ما الذي يشمله السعر الأساسي؟</h2>
-        <div class="compare-grid">
-          <div class="compare-card">
-            <h3><i class="fa-solid fa-circle-check text-success"></i> مشمول</h3>
-            <ul>
-              <li><i class="fa-solid fa-check"></i> خدمة السائق وتنسيق الرحلة</li>
-              <li><i class="fa-solid fa-check"></i> الوقود والمواقف ضمن المسار المتفق</li>
-              <li><i class="fa-solid fa-check"></i> متابعة واتساب قبل وأثناء الرحلة</li>
+          <!-- Inclusions Widget -->
+          <div class="sidebar-widget">
+            <h3 style="font-family: inherit; font-weight: 800;">ماذا يشمل السعر</h3>
+            <ul class="check-list-premium">
+              <li><i class="fa-solid fa-check"></i> سائق محترف</li>
+              <li><i class="fa-solid fa-check"></i> الوقود والمواقف</li>
+              <li><i class="fa-solid fa-check"></i> تأمين السيارة</li>
+              <li><i class="fa-solid fa-check"></i> دعم على مدار الساعة</li>
+              <li><i class="fa-solid fa-check"></i> إلغاء مجاني</li>
             </ul>
           </div>
-          <div class="compare-card">
-            <h3><i class="fa-solid fa-circle-xmark text-accent"></i> غير مشمول افتراضياً</h3>
-            <ul>
-              <li><i class="fa-solid fa-xmark"></i> الفنادق والوجبات وتذاكر الأنشطة</li>
-              <li><i class="fa-solid fa-xmark"></i> ساعات إضافية خارج الوقت المتفق</li>
-              <li><i class="fa-solid fa-xmark"></i> تعديل كبير في المسار بعد التأكيد</li>
-            </ul>
+
+          <!-- Trust Widget -->
+          <div class="sidebar-widget trust-widget">
+            <div class="trust-row">
+              <div class="trust-item"><i class="fa-solid fa-star"></i> تقييم 4.9/5</div>
+              <div class="trust-item"><i class="fa-solid fa-clock"></i> رد سريع</div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="content-card" style="padding:2rem;">
-        <h2 class="section-heading">ثقة في الحجز</h2>
-        <div class="proof-grid">
-          <div class="proof-card"><p class="proof-number">24/7</p><p class="proof-label">دعم</p></div>
-          <div class="proof-card"><p class="proof-number">10 د</p><p class="proof-label">متوسط الرد</p></div>
-          <div class="proof-card"><p class="proof-number">4.9/5</p><p class="proof-label">رضا العملاء</p></div>
-          <div class="proof-card"><p class="proof-number">بدون رسوم</p><p class="proof-label">مخفية</p></div>
+
         </div>
       </div>
     </div>
   </section>
 
-  <div id="successModal" class="hidden modal-overlay"><div class="modal-content"><button onclick="UIManager.closeModal('successModal')" class="modal-close">&times;</button><div class="modal-icon-circle"><i class="fa-solid fa-check" style="font-size:2rem;"></i></div><h3 class="modal-title">العرض جاهز</h3><p class="modal-desc">تم تجهيز التفاصيل للإرسال.</p><a id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer" class="modal-btn"><i class="fa-brands fa-whatsapp" style="font-size:1.25rem;"></i> <span>فتح واتساب</span></a></div></div>
+  <div id="successModal" class="hidden modal-overlay"><div class="modal-content"><button onclick="UIManager.closeModal('successModal')" class="modal-close">&times;</button><div class="modal-icon-circle"><i class="fa-solid fa-check" style="font-size:2rem;"></i></div><h3 class="modal-title" style="font-family: 'Cairo', sans-serif;">عرض السعر جاهز!</h3><p class="modal-desc" style="font-family: 'Cairo', sans-serif;">تفاصيل رحلتك جاهزة للإرسال.</p><a id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer" class="modal-btn"><i class="fa-brands fa-whatsapp" style="font-size:1.25rem;"></i> <span style="font-family: 'Cairo', sans-serif;">افتح واتساب</span></a></div></div>
 
   </main>
-  <footer class="footer">
+  <footer class="footer" style="direction: rtl; font-family: 'Cairo', sans-serif;">
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-brand">
-            <div class="footer-brand-icon"><i class="fa-solid fa-mountain"></i></div>
-            <span class="footer-brand-text">Georgia Hills</span>
+          <div class="footer-brand" style="justify-content: flex-start;">
+            <div class="footer-brand-icon"><i class="fa-solid fa-mountain" style="color: #C29B57;"></i></div>
+            <span class="footer-brand-text" style="font-family: inherit;">جورجيا هيلز</span>
           </div>
-          <p style="color:var(--color-gray-300); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem;">حلول نقل احترافية في جورجيا مع تركيز على الأمان والراحة والخبرة المحلية.</p>
-          <div class="footer-social">
+          <p style="color:var(--color-gray-300); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem; font-weight: 600;">حلول نقل احترافية في جورجيا مع تركيز على الأمان والراحة والخبرة المحلية.</p>
+          <div class="footer-social" style="justify-content: flex-start;">
             <a href="https://instagram.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://facebook.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <button onclick="App.share()" class="social-btn" aria-label="Share Website"><i class="fa-solid fa-share-nodes"></i></button>
           </div>
         </div>
         <div>
-          <h3>روابط سريعة</h3>
-          <ul>
+          <h3 style="font-weight: 800;">روابط سريعة</h3>
+          <ul style="font-weight: 600;">
             <li><a href="arabic.html">الرئيسية</a></li>
             <li><a href="services-ar.html">الخدمات</a></li>
             <li><a href="guide-ar.html">الدليل</a></li>
@@ -181,21 +237,22 @@
           </ul>
         </div>
         <div>
-          <h3>اتصل بنا</h3>
-          <ul style="color:var(--color-gray-400);">
-            <li class="footer-contact-item"><i class="fa-solid fa-phone text-accent"></i> <span dir="ltr">+995 579 08 85 37</span></li>
-            <li class="footer-contact-item"><i class="fa-brands fa-whatsapp text-accent"></i> <span dir="ltr">+995 579 08 85 37</span></li>
-            <li class="footer-contact-item"><i class="fa-solid fa-envelope text-accent"></i> info@georgiahills.com</li>
+          <h3 style="font-weight: 800;">اتصل بنا</h3>
+          <ul style="color:var(--color-gray-400); font-weight: 600;">
+            <li class="footer-contact-item"><i class="fa-solid fa-phone text-accent" style="color: #C29B57;"></i> <span dir="ltr">+995 579 08 85 37</span></li>
+            <li class="footer-contact-item"><i class="fa-brands fa-whatsapp text-accent" style="color: #C29B57;"></i> <span dir="ltr">+995 579 08 85 37</span></li>
+            <li class="footer-contact-item"><i class="fa-solid fa-envelope text-accent" style="color: #C29B57;"></i> info@georgiahills.com</li>
           </ul>
         </div>
         <div>
           <div class="footer-map-container">
-            <span class="footer-map-overlay"><i class="fa-solid fa-map-location-dot"></i> <span>موقعنا</span></span>
+            <span class="footer-map-overlay"><i class="fa-solid fa-map-location-dot"></i> <span style="font-family: 'Cairo', sans-serif; font-weight: 700;">موقعنا</span></span>
           </div>
         </div>
       </div>
-      <div class="footer-bottom">&copy; <span id="year">2026</span> Georgia Hills. جميع الحقوق محفوظة.</div>
+      <div class="footer-bottom">&copy; <span id="year">2026</span> جورجيا هيلز. جميع الحقوق محفوظة.</div>
     </div>
   </footer>
 </body>
 </html>
+

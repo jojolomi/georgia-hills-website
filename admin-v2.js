@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from
 import { getFirestore, collection, doc, getDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
-// --- Configuration ---
+// ── Configuration ─────────────────────────────────────────────────────────────
 const defaultFirebaseConfig = {
     apiKey: "AIzaSyApLm0zacQiM1VbSQ5INRlQ28ev3QoTw2o",
     authDomain: "georgiahills-15d19.firebaseapp.com",
@@ -20,17 +20,14 @@ const defaultFirebaseConfig = {
 
 const firebaseConfig = window.__GH_FIREBASE_CONFIG || window.firebaseConfig || defaultFirebaseConfig;
 if (!firebaseConfig || !firebaseConfig.apiKey) {
-    console.error("Firebase Config Missing!");
-    const appEl = document.getElementById("app");
-    if (appEl) {
-        appEl.innerHTML = `
-            <div class="min-h-screen flex items-center justify-center p-6 bg-red-50">
-                <div class="max-w-lg bg-white border border-red-200 rounded-lg p-6 shadow">
-                    <h2 class="text-xl font-bold text-red-700 mb-2">Admin Configuration Error</h2>
-                    <p class="text-sm text-gray-700">Firebase configuration is missing. Make sure <code>firebase-config.js</code> is loaded or fallback config is valid.</p>
-                </div>
-            </div>`;
-    }
+    document.getElementById('app').innerHTML = `
+        <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0c0e16;padding:24px">
+            <div style="background:#141720;border:1px solid #1e2133;border-radius:16px;padding:32px;max-width:420px;text-align:center">
+                <div style="font-size:32px;margin-bottom:12px">⚠️</div>
+                <h2 style="color:#ef4444;font-size:18px;margin-bottom:8px;font-family:sans-serif">Configuration Error</h2>
+                <p style="color:#8892b0;font-size:13px;font-family:sans-serif">Firebase configuration is missing. Ensure <code>firebase-config.js</code> is present or the default config is valid.</p>
+            </div>
+        </div>`;
     throw new Error("Firebase configuration missing");
 }
 
@@ -42,26 +39,16 @@ const functionsRegion = firebaseConfig.functionsRegion || "europe-west1";
 const adminApiEndpoint = firebaseConfig.adminApiEndpoint
     || `https://${functionsRegion}-${firebaseConfig.projectId}.cloudfunctions.net/adminApi`;
 
-// --- State Management ---
+// ── State ─────────────────────────────────────────────────────────────────────
 const State = {
     user: null,
     userRole: 'viewer',
     currentTab: 'dashboard',
     destinations: [],
     articles: [],
-    pages: {
-        home: {},
-        about: {},
-        contact: {},
-        shared: {},
-        services: {} // Future use
-    },
+    pages: { home: {}, about: {}, contact: {}, shared: {}, services: {} },
     pageMeta: {},
-    settings: {
-        navbar: [],
-        contact: {},
-        social: {}
-    },
+    settings: { navbar: [], contact: {}, social: {} },
     conversionStats: null,
     mediaAssets: [],
     mediaFilters: { query: '', tag: '' },
@@ -72,12 +59,8 @@ const State = {
 };
 
 const Security = {
-    isAdmin() {
-        return State.userRole === 'admin';
-    },
-    canEdit() {
-        return State.userRole === 'admin' || State.userRole === 'editor';
-    }
+    isAdmin() { return State.userRole === 'admin'; },
+    canEdit() { return State.userRole === 'admin' || State.userRole === 'editor'; }
 };
 
 window.addEventListener('beforeunload', (e) => {
@@ -86,6 +69,7 @@ window.addEventListener('beforeunload', (e) => {
     e.returnValue = '';
 });
 
+// ── Default Content ──────────────────────────────────────────────────────────
 const DefaultContent = {
     home: {
         hero: {
@@ -96,24 +80,21 @@ const DefaultContent = {
             bg_image: 'image-1600.webp',
             steps_title_en: 'Your Journey in 3 Steps',
             steps_title_ar: 'رحلتك في 3 خطوات',
-            step1_title_en: 'Choose Your Trip',
-            step1_title_ar: 'اختر رحلتك',
+            step1_title_en: 'Choose Your Trip', step1_title_ar: 'اختر رحلتك',
             step1_desc_en: 'Select a destination or customizing your own daily itinerary.',
             step1_desc_ar: 'اختر وجهة أو صمم مسار رحلتك اليومي الخاص.',
-            step2_title_en: 'Get WhatsApp Quote',
-            step2_title_ar: 'احصل على عرض واتساب',
+            step2_title_en: 'Get WhatsApp Quote', step2_title_ar: 'احصل على عرض واتساب',
             step2_desc_en: 'Receive an instant, all-inclusive price directly on your phone.',
             step2_desc_ar: 'احصل على سعر فوري شامل كلياً مباشرة على هاتفك.',
-            step3_title_en: 'Meet Your Driver',
-            step3_title_ar: 'قابل سائقك',
+            step3_title_en: 'Meet Your Driver', step3_title_ar: 'قابل سائقك',
             step3_desc_en: 'Your professional driver will pick you up from your hotel or airport.',
             step3_desc_ar: 'سائقك المحترف سيستقبلك من فندقك أو المطار.'
         },
         about: {
             title_en: 'More Than Just A Ride, <br>It\'s Your Journey.',
             title_ar: 'أكثر من مجرد رحلة، <br>إنها مغامرتك.',
-             text_en: 'Navigating Georgia\'s mountain passes requires skill and local knowledge. We provide professional, English-speaking drivers who act as your personal guide.',
-             text_ar: 'تتطلب القيادة في جبال جورجيا مهارة عالية. نوفر سائقين محترفين يتحدثون الإنجليزية ويعملون كمرشدين لك.',
+            text_en: 'Navigating Georgia\'s mountain passes requires skill and local knowledge. We provide professional, English-speaking drivers who act as your personal guide.',
+            text_ar: 'تتطلب القيادة في جبال جورجيا مهارة عالية. نوفر سائقين محترفين يتحدثون الإنجليزية ويعملون كمرشدين لك.',
             image: 'Tbilisi_old_Town.webp'
         }
     },
@@ -127,17 +108,16 @@ const DefaultContent = {
         story: {
             title_en: 'More than drivers.<br>We are your Georgian hosts.',
             title_ar: 'أكثر من سائقين.<br>نحن مضيفوك في جورجيا.',
-            // Splitting paragraphs can be complex, simplifying to main text blocks
-            intro_en: 'At Georgia Hills, we believe that the best way to see a country is through the eyes of a local friend. Founded by a team of passionate travel experts, we set out to change the standard of private transport in Georgia.',
-            intro_ar: 'في جورجيا هيلز، نؤمن بأن أفضل طريقة لرؤية البلد هي من خلال عيون صديق محلي. تأسسنا بواسطة فريق من خبراء السفر الشغوفين، ونسعى لتغيير معايير النقل الخاص في جورجيا.'
+            intro_en: 'At Georgia Hills, we believe that the best way to see a country is through the eyes of a local friend.',
+            intro_ar: 'في جورجيا هيلز، نؤمن بأن أفضل طريقة لرؤية البلد هي من خلال عيون صديق محلي.'
         }
     },
     services: {
         hero: {
             title_en: 'Transparent Pricing.<br><span class="text-gradient-gold">Unmatched Comfort.</span>',
             title_ar: 'الأسعار شفافة.<br><span class="text-gradient-gold">راحة لا تضاهى.</span>',
-            subtitle_en: 'Professional privat transport with <span class="highlight-text">no hidden fees.</span><br>Flexible packages & modern fleet designed for your family.',
-            subtitle_ar: 'نقل خاص محترف بلا <span class="highlight-text">رسوم مخفية.</span><br>باقات مرنة وأسطول حديث مصمم لعائلتك.'
+            subtitle_en: 'Professional private transport with <span class="highlight-text">no hidden fees.</span>',
+            subtitle_ar: 'نقل خاص محترف بلا <span class="highlight-text">رسوم مخفية.</span>'
         },
         intro: {
             title_en: 'Everything You Need For A Perfect Trip',
@@ -157,7 +137,7 @@ const DefaultContent = {
             title_en: 'We\'d love to hear from you',
             title_ar: 'نود أن نسمع منك',
             desc_en: 'Have a question about our fleet, pricing, or custom itineraries? Reach out to us directly.',
-            desc_ar: 'هل لديك سؤال حول أسطولنا أو أسعارنا أو مساراتنا المخصصة؟ تواصل معنا مباشرة.'
+            desc_ar: 'هل لديك سؤال حول أسطولنا أو أسعارنا؟ تواصل معنا مباشرة.'
         }
     },
     shared: {
@@ -181,14 +161,9 @@ const DefaultContent = {
         }
     },
     settings_global: {
-        phone: '+995 579 08 85 37',
-        whatsapp: '995579088537',
-        email: 'info@georgiahills.com',
-        address: 'Tbilisi, Georgia',
-        social: {
-            facebook: 'https://facebook.com/georgiahills',
-            instagram: 'https://instagram.com/georgiahills'
-        }
+        phone: '+995 579 08 85 37', whatsapp: '995579088537',
+        email: 'info@georgiahills.com', address: 'Tbilisi, Georgia',
+        social: { facebook: 'https://facebook.com/georgiahills', instagram: 'https://instagram.com/georgiahills' }
     },
     settings_navbar: [
         { label_en: 'Home', label_ar: 'الرئيسية', link: 'index.html' },
@@ -200,24 +175,24 @@ const DefaultContent = {
     ]
 };
 
-// --- Schema Definitions for Page Editor ---
+// ── Page Schemas ─────────────────────────────────────────────────────────────
 const PageSchemas = {
     home: [
-        { section: "Hero Section", description: "The main banner at the top of the home page." },
+        { section: "Hero Section", description: "Main banner at the top of the home page.", icon: "fa-image" },
         { type: "image", key: "hero.bg_image", label: "Background Image" },
         { type: "text", key: "hero.title_en", label: "Title (English)" },
         { type: "text", key: "hero.title_ar", label: "Title (Arabic)", dir: "rtl" },
         { type: "text", key: "hero.subtitle_en", label: "Subtitle (English)" },
         { type: "text", key: "hero.subtitle_ar", label: "Subtitle (Arabic)", dir: "rtl" },
-        
-        { section: "About Section", description: "Introduction text below the hero." },
+
+        { section: "About Section", description: "Introduction text below the hero.", icon: "fa-circle-info" },
         { type: "image", key: "about.image", label: "About Image" },
         { type: "text", key: "about.title_en", label: "Title (English)" },
         { type: "text", key: "about.title_ar", label: "Title (Arabic)", dir: "rtl" },
         { type: "textarea", key: "about.text_en", label: "Description (English)" },
         { type: "textarea", key: "about.text_ar", label: "Description (Arabic)", dir: "rtl" },
 
-        { section: "How It Works", description: "The 3-step process section." },
+        { section: "How It Works", description: "The 3-step process section.", icon: "fa-list-ol" },
         { type: "text", key: "hero.steps_title_en", label: "Section Title (English)" },
         { type: "text", key: "hero.steps_title_ar", label: "Section Title (Arabic)", dir: "rtl" },
         { type: "text", key: "hero.step1_title_en", label: "Step 1 Title (English)" },
@@ -233,75 +208,67 @@ const PageSchemas = {
         { type: "text", key: "hero.step3_desc_en", label: "Step 3 Desc (English)" },
         { type: "text", key: "hero.step3_desc_ar", label: "Step 3 Desc (Arabic)", dir: "rtl" },
 
-        { section: "SEO Settings", description: "Search Engine Optimization meta tags." },
-        { type: "text", key: "seo.meta_title", label: "Meta Title (Browser Tab)" },
-        { type: "textarea", key: "seo.meta_description", label: "Meta Description (Google Snippet)" }
+        { section: "SEO Settings", description: "Search Engine Optimization meta tags.", icon: "fa-magnifying-glass" },
+        { type: "text", key: "seo.meta_title", label: "Meta Title (Browser Tab)", hint: "Max 60 chars", maxLen: 60 },
+        { type: "textarea", key: "seo.meta_description", label: "Meta Description (Google Snippet)", hint: "Max 160 chars", maxLen: 160 }
     ],
-    about: [ 
-        { section: "Hero Section", description: "Top banner of the About Us page." },
+    about: [
+        { section: "Hero Section", description: "Top banner of the About Us page.", icon: "fa-image" },
         { type: "text", key: "hero.title_en", label: "Hero Title (English)" },
         { type: "text", key: "hero.title_ar", label: "Hero Title (Arabic)", dir: "rtl" },
         { type: "textarea", key: "hero.subtitle_en", label: "Hero Subtitle (English)" },
         { type: "textarea", key: "hero.subtitle_ar", label: "Hero Subtitle (Arabic)", dir: "rtl" },
-
-        { section: "Our Story", description: "Main narrative text." },
+        { section: "Our Story", description: "Main narrative text.", icon: "fa-book-open" },
         { type: "text", key: "story.title_en", label: "Story Title (English)" },
         { type: "text", key: "story.title_ar", label: "Story Title (Arabic)", dir: "rtl" },
         { type: "textarea", key: "story.intro_en", label: "Intro Paragraph (English)" },
         { type: "textarea", key: "story.intro_ar", label: "Intro Paragraph (Arabic)", dir: "rtl" },
-
-        { section: "SEO Settings", description: "Search Engine Optimization meta tags." },
-        { type: "text", key: "seo.meta_title", label: "Meta Title" },
-        { type: "textarea", key: "seo.meta_description", label: "Meta Description" }
+        { section: "SEO Settings", description: "Search Engine Optimization meta tags.", icon: "fa-magnifying-glass" },
+        { type: "text", key: "seo.meta_title", label: "Meta Title", maxLen: 60 },
+        { type: "textarea", key: "seo.meta_description", label: "Meta Description", maxLen: 160 }
     ],
     services: [
-        { section: "Hero Section", description: "Top banner of Services page." },
+        { section: "Hero Section", description: "Top banner of Services page.", icon: "fa-image" },
         { type: "text", key: "hero.title_en", label: "Hero Title (English)" },
         { type: "text", key: "hero.title_ar", label: "Hero Title (Arabic)", dir: "rtl" },
         { type: "textarea", key: "hero.subtitle_en", label: "Hero Subtitle (English)" },
         { type: "textarea", key: "hero.subtitle_ar", label: "Hero Subtitle (Arabic)", dir: "rtl" },
-        
-        { section: "Intro", description: "Text below the hero." },
+        { section: "Intro", description: "Text below the hero.", icon: "fa-align-left" },
         { type: "text", key: "intro.title_en", label: "Main Title (English)" },
         { type: "text", key: "intro.title_ar", label: "Main Title (Arabic)", dir: "rtl" },
         { type: "textarea", key: "intro.desc_en", label: "Description (English)" },
         { type: "textarea", key: "intro.desc_ar", label: "Description (Arabic)", dir: "rtl" },
-
-        { section: "SEO Settings", description: "Search Engine Optimization meta tags." },
-        { type: "text", key: "seo.meta_title", label: "Meta Title" },
-        { type: "textarea", key: "seo.meta_description", label: "Meta Description" }
+        { section: "SEO Settings", description: "Search Engine Optimization meta tags.", icon: "fa-magnifying-glass" },
+        { type: "text", key: "seo.meta_title", label: "Meta Title", maxLen: 60 },
+        { type: "textarea", key: "seo.meta_description", label: "Meta Description", maxLen: 160 }
     ],
     contact: [
-        { section: "Hero Section", description: "Top banner of Contact page." },
+        { section: "Hero Section", description: "Top banner of Contact page.", icon: "fa-image" },
         { type: "text", key: "hero.title_en", label: "Hero Title (English)" },
         { type: "text", key: "hero.title_ar", label: "Hero Title (Arabic)", dir: "rtl" },
         { type: "textarea", key: "hero.subtitle_en", label: "Hero Subtitle (English)" },
         { type: "textarea", key: "hero.subtitle_ar", label: "Hero Subtitle (Arabic)", dir: "rtl" },
-        
-        { section: "Intro", description: "Text below the hero." },
+        { section: "Intro", description: "Text below the hero.", icon: "fa-align-left" },
         { type: "text", key: "intro.title_en", label: "Main Title (English)" },
         { type: "text", key: "intro.title_ar", label: "Main Title (Arabic)", dir: "rtl" },
         { type: "textarea", key: "intro.desc_en", label: "Description (English)" },
         { type: "textarea", key: "intro.desc_ar", label: "Description (Arabic)", dir: "rtl" },
-
-        { section: "SEO Settings", description: "Search Engine Optimization meta tags." },
-        { type: "text", key: "seo.meta_title", label: "Meta Title" },
-        { type: "textarea", key: "seo.meta_description", label: "Meta Description" }
+        { section: "SEO Settings", description: "Search Engine Optimization meta tags.", icon: "fa-magnifying-glass" },
+        { type: "text", key: "seo.meta_title", label: "Meta Title", maxLen: 60 },
+        { type: "textarea", key: "seo.meta_description", label: "Meta Description", maxLen: 160 }
     ],
     shared: [
-        { section: "Footer", description: "Content appearing in the site footer." },
+        { section: "Footer", description: "Content appearing in the site footer.", icon: "fa-layer-group" },
         { type: "textarea", key: "footer.desc_en", label: "Footer Description (English)" },
         { type: "textarea", key: "footer.desc_ar", label: "Footer Description (Arabic)", dir: "rtl" },
-
-        { section: "Trust Strip", description: "Icons and text above the footer on secondary pages." },
+        { section: "Trust Strip", description: "Icons and text above the footer on secondary pages.", icon: "fa-shield-halved" },
         { type: "text", key: "trust.item1_en", label: "Item 1 (English)" },
         { type: "text", key: "trust.item1_ar", label: "Item 1 (Arabic)", dir: "rtl" },
         { type: "text", key: "trust.item2_en", label: "Item 2 (English)" },
         { type: "text", key: "trust.item2_ar", label: "Item 2 (Arabic)", dir: "rtl" },
         { type: "text", key: "trust.item3_en", label: "Item 3 (English)" },
         { type: "text", key: "trust.item3_ar", label: "Item 3 (Arabic)", dir: "rtl" },
-
-        { section: "Booking Flow", description: "The 'Professional Booking Flow' section on secondary pages." },
+        { section: "Booking Flow", description: "The 3-step booking section on secondary pages.", icon: "fa-list-ol" },
         { type: "text", key: "booking_flow.title_en", label: "Section Title (English)" },
         { type: "text", key: "booking_flow.title_ar", label: "Section Title (Arabic)", dir: "rtl" },
         { type: "text", key: "booking_flow.step1_title_en", label: "Step 1 Title (English)" },
@@ -319,7 +286,7 @@ const PageSchemas = {
     ]
 };
 
-// --- Data Layer ---
+// ── Data Layer (unchanged) ───────────────────────────────────────────────────
 const Data = {
     adminApiHealthy: true,
 
@@ -329,10 +296,7 @@ const Data = {
         const token = await user.getIdToken();
         const response = await fetch(adminApiEndpoint, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             body: JSON.stringify({ action, payload })
         });
         const result = await response.json().catch(() => ({}));
@@ -346,29 +310,19 @@ const Data = {
 
     async loadAll() {
         const tasks = [
-            this.fetchDestinations(),
-            this.fetchArticles(),
-            this.fetchSettings(),
-            this.fetchPage('home'),
-                this.fetchPage('about'),
-                this.fetchPage('services'),
-                this.fetchPage('contact'),
-                this.fetchPage('shared'),
-                this.fetchConversionStats(),
-                this.fetchMediaLibrary()
-            ];
-
+            this.fetchDestinations(), this.fetchArticles(), this.fetchSettings(),
+            this.fetchPage('home'), this.fetchPage('about'), this.fetchPage('services'),
+            this.fetchPage('contact'), this.fetchPage('shared'),
+            this.fetchConversionStats(), this.fetchMediaLibrary()
+        ];
         const results = await Promise.allSettled(tasks);
         const failed = results.filter(r => r.status === "rejected");
-        if (failed.length > 0) {
-            console.warn(`[Admin] Partial load: ${failed.length} task(s) failed`, failed.map(f => f.reason?.message || f.reason));
-        }
+        if (failed.length > 0) console.warn(`[Admin] Partial load: ${failed.length} task(s) failed`);
         State.loaded = true;
     },
 
     async fetchDestinations() {
         const snap = await getDocs(collection(db, "destinations"));
-        console.log(`[Admin] Fetched ${snap.size} destinations`);
         State.destinations = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     },
 
@@ -379,15 +333,10 @@ const Data = {
     },
 
     async fetchSettings() {
-        // Fetch Navbar
         try {
             const navSnap = await getDoc(doc(db, "settings", "navbar"));
-            if (navSnap.exists()) {
-                State.settings.navbar = navSnap.data().items || [];
-            }
+            if (navSnap.exists()) State.settings.navbar = navSnap.data().items || [];
         } catch (e) { console.warn("Navbar settings not found", e); }
-
-        // Fetch Contact/Global
         try {
             const contactSnap = await getDoc(doc(db, "settings", "contact"));
             if (contactSnap.exists()) {
@@ -402,27 +351,17 @@ const Data = {
         try {
             const pageRes = await this.callAdminApi("getPageEditor", { pageId });
             const fallback = DefaultContent[pageId] ? JSON.parse(JSON.stringify(DefaultContent[pageId])) : {};
-            State.pages[pageId] = pageRes.draft && Object.keys(pageRes.draft).length
-                ? pageRes.draft
-                : (pageRes.published || fallback);
+            State.pages[pageId] = pageRes.draft && Object.keys(pageRes.draft).length ? pageRes.draft : (pageRes.published || fallback);
             State.pageMeta[pageId] = {
-                published: pageRes.published || {},
-                status: pageRes.status || "draft",
-                updatedAt: pageRes.updatedAt || null,
-                publishedAt: pageRes.publishedAt || null,
-                lastPublishNote: pageRes.lastPublishNote || '',
-                lastChangeSummary: pageRes.lastChangeSummary || '',
+                published: pageRes.published || {}, status: pageRes.status || "draft",
+                updatedAt: pageRes.updatedAt || null, publishedAt: pageRes.publishedAt || null,
+                lastPublishNote: pageRes.lastPublishNote || '', lastChangeSummary: pageRes.lastChangeSummary || '',
                 revisions: pageRes.revisions || []
             };
         } catch (e) {
-            console.warn(`Page ${pageId} load via adminApi failed, falling back to settings/page_${pageId}`, e);
             try {
                 const fallbackSnap = await getDoc(doc(db, "settings", `page_${pageId}`));
-                if (fallbackSnap.exists()) {
-                    State.pages[pageId] = fallbackSnap.data();
-                } else {
-                    State.pages[pageId] = DefaultContent[pageId] ? JSON.parse(JSON.stringify(DefaultContent[pageId])) : {};
-                }
+                State.pages[pageId] = fallbackSnap.exists() ? fallbackSnap.data() : (DefaultContent[pageId] ? JSON.parse(JSON.stringify(DefaultContent[pageId])) : {});
             } catch (_e2) {
                 State.pages[pageId] = DefaultContent[pageId] ? JSON.parse(JSON.stringify(DefaultContent[pageId])) : {};
             }
@@ -435,530 +374,848 @@ const Data = {
         await this.fetchDestinations();
         return result.id;
     },
-
     async saveArticle(id, data) {
         const result = await this.callAdminApi("upsertArticle", { id: id || null, data });
         await this.fetchArticles();
         return result.id;
     },
-
     async deleteDestination(destId) {
         await this.callAdminApi("deleteDestination", { id: destId });
         await this.fetchDestinations();
     },
-
     async deleteArticle(id) {
         await this.callAdminApi("deleteArticle", { id });
         await this.fetchArticles();
     },
-
     async saveSettings(type, data) {
         await this.callAdminApi("saveSettings", { type, data });
-        if(type === 'navbar') State.settings.navbar = data.items;
-        if(type === 'contact') {
-            State.settings.contact = data;
-            State.settings.social = data.social;
-        }
+        if (type === 'navbar') State.settings.navbar = data.items;
+        if (type === 'contact') { State.settings.contact = data; State.settings.social = data.social; }
     },
-
     async savePage(pageId, data) {
         await this.callAdminApi("savePageDraft", { pageId, data });
         State.pages[pageId] = data;
         await this.fetchPage(pageId);
     },
-
     async publishPage(pageId, options = {}) {
-        await this.callAdminApi("publishPage", {
-            pageId,
-            note: options.note || "",
-            changeSummary: options.changeSummary || ""
-        });
+        await this.callAdminApi("publishPage", { pageId, note: options.note || "", changeSummary: options.changeSummary || "" });
         await this.fetchPage(pageId);
     },
-
     async rollbackPage(pageId, revisionId, publishNow = false) {
         await this.callAdminApi("rollbackPage", { pageId, revisionId, publishNow });
         await this.fetchPage(pageId);
     },
-
     async uploadImage(file, path) {
         const storageRef = ref(storage, `${path}/${Date.now()}_${file.name}`);
         const snapshot = await uploadBytes(storageRef, file);
         const url = await getDownloadURL(snapshot.ref);
-        try {
-            await this.saveMediaMeta(url, [], '');
-        } catch (_e) {}
+        try { await this.saveMediaMeta(url, [], ''); } catch (_e) {}
         return url;
     },
-
     async fetchLogs() {
-        try {
-            const result = await this.callAdminApi("getAuditLogs", { limit: 8 });
-            return result.logs || [];
-        } catch(e) {
-            console.warn("[Admin] Audit logs unavailable", e.message || e);
-            return [];
-        }
+        try { const r = await this.callAdminApi("getAuditLogs", { limit: 8 }); return r.logs || []; }
+        catch (e) { console.warn("[Admin] Audit logs unavailable", e.message); return []; }
     },
-
     async fetchConversionStats() {
-        try {
-            const result = await this.callAdminApi("getConversionDashboard", { days: 30 });
-            State.conversionStats = result;
-        } catch (e) {
-            State.conversionStats = null;
-            console.warn("[Admin] Conversion stats unavailable", e.message || e);
-        }
+        try { const r = await this.callAdminApi("getConversionDashboard", { days: 30 }); State.conversionStats = r; }
+        catch (e) { State.conversionStats = null; }
     },
-
     async fetchMediaLibrary() {
         try {
-            const result = await this.callAdminApi("getMediaLibrary", {
-                query: State.mediaFilters.query || "",
-                tag: State.mediaFilters.tag || ""
-            });
-            State.mediaAssets = result.assets || [];
-        } catch (e) {
-            State.mediaAssets = [];
-            console.warn("[Admin] Media library unavailable", e.message || e);
-        }
+            const r = await this.callAdminApi("getMediaLibrary", { query: State.mediaFilters.query || "", tag: State.mediaFilters.tag || "" });
+            State.mediaAssets = r.assets || [];
+        } catch (e) { State.mediaAssets = []; }
     },
-
-    async saveMediaMeta(url, tags = [], alt = "") {
-        await this.callAdminApi("saveMediaMeta", { url, tags, alt });
-    },
-
-    async replaceMediaAsset(oldUrl, newUrl) {
-        return this.callAdminApi("replaceMediaAsset", { oldUrl, newUrl });
-    },
-
+    async saveMediaMeta(url, tags = [], alt = "") { await this.callAdminApi("saveMediaMeta", { url, tags, alt }); },
+    async replaceMediaAsset(oldUrl, newUrl) { return this.callAdminApi("replaceMediaAsset", { oldUrl, newUrl }); },
     async schedulePublish(pageId, scheduledAt, note = "", changeSummary = "") {
         return this.callAdminApi("schedulePublish", { pageId, scheduledAt, note, changeSummary });
     },
-
-    async runScheduledPublishes() {
-        return this.callAdminApi("runScheduledPublishes", {});
-    }
+    async runScheduledPublishes() { return this.callAdminApi("runScheduledPublishes", {}); }
 };
 
-// --- UI Layer ---
+// ═════════════════════════════════════════════════════════════════════════════
+// UI LAYER — Premium Reconstruction
+// ═════════════════════════════════════════════════════════════════════════════
 const UI = {
+
+    // ── Toast ───────────────────────────────────────────────────────────────
+    toast(msg, type = 'info', duration = 4000) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const icons = { success: 'fa-circle-check', error: 'fa-triangle-exclamation', warning: 'fa-circle-exclamation', info: 'fa-circle-info' };
+        const colors = { success: '#10b981', error: '#ef4444', warning: '#f59e0b', info: '#3b82f6' };
+        const el = document.createElement('div');
+        el.className = `toast-item ${type}`;
+        el.innerHTML = `
+            <i class="fa-solid ${icons[type] || icons.info} toast-icon" style="color:${colors[type]}"></i>
+            <span class="toast-msg">${Admin.escapeHtml(msg)}</span>
+            <button class="toast-close" onclick="this.closest('.toast-item').remove()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="toast-progress" style="animation-duration:${duration}ms"></div>`;
+        container.appendChild(el);
+        setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 280); }, duration);
+    },
+
+    // ── Modal ───────────────────────────────────────────────────────────────
+    openModal() {
+        const backdrop = document.getElementById('modal-backdrop');
+        const panel = document.getElementById('modal-panel');
+        if (!backdrop || !panel) return;
+        backdrop.classList.add('visible');
+        requestAnimationFrame(() => panel.classList.add('visible'));
+        document.addEventListener('keydown', this._escHandler = (e) => { if (e.key === 'Escape') this.closeModal(); }, { once: true });
+    },
+    closeModal() {
+        const backdrop = document.getElementById('modal-backdrop');
+        const panel = document.getElementById('modal-panel');
+        if (!backdrop || !panel) return;
+        panel.classList.remove('visible');
+        backdrop.classList.remove('visible');
+        setTimeout(() => { if (panel) panel.innerHTML = ''; }, 350);
+    },
+
+    // ── Loading ─────────────────────────────────────────────────────────────
     showLoading() {
-        const app = document.getElementById('app');
-        if(app) app.innerHTML = `
-            <div class="flex items-center justify-center min-h-screen bg-gray-100">
-                <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
+        document.getElementById('app').innerHTML = `
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <span class="spinner-text">Authenticating…</span>
             </div>`;
     },
 
+    // ── Login ───────────────────────────────────────────────────────────────
     renderLogin() {
         document.getElementById('app').innerHTML = `
-            <div class="min-h-screen flex items-center justify-center bg-gray-900 px-4">
-                <div class="max-w-md w-full bg-gray-800 rounded-lg shadow-xl overflow-hidden">
-                    <div class="px-6 py-8">
-                        <h2 class="text-center text-3xl font-extrabold text-white mb-2">Georgia Hills</h2>
-                        <p class="text-center text-gray-400 mb-8">Admin Access Panel</p>
-                        <form id="login-form" class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
-                                <input id="email" type="email" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">Password</label>
-                                <input id="password" type="password" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors">
-                            </div>
-                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition transform hover:scale-[1.02]">
-                                Sign In
-                            </button>
-                        </form>
+            <div class="login-page">
+                <div class="login-bg-orb login-bg-orb-1"></div>
+                <div class="login-bg-orb login-bg-orb-2"></div>
+                <div class="login-card">
+                    <div class="login-logo-wrap">
+                        <div class="login-logo-icon">GH</div>
+                        <div class="login-title">Georgia Hills</div>
+                        <div class="login-sub">Admin Control Panel</div>
+                    </div>
+                    <form id="login-form" autocomplete="on">
+                        <div class="login-field">
+                            <label class="login-label" for="login-email">Email Address</label>
+                            <input id="login-email" type="email" name="email" required
+                                class="login-input" placeholder="admin@georgiahills.com" autocomplete="username">
+                        </div>
+                        <div class="login-field">
+                            <label class="login-label" for="login-password">Password</label>
+                            <input id="login-password" type="password" name="password" required
+                                class="login-input" placeholder="••••••••••" autocomplete="current-password">
+                        </div>
+                        <button type="submit" class="login-btn" id="login-submit">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            Sign In to Admin
+                        </button>
+                        <div id="login-error" style="display:none"></div>
+                    </form>
+                    <div style="margin-top:24px;text-align:center;font-size:11px;color:#3a3f55">
+                        Protected access. Unauthorized access prohibited.
                     </div>
                 </div>
             </div>`;
-            
+
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerText = "Signing in...";
+            const btn = document.getElementById('login-submit');
+            const errEl = document.getElementById('login-error');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Signing in…';
             btn.disabled = true;
+            errEl.style.display = 'none';
             try {
-                await signInWithEmailAndPassword(auth, 
-                    document.getElementById('email').value,
-                    document.getElementById('password').value
+                await signInWithEmailAndPassword(auth,
+                    document.getElementById('login-email').value,
+                    document.getElementById('login-password').value
                 );
             } catch (err) {
-                UI.toast(err.message, 'error');
-                btn.innerText = originalText;
+                errEl.className = 'login-error';
+                errEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${err.message}`;
+                errEl.style.display = 'flex';
+                btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Admin';
                 btn.disabled = false;
             }
         });
     },
 
+    // ── Sidebar item ─────────────────────────────────────────────────────────
+    renderSidebarItem(tab, icon, label, active = false) {
+        return `
+            <button class="sb-item${active ? ' active' : ''}" onclick="window.Admin.switchTab('${tab}')" data-tab="${tab}">
+                <span class="sb-item-icon"><i class="fa-solid ${icon}"></i></span>
+                <span class="sb-item-label">${label}</span>
+            </button>`;
+    },
+
+    // ── Layout ───────────────────────────────────────────────────────────────
     renderLayout() {
+        const t = State.currentTab;
+        const userInitial = (State.user?.email || 'A')[0].toUpperCase();
+
         document.getElementById('app').innerHTML = `
-            <div class="flex h-screen overflow-hidden bg-gray-100">
-                <!-- Sidebar -->
-                <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-10 transition-all duration-300 hidden md:flex">
-                    <div class="h-16 flex items-center px-6 border-b border-gray-100">
-                        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">GH Admin</span>
+        <div class="admin-shell">
+            <!-- Sidebar -->
+            <aside class="admin-sidebar" id="sidebar">
+                <div class="sb-logo">
+                    <div class="sb-logo-mark">GH</div>
+                    <div class="sb-logo-text">
+                        <span class="sb-logo-title">Georgia Hills</span>
+                        <span class="sb-logo-sub">Admin Panel</span>
                     </div>
-                    
-                    <nav class="flex-1 overflow-y-auto p-4 space-y-1">
-                        ${this.renderSidebarItem('dashboard', 'fa-chart-pie', 'Overview')}
-                        <div class="pt-4 pb-2 px-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Content Management</div>
-                        ${this.renderSidebarItem('page-home', 'fa-house', 'Home Page')}
-                        ${this.renderSidebarItem('destinations', 'fa-map-location-dot', 'Destinations')}
-                        ${this.renderSidebarItem('articles', 'fa-newspaper', 'Blog / Articles')}
-                        ${this.renderSidebarItem('page-about', 'fa-circle-info', 'About Page')}
-                        ${this.renderSidebarItem('page-services', 'fa-briefcase', 'Services Page')}
-                        ${this.renderSidebarItem('page-contact', 'fa-envelope', 'Contact Page')}
-                        ${this.renderSidebarItem('page-shared', 'fa-layer-group', 'Shared Content')}
-                        ${this.renderSidebarItem('media-library', 'fa-photo-film', 'Media Library')}
-                        ${Security.isAdmin() ? `
-                            <div class="pt-4 pb-2 px-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Configuration</div>
-                            ${this.renderSidebarItem('settings-global', 'fa-globe', 'Global Settings')}
-                            ${this.renderSidebarItem('settings-navbar', 'fa-bars', 'Navigation Menu')}
-                        ` : ''}
-                    </nav>
-
-                    <div class="p-4 border-t border-gray-100 bg-gray-50">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">A</div>
-                            <div class="text-sm">
-                                <p class="font-medium text-gray-900">${State.user?.email || 'User'}</p>
-                                <p class="text-xs text-gray-500">${State.userRole}</p>
-                            </div>
-                        </div>
-                        <button onclick="window.Admin.logout()" class="w-full text-center py-2 text-sm text-red-600 hover:bg-red-50 rounded transition-colors">Sign Out</button>
-                    </div>
-                </aside>
-
-                <!-- Main Content -->
-                <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
-                    <!-- Mobile Header -->
-                    <header class="bg-white shadow-sm h-16 flex items-center justify-between px-4 md:px-8 z-10">
-                        <button class="md:hidden text-gray-600 hover:text-gray-900" onclick="document.querySelector('aside').classList.toggle('hidden')">
-                            <i class="fa-solid fa-bars text-xl"></i>
-                        </button>
-                        <h1 class="text-lg font-semibold text-gray-800 capitalize" id="header-title">
-                            ${State.currentTab.replace('-', ' ')}
-                        </h1>
-                        <a href="/" target="_blank" class="text-sm font-medium text-blue-600 hover:text-blue-800 flex items-center gap-2">
-                            <span>Open Website</span> 
-                            <i class="fa-solid fa-external-link-alt text-xs"></i>
-                        </a>
-                    </header>
-
-                    <!-- Content Area -->
-                    <main class="flex-1 overflow-y-auto p-4 md:p-8 bg-gray-50/50" id="main-content">
-                        <!-- Dynamic Content -->
-                    </main>
                 </div>
+
+                <nav class="sb-nav sb-scroll">
+                    ${this.renderSidebarItem('dashboard', 'fa-chart-pie', 'Overview', t === 'dashboard')}
+
+                    <div class="sb-section-label">Content</div>
+                    ${this.renderSidebarItem('page-home', 'fa-house', 'Home Page', t === 'page-home')}
+                    ${this.renderSidebarItem('destinations', 'fa-map-location-dot', 'Destinations', t === 'destinations')}
+                    ${this.renderSidebarItem('articles', 'fa-newspaper', 'Blog & Articles', t === 'articles')}
+                    ${this.renderSidebarItem('page-about', 'fa-circle-info', 'About Page', t === 'page-about')}
+                    ${this.renderSidebarItem('page-services', 'fa-briefcase', 'Services Page', t === 'page-services')}
+                    ${this.renderSidebarItem('page-contact', 'fa-envelope', 'Contact Page', t === 'page-contact')}
+                    ${this.renderSidebarItem('page-shared', 'fa-layer-group', 'Shared Content', t === 'page-shared')}
+                    ${this.renderSidebarItem('media-library', 'fa-photo-film', 'Media Library', t === 'media-library')}
+
+                    ${Security.isAdmin() ? `
+                    <div class="sb-section-label">Configuration</div>
+                    ${this.renderSidebarItem('settings-global', 'fa-globe', 'Global Settings', t === 'settings-global')}
+                    ${this.renderSidebarItem('settings-navbar', 'fa-bars', 'Navigation Menu', t === 'settings-navbar')}
+                    ` : ''}
+                </nav>
+
+                <div class="sb-footer">
+                    <div class="sb-user">
+                        <div class="sb-avatar">${userInitial}</div>
+                        <div class="sb-user-info">
+                            <div class="sb-user-name">${Admin.escapeHtml(State.user?.email || 'Admin User')}</div>
+                            <div class="sb-user-role">${State.userRole}</div>
+                        </div>
+                    </div>
+                    <button class="sb-logout" onclick="window.Admin.logout()">
+                        <i class="fa-solid fa-arrow-right-from-bracket" style="width:18px;text-align:center"></i>
+                        <span class="sb-logout-label">Sign Out</span>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main -->
+            <div class="admin-main">
+                <header class="admin-header">
+                    <div class="admin-header-left">
+                        <button class="mobile-menu-btn" onclick="window.Admin.openMobileSidebar()">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <button onclick="window.Admin.toggleSidebar()" class="header-btn header-btn-ghost" title="Toggle sidebar" style="display:flex">
+                            <i class="fa-solid fa-sidebar" style="font-size:15px"></i>
+                        </button>
+                        <span class="header-title" id="header-title">${this._tabLabel(t)}</span>
+                    </div>
+                    <div class="admin-header-right">
+                        <div class="header-status">
+                            <div class="header-status-dot"></div>
+                            <span>Live</span>
+                        </div>
+                        <a href="/" target="_blank" class="header-btn header-btn-ghost">
+                            <i class="fa-solid fa-external-link-alt"></i>
+                            View Site
+                        </a>
+                    </div>
+                </header>
+                <main class="admin-content fade-in" id="main-content"></main>
             </div>
-            <div id="toast-container" class="toast-container"></div>
-            <div id="modal-backdrop" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity opacity-0" onclick="window.Admin.closeModal()"></div>
-            <div id="modal-panel" class="fixed inset-y-0 right-0 w-full md:w-[600px] bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
-                <!-- Modal Content -->
-            </div>
-        `;
+        </div>`;
+
         this.loadTab(State.currentTab);
     },
 
-    renderSidebarItem(tab, icon, label) {
-        const isActive = State.currentTab === tab;
-        return `
-            <button onclick="window.Admin.switchTab('${tab}')" data-tab="${tab}"
-                class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${isActive ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'}">
-                <i data-icon="${icon}" class="fa-solid ${icon} w-5 text-center ${isActive ? 'text-blue-600' : 'text-gray-400'}"></i>
-                ${label}
-            </button>
-        `;
+    _tabLabel(tab) {
+        const labels = {
+            'dashboard': 'Overview', 'destinations': 'Destinations', 'articles': 'Blog & Articles',
+            'page-home': 'Home Page', 'page-about': 'About Page', 'page-services': 'Services Page',
+            'page-contact': 'Contact Page', 'page-shared': 'Shared Content', 'media-library': 'Media Library',
+            'settings-global': 'Global Settings', 'settings-navbar': 'Navigation Menu'
+        };
+        return labels[tab] || tab;
     },
 
     async loadTab(tab) {
         if (tab !== State.currentTab && State.unsavedChanges) {
-            const leave = confirm('You have unsaved changes. Leave this page?');
-            if (!leave) return;
+            if (!confirm('You have unsaved changes. Leave this page?')) return;
             State.unsavedChanges = false;
         }
-
         if (!Security.isAdmin() && (tab === 'settings-global' || tab === 'settings-navbar')) {
-            UI.toast("Only admin can access configuration tabs.", "error");
+            UI.toast("Only admins can access configuration.", "error");
             tab = 'dashboard';
         }
 
         State.currentTab = tab;
-        // Re-render sidebar to update active state
-        // In a real framework we'd use reactive state, here we cheat slightly or just re-render sidebar
-        const sidebarBtns = document.querySelectorAll('aside nav button[data-tab]');
-        sidebarBtns.forEach(btn => {
-           const iconEl = btn.querySelector('i[data-icon]');
-           const isActive = btn.dataset.tab === tab;
-           if (isActive) {
-               btn.className = "w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors bg-blue-50 text-blue-700";
-               if (iconEl) iconEl.className = `fa-solid ${iconEl.dataset.icon} w-5 text-center text-blue-600`;
-           } else {
-               btn.className = "w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors text-gray-600 hover:bg-gray-100 hover:text-gray-900";
-               if (iconEl) iconEl.className = `fa-solid ${iconEl.dataset.icon} w-5 text-center text-gray-400`;
-           }
-        });
-
         const content = document.getElementById('main-content');
         const headerTitle = document.getElementById('header-title');
-        if(headerTitle) headerTitle.innerText = tab.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
-        
-        switch(tab) {
-            case 'dashboard': this.renderDashboard(content); break;
+        if (headerTitle) headerTitle.textContent = this._tabLabel(tab);
+
+        // Update active sidebar items
+        document.querySelectorAll('.sb-item[data-tab]').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tab);
+        });
+
+        if (content) {
+            content.classList.remove('fade-in');
+            void content.offsetWidth;
+            content.classList.add('fade-in');
+        }
+
+        switch (tab) {
+            case 'dashboard': await this.renderDashboard(content); break;
             case 'destinations': this.renderDestinations(content); break;
             case 'articles': this.renderArticles(content); break;
-            case 'page-home': this.renderPageEditor(content, 'home'); break;
-            case 'page-about': this.renderPageEditor(content, 'about'); break;
-            case 'page-services': this.renderPageEditor(content, 'services'); break;
-            case 'page-contact': this.renderPageEditor(content, 'contact'); break;
-            case 'page-shared': this.renderPageEditor(content, 'shared'); break;
-            case 'media-library': this.renderMediaLibrary(content); break;
+            case 'page-home': Admin.renderPageEditor(content, 'home'); break;
+            case 'page-about': Admin.renderPageEditor(content, 'about'); break;
+            case 'page-services': Admin.renderPageEditor(content, 'services'); break;
+            case 'page-contact': Admin.renderPageEditor(content, 'contact'); break;
+            case 'page-shared': Admin.renderPageEditor(content, 'shared'); break;
+            case 'media-library': await this.renderMediaLibrary(content); break;
             case 'settings-global': this.renderGlobalSettings(content); break;
             case 'settings-navbar': this.renderNavbarSettings(content); break;
-            default: content.innerHTML = `<div class="text-center text-gray-500 mt-20">Page not found</div>`;
+            default: content.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">Page Not Found</div><div class="empty-desc">Tab "${tab}" doesn't exist.</div></div>`;
         }
     },
 
+    // ── Dashboard ────────────────────────────────────────────────────────────
     async renderDashboard(container) {
         const destCount = State.destinations.length;
         const activeDestCount = State.destinations.filter(d => d.active !== false).length;
         const articleCount = State.articles.length;
-        const navCount = State.settings.navbar ? State.settings.navbar.length : 0;
-        const contactConfigured = State.settings.contact && State.settings.contact.phone ? 'Configured' : 'Pending';
         const conv = State.conversionStats?.totals || { bookings: 0, en: 0, ar: 0 };
-        
+        const contactConfigured = State.settings.contact?.phone ? true : false;
+
+        container.innerHTML = `
+        <div class="space-y">
+            <!-- KPI Row -->
+            <div class="grid-4">
+                <div class="kpi-card" style="--kpi-color:#3b82f6" id="kpi-dest">
+                    <div class="kpi-info">
+                        <div class="kpi-label">Destinations</div>
+                        <div class="kpi-value">${destCount}</div>
+                        <div class="kpi-sub">
+                            <span class="kpi-badge green"><i class="fa-solid fa-circle" style="font-size:6px"></i> ${activeDestCount} active</span>
+                        </div>
+                    </div>
+                    <div class="kpi-icon" style="background:#eff6ff;color:#3b82f6">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                </div>
+                <div class="kpi-card" style="--kpi-color:#8b5cf6">
+                    <div class="kpi-info">
+                        <div class="kpi-label">Blog Articles</div>
+                        <div class="kpi-value">${articleCount}</div>
+                        <div class="kpi-sub">Published posts</div>
+                    </div>
+                    <div class="kpi-icon" style="background:#f5f3ff;color:#8b5cf6">
+                        <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                </div>
+                <div class="kpi-card" style="--kpi-color:#10b981">
+                    <div class="kpi-info">
+                        <div class="kpi-label">30d Booking Leads</div>
+                        <div class="kpi-value">${conv.bookings}</div>
+                        <div class="kpi-sub">EN: ${conv.en} &nbsp;|&nbsp; AR: ${conv.ar}</div>
+                    </div>
+                    <div class="kpi-icon" style="background:#ecfdf5;color:#10b981">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                </div>
+                <div class="kpi-card" style="--kpi-color:${contactConfigured ? '#10b981' : '#f59e0b'}">
+                    <div class="kpi-info">
+                        <div class="kpi-label">Contact Info</div>
+                        <div class="kpi-value" style="font-size:16px;line-height:1.4;padding-top:4px">${contactConfigured ? 'Configured' : 'Needs Setup'}</div>
+                        <div class="kpi-sub"><span class="kpi-badge ${contactConfigured ? 'green' : 'amber'}">${contactConfigured ? '✓ Ready' : '⚠ Action needed'}</span></div>
+                    </div>
+                    <div class="kpi-icon" style="background:${contactConfigured ? '#ecfdf5' : '#fffbeb'};color:${contactConfigured ? '#10b981' : '#f59e0b'}">
+                        <i class="fa-solid fa-address-card"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px">
+                <!-- Quick Actions -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon" style="background:#fef9ec;color:#c9a227"><i class="fa-solid fa-bolt"></i></div>
+                            Quick Actions
+                        </div>
+                    </div>
+                    <div class="card-p">
+                        <div class="quick-grid">
+                            <button class="quick-btn" onclick="window.Admin.openDestinationModal()">
+                                <div class="quick-btn-icon" style="background:#eff6ff;color:#3b82f6"><i class="fa-solid fa-plus"></i></div>
+                                <span class="quick-btn-label">Add Destination</span>
+                            </button>
+                            <button class="quick-btn" onclick="window.Admin.switchTab('page-home')">
+                                <div class="quick-btn-icon" style="background:#f5f3ff;color:#8b5cf6"><i class="fa-solid fa-house"></i></div>
+                                <span class="quick-btn-label">Edit Home</span>
+                            </button>
+                            <button class="quick-btn" onclick="window.Admin.openArticleModal()">
+                                <div class="quick-btn-icon" style="background:#fff7ed;color:#ea580c"><i class="fa-solid fa-pen-nib"></i></div>
+                                <span class="quick-btn-label">Write Article</span>
+                            </button>
+                            <button class="quick-btn" onclick="window.Admin.switchTab('media-library')">
+                                <div class="quick-btn-icon" style="background:#ecfdf5;color:#10b981"><i class="fa-solid fa-photo-film"></i></div>
+                                <span class="quick-btn-label">Media Library</span>
+                            </button>
+                            <button class="quick-btn" ${Security.isAdmin() ? '' : 'disabled'} onclick="window.Admin.switchTab('settings-global')">
+                                <div class="quick-btn-icon" style="background:#fef2f2;color:#ef4444"><i class="fa-solid fa-phone"></i></div>
+                                <span class="quick-btn-label">Contact Info</span>
+                            </button>
+                            <button class="quick-btn" onclick="window.open('/','_blank')">
+                                <div class="quick-btn-icon" style="background:#f8fafc;color:#64748b"><i class="fa-solid fa-external-link-alt"></i></div>
+                                <span class="quick-btn-label">View Live Site</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Health -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon" style="background:#ecfdf5;color:#10b981"><i class="fa-solid fa-heart-pulse"></i></div>
+                            System Health
+                        </div>
+                    </div>
+                    <div class="card-p" style="display:flex;flex-direction:column;gap:10px">
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px">
+                            <div style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#065f46">
+                                <div style="width:7px;height:7px;background:#10b981;border-radius:50%;animation:pulse-green 2s infinite"></div>
+                                Firestore Connected
+                            </div>
+                            <i class="fa-solid fa-database" style="color:#10b981;font-size:12px"></i>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px">
+                            <div style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#1d4ed8">
+                                <div style="width:7px;height:7px;background:#3b82f6;border-radius:50%"></div>
+                                Auth Active
+                            </div>
+                            <i class="fa-solid fa-shield-halved" style="color:#3b82f6;font-size:12px"></i>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:${Data.adminApiHealthy ? '#ecfdf5' : '#fef2f2'};border:1px solid ${Data.adminApiHealthy ? '#a7f3d0' : '#fecaca'};border-radius:8px">
+                            <div style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:${Data.adminApiHealthy ? '#065f46' : '#991b1b'}">
+                                <div style="width:7px;height:7px;background:${Data.adminApiHealthy ? '#10b981' : '#ef4444'};border-radius:50%"></div>
+                                Admin API
+                            </div>
+                            <i class="fa-solid fa-server" style="color:${Data.adminApiHealthy ? '#10b981' : '#ef4444'};font-size:12px"></i>
+                        </div>
+                        <div style="margin-top:8px;padding-top:12px;border-top:1px solid #e2e8f0">
+                            <div style="font-size:11px;color:#64748b;margin-bottom:6px;font-weight:500">Storage usage (est.)</div>
+                            <div style="background:#e2e8f0;border-radius:99px;height:5px;overflow:hidden">
+                                <div style="width:15%;background:linear-gradient(90deg,#3b82f6,#8b5cf6);height:100%;border-radius:99px"></div>
+                            </div>
+                            <div style="font-size:10px;color:#94a3b8;margin-top:4px;text-align:right">~15% used</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card" id="activity-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-title-icon" style="background:#fef9ec;color:#c9a227"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        Recent Activity
+                    </div>
+                    <button onclick="window.Admin.switchTab('dashboard')" class="btn btn-ghost btn-sm">
+                        <i class="fa-solid fa-rotate"></i> Refresh
+                    </button>
+                </div>
+                <div class="card-p" id="activity-body">
+                    <div style="display:flex;gap:12px;align-items:center;padding:8px 0">
+                        <div class="skeleton" style="width:28px;height:28px;border-radius:7px;flex-shrink:0"></div>
+                        <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+                            <div class="skeleton" style="height:12px;width:60%;border-radius:4px"></div>
+                            <div class="skeleton" style="height:10px;width:40%;border-radius:4px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+        // Animate KPI cards
+        setTimeout(() => {
+            document.querySelectorAll('.kpi-card').forEach((c, i) => {
+                setTimeout(() => c.classList.add('loaded'), i * 80);
+            });
+        }, 100);
+
+        // Load activity asynchronously
         const logs = await Data.fetchLogs();
-
-        container.innerHTML = `
-            <div class="space-y-6">
-                <!-- Stats Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Total Destinations -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-500">Total Destinations</p>
-                            <h3 class="text-2xl font-bold text-gray-900 mt-1">${destCount}</h3>
-                            <p class="text-xs text-green-600 mt-1"><i class="fa-solid fa-check"></i> ${activeDestCount} Active</p>
-                        </div>
-                        <div class="p-3 bg-blue-50 rounded-lg text-blue-600"><i class="fa-solid fa-map-location-dot text-xl"></i></div>
-                    </div>
-
-                    <!-- Articles -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-500">Blog Articles</p>
-                            <h3 class="text-2xl font-bold text-gray-900 mt-1">${articleCount}</h3>
-                            <p class="text-xs text-gray-400 mt-1">Published Posts</p>
-                        </div>
-                        <div class="p-3 bg-indigo-50 rounded-lg text-indigo-600"><i class="fa-solid fa-bars text-xl"></i></div>
-                    </div>
-
-                    <!-- Contact Info Status -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-500">Contact Info</p>
-                            <h3 class="text-lg font-bold text-gray-900 mt-1">${contactConfigured}</h3>
-                            <p class="text-xs text-gray-400 mt-1">Global Settings</p>
-                        </div>
-                        <div class="p-3 bg-green-50 rounded-lg text-green-600"><i class="fa-solid fa-address-card text-xl"></i></div>
-                    </div>
-
-                    <!-- Analytics Link -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between cursor-pointer hover:border-blue-300 transition-colors" onclick="window.open('https://analytics.google.com', '_blank')">
-                        <div>
-                            <p class="text-sm font-medium text-gray-500">Visitor Stats</p>
-                            <h3 class="text-lg font-bold text-blue-600 mt-1">Open Analytics &rarr;</h3>
-                            <p class="text-xs text-gray-400 mt-1">View Traffic Data</p>
-                        </div>
-                        <div class="p-3 bg-orange-50 rounded-lg text-orange-600"><i class="fa-solid fa-chart-line text-xl"></i></div>
-                    </div>
-
-                    <!-- Conversion KPI -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-500">30d Booking Leads</p>
-                            <h3 class="text-2xl font-bold text-gray-900 mt-1">${conv.bookings}</h3>
-                            <p class="text-xs text-gray-400 mt-1">EN: ${conv.en} | AR: ${conv.ar}</p>
-                        </div>
-                        <div class="p-3 bg-emerald-50 rounded-lg text-emerald-600"><i class="fa-solid fa-bullseye text-xl"></i></div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Quick Actions -->
-                    <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                        <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-bolt text-yellow-500"></i> Quick Actions
-                        </h3>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <button onclick="window.Admin.openDestinationModal()" class="p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all text-left group">
-                                <i class="fa-solid fa-plus text-2xl mb-2 text-blue-500 group-hover:scale-110 transition-transform block"></i>
-                                <span class="font-medium text-sm">Add Destination</span>
-                            </button>
-                            <button onclick="window.Admin.switchTab('page-home')" class="p-4 border border-gray-200 rounded-lg hover:bg-purple-50 hover:border-purple-200 hover:text-purple-700 transition-all text-left group">
-                                <i class="fa-solid fa-house text-2xl mb-2 text-purple-500 group-hover:scale-110 transition-transform block"></i>
-                                <span class="font-medium text-sm">Edit Home Page</span>
-                            </button>
-                            <button onclick="window.Admin.switchTab('settings-global')" ${Security.isAdmin() ? '' : 'disabled'} class="p-4 border border-gray-200 rounded-lg hover:bg-green-50 hover:border-green-200 hover:text-green-700 transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed">
-                                <i class="fa-solid fa-phone text-2xl mb-2 text-green-500 group-hover:scale-110 transition-transform block"></i>
-                                <span class="font-medium text-sm">Update Contact</span>
-                            </button>
-                            <button onclick="window.Admin.openArticleModal()" class="p-4 border border-gray-200 rounded-lg hover:bg-orange-50 hover:border-orange-200 hover:text-orange-700 transition-all text-left group">
-                                <i class="fa-solid fa-newspaper text-2xl mb-2 text-orange-500 group-hover:scale-110 transition-transform block"></i>
-                                <span class="font-medium text-sm">Write Article</span>
-                            </button>
-                            <button onclick="window.Admin.switchTab('settings-navbar')" ${Security.isAdmin() ? '' : 'disabled'} class="p-4 border border-gray-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed">
-                                <i class="fa-solid fa-bars text-2xl mb-2 text-indigo-500 group-hover:scale-110 transition-transform block"></i>
-                                <span class="font-medium text-sm">Manage Menu</span>
-                            </button>
-                             <button onclick="window.open('/', '_blank')" class="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 transition-all text-left group">
-                                <i class="fa-solid fa-external-link-alt text-2xl mb-2 text-gray-500 group-hover:scale-110 transition-transform block"></i>
-                                <span class="font-medium text-sm">View Live Site</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- System Status / Info -->
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                        <h3 class="font-bold text-gray-800 mb-4">System Health</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-100">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                    <span class="text-sm font-medium text-green-800">Database Connected</span>
-                                </div>
-                                <i class="fa-solid fa-database text-green-600"></i>
-                            </div>
-                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-100">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                    <span class="text-sm font-medium text-blue-800">Auth Active</span>
-                                </div>
-                                <i class="fa-solid fa-shield-halved text-blue-600"></i>
-                            </div>
-                            
-                            <div class="mt-6 pt-4 border-t border-gray-100">
-                                <p class="text-xs text-gray-500 mb-2">Storage Usage (Est.)</p>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 15%"></div>
-                                </div>
-                                <p class="text-xs text-right text-gray-400 mt-1">Healthy</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Activity Log -->
-                    <div class="lg:col-span-3 bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                        <h3 class="font-bold text-gray-800 mb-4">Recent Activity</h3>
-                        <div class="overflow-hidden">
-                            <table class="min-w-full text-sm text-left text-gray-500">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                    <tr><th class="px-4 py-3">Action</th><th class="px-4 py-3">Details</th><th class="px-4 py-3">User</th><th class="px-4 py-3">Time</th></tr>
-                                </thead>
-                                <tbody>
-                                    ${logs.length > 0 ? logs.map(log => `
-                                        <tr class="border-b hover:bg-gray-50">
-                                            <td class="px-4 py-3 font-medium text-gray-900 capitalize">${log.action.replace('_', ' ')}</td>
-                                            <td class="px-4 py-3">${log.details}</td>
-                                            <td class="px-4 py-3">${log.userEmail || log.user || '-'}</td>
-                                            <td class="px-4 py-3">${new Date(log.timestamp).toLocaleString()}</td>
-                                        </tr>
-                                    `).join('') : '<tr><td colspan="4" class="px-4 py-3 text-center text-gray-400">No recent activity recorded.</td></tr>'}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    },
-
-    renderDestinations(container) {
-        container.innerHTML = `
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-800">Destinations</h2>
-                    <p class="text-sm text-gray-500">Manage tour packages and locations</p>
-                </div>
-                <button onclick="window.Admin.openDestinationModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg shadow-sm font-medium flex items-center gap-2">
-                    <i class="fa-solid fa-plus"></i> Add New
-                </button>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                ${State.destinations.map(dest => {
-                    const esc = (s) => String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+        const actBody = document.getElementById('activity-body');
+        if (actBody) {
+            if (logs.length === 0) {
+                actBody.innerHTML = `<div class="empty-state" style="padding:32px"><div class="empty-icon" style="width:48px;height:48px;font-size:20px">📋</div><div class="empty-title" style="font-size:14px">No recent activity</div><div class="empty-desc">Actions will appear here as you make changes.</div></div>`;
+            } else {
+                const actColors = { publish: ['#ecfdf5','#10b981','fa-cloud-arrow-up'], save: ['#eff6ff','#3b82f6','fa-floppy-disk'], delete: ['#fef2f2','#ef4444','fa-trash'], default: ['#f8fafc','#64748b','fa-circle-dot'] };
+                actBody.innerHTML = logs.map(log => {
+                    const action = (log.action || '').toLowerCase();
+                    const [bg, color, icon] = actColors[Object.keys(actColors).find(k => action.includes(k))] || actColors.default;
+                    const time = log.timestamp ? new Date(log.timestamp).toLocaleString() : '—';
                     return `
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow group flex flex-col h-full">
-                        <div class="relative h-48 bg-gray-100 shrink-0">
-                            <img src="${esc(dest.thumbnail) || 'https://placehold.co/600x400?text=No+Image'}" class="w-full h-full object-cover">
-                            <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                ${Security.isAdmin() ? `<button onclick="window.Admin.deleteDestination('${esc(dest.id)}')" class="bg-white p-2 text-red-600 rounded shadow hover:bg-red-50" title="Delete"><i class="fa-solid fa-trash"></i></button>` : ''}
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background:${bg};color:${color}"><i class="fa-solid ${icon}"></i></div>
+                            <div class="activity-body">
+                                <div class="activity-action">${Admin.escapeHtml(log.action || '').replace(/_/g, ' ')}</div>
+                                <div class="activity-detail">${Admin.escapeHtml(log.details || log.userEmail || '')}</div>
                             </div>
-                        </div>
-                        <div class="p-5 flex flex-col flex-1">
-                            <h3 class="font-bold text-lg text-gray-900 mb-1 line-clamp-1">${esc(dest.title?.en) || 'Untitled'}</h3>
-                            <p class="text-sm text-gray-500 mb-4 line-clamp-2 flex-1">${esc(dest.desc?.en) || 'No description'}</p>
-                            <div class="flex justify-between items-center pt-4 border-t border-gray-100 mt-auto">
-                                <span class="text-xs font-mono bg-gray-100 px-2 py-1 rounded text-gray-600 truncate max-w-[100px]">${esc(dest.id)}</span>
-                                <button onclick="window.Admin.openDestinationModal('${esc(dest.id)}')" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Edit Details &rarr;</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                }).join('')}
-            </div>
-        `;
-        // Handle empty state
-        if(State.destinations.length === 0) {
-            container.innerHTML += `<div class="bg-white p-10 text-center rounded shadow"><p class="text-gray-500">No destinations found.</p></div>`;
+                            <div class="activity-time">${time}</div>
+                        </div>`;
+                }).join('');
+            }
         }
     },
 
-    renderArticles(container) {
+    // ── Destinations ─────────────────────────────────────────────────────────
+    renderDestinations(container) {
         container.innerHTML = `
-            <div class="flex justify-between items-center mb-6">
+        <div class="space-y">
+            <div class="page-section-header">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-800">Blog Articles</h2>
-                    <p class="text-sm text-gray-500">Manage news and travel guides</p>
+                    <div class="page-section-title">Destinations</div>
+                    <div class="page-section-sub">Manage tour packages and locations shown on the website</div>
                 </div>
-                <button onclick="window.Admin.openArticleModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg shadow-sm font-medium flex items-center gap-2">
-                    <i class="fa-solid fa-plus"></i> Write New
+                <button class="btn btn-primary" onclick="window.Admin.openDestinationModal()">
+                    <i class="fa-solid fa-plus"></i> Add Destination
                 </button>
             </div>
-            
-            <div class="grid grid-cols-1 gap-4">
-                ${State.articles.map(art => `
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 flex items-center gap-4 hover:shadow-md transition-shadow">
-                        <img src="${art.image || 'https://placehold.co/100x100'}" class="w-20 h-20 rounded-lg object-cover bg-gray-100">
-                        <div class="flex-1">
-                            <h3 class="font-bold text-gray-900">${art.title?.en || 'Untitled'}</h3>
-                            <p class="text-sm text-gray-500 line-clamp-1">${art.excerpt?.en || ''}</p>
-                            <div class="text-xs text-gray-400 mt-1">Published: ${art.date || 'N/A'}</div>
+
+            ${State.destinations.length === 0 ? `
+            <div class="card">
+                <div class="empty-state">
+                    <div class="empty-icon">📍</div>
+                    <div class="empty-title">No Destinations Yet</div>
+                    <div class="empty-desc">Add your first destination to start building your tour catalogue.</div>
+                    <button class="btn btn-primary" onclick="window.Admin.openDestinationModal()" style="margin-top:8px">
+                        <i class="fa-solid fa-plus"></i> Add First Destination
+                    </button>
+                </div>
+            </div>` : `
+            <div class="dest-grid">
+                ${State.destinations.map(dest => {
+                    const e = (s) => Admin.escapeHtml(s);
+                    const isActive = dest.active !== false;
+                    return `
+                    <div class="dest-card">
+                        <div class="dest-card-img">
+                            <img src="${e(dest.thumbnail || '')}" onerror="this.src='https://placehold.co/600x320/1e2133/8892b0?text=No+Image'" loading="lazy" alt="${e(dest.title?.en || '')}">
+                            <div class="dest-card-overlay">
+                                <button onclick="window.Admin.openDestinationModal('${e(dest.id)}')" class="btn btn-ghost btn-sm" style="background:rgba(255,255,255,0.9)">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
+                                ${Security.isAdmin() ? `<button onclick="window.Admin.deleteDestination('${e(dest.id)}')" class="btn btn-danger btn-sm">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>` : ''}
+                            </div>
                         </div>
-                        <div class="flex gap-2">
-                            <button onclick="window.Admin.openArticleModal('${art.id}')" class="p-2 text-blue-600 hover:bg-blue-50 rounded"><i class="fa-solid fa-pen"></i></button>
-                            ${Security.isAdmin() ? `<button onclick="window.Admin.deleteArticle('${art.id}')" class="p-2 text-red-600 hover:bg-red-50 rounded"><i class="fa-solid fa-trash"></i></button>` : ''}
+                        <div class="dest-card-body">
+                            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                                <div class="dest-card-title">${e(dest.title?.en || 'Untitled Destination')}</div>
+                                <span class="badge ${isActive ? 'badge-green' : 'badge-gray'}">${isActive ? 'Active' : 'Hidden'}</span>
+                            </div>
+                            <div class="dest-card-desc">${e(dest.desc?.en || 'No description provided.')}</div>
+                            ${dest.price || dest.duration ? `
+                            <div style="display:flex;gap:8px;flex-wrap:wrap">
+                                ${dest.price ? `<span class="badge badge-blue"><i class="fa-solid fa-tag"></i> ${e(dest.price)}</span>` : ''}
+                                ${dest.duration ? `<span class="badge badge-violet"><i class="fa-solid fa-clock"></i> ${e(dest.duration)}</span>` : ''}
+                            </div>` : ''}
                         </div>
-                    </div>
-                `).join('')}
-                ${State.articles.length === 0 ? '<div class="bg-white p-10 text-center rounded shadow"><p class="text-gray-500">No articles found.</p></div>' : ''}
-            </div>
-        `;
+                        <div class="dest-card-footer">
+                            <span class="dest-id font-mono">${e(dest.id)}</span>
+                            <button onclick="window.Admin.openDestinationModal('${e(dest.id)}')" class="btn btn-ghost btn-sm">
+                                Edit Details <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>`;
+                }).join('')}
+            </div>`}
+        </div>`;
     },
 
-    renderPageEditor: (container, pageId) => Admin.renderPageEditor(container, pageId), // Redirect to the robust implementation
+    // ── Articles ─────────────────────────────────────────────────────────────
+    renderArticles(container) {
+        container.innerHTML = `
+        <div class="space-y">
+            <div class="page-section-header">
+                <div>
+                    <div class="page-section-title">Blog & Articles</div>
+                    <div class="page-section-sub">Manage travel guides and news posts</div>
+                </div>
+                <button class="btn btn-primary" onclick="window.Admin.openArticleModal()">
+                    <i class="fa-solid fa-pen-nib"></i> Write New Article
+                </button>
+            </div>
 
-    
-    // Helpers for extracting/setting nested keys like "hero.title"
+            ${State.articles.length === 0 ? `
+            <div class="card">
+                <div class="empty-state">
+                    <div class="empty-icon">📰</div>
+                    <div class="empty-title">No Articles Yet</div>
+                    <div class="empty-desc">Write your first blog post to attract visitors and improve SEO.</div>
+                    <button class="btn btn-primary" onclick="window.Admin.openArticleModal()" style="margin-top:8px">
+                        <i class="fa-solid fa-pen-nib"></i> Write First Article
+                    </button>
+                </div>
+            </div>` : `
+            <div class="card">
+                <div style="overflow:hidden">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:60px"></th>
+                                <th>Article</th>
+                                <th>Date</th>
+                                <th>Arabic Title</th>
+                                <th style="width:100px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${State.articles.map(art => `
+                            <tr>
+                                <td>
+                                    <img src="${Admin.escapeHtml(art.image || '')}" onerror="this.src='https://placehold.co/60x60/f0f3f9/64748b?text=?'"
+                                        style="width:44px;height:44px;border-radius:8px;object-fit:cover;border:1px solid #e2e8f0">
+                                </td>
+                                <td>
+                                    <div class="td-strong">${Admin.escapeHtml(art.title?.en || 'Untitled')}</div>
+                                    <div style="font-size:11px;color:#64748b;margin-top:2px">${Admin.escapeHtml((art.excerpt?.en || '').substring(0, 80))}${(art.excerpt?.en || '').length > 80 ? '…' : ''}</div>
+                                </td>
+                                <td style="white-space:nowrap;color:#64748b;font-size:12px">${Admin.escapeHtml(art.date || '—')}</td>
+                                <td style="direction:rtl;text-align:right;font-size:12px">${Admin.escapeHtml(art.title?.ar || '—')}</td>
+                                <td>
+                                    <div style="display:flex;gap:6px">
+                                        <button onclick="window.Admin.openArticleModal('${art.id}')" class="btn btn-ghost btn-sm btn-icon" title="Edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                        ${Security.isAdmin() ? `<button onclick="window.Admin.deleteArticle('${art.id}')" class="btn btn-danger btn-sm btn-icon" title="Delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>` : ''}
+                                    </div>
+                                </td>
+                            </tr>`).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            </div>`}
+        </div>`;
+    },
+
+    // ── Global Settings ───────────────────────────────────────────────────────
+    renderGlobalSettings(container) {
+        const c = State.settings.contact || {};
+        const s = State.settings.social || {};
+
+        container.innerHTML = `
+        <div class="space-y" style="max-width:720px">
+            <div class="page-section-header">
+                <div>
+                    <div class="page-section-title">Global Settings</div>
+                    <div class="page-section-sub">Contact details and social media links used across the whole site</div>
+                </div>
+                <button onclick="window.Admin.loadGlobalDefaults()" class="btn btn-amber btn-sm">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Load Defaults
+                </button>
+            </div>
+
+            <form id="settings-form" class="space-y">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><div class="card-title-icon" style="background:#eff6ff;color:#3b82f6"><i class="fa-solid fa-phone"></i></div>Contact Information</div>
+                    </div>
+                    <div class="card-p">
+                        <div class="grid-2">
+                            <div class="field-group">
+                                <label class="field-label">Phone Number (Display)</label>
+                                <input type="text" name="phone" value="${Admin.escapeHtml(c.phone || '')}" class="field-input" placeholder="+995 XXX XX XX XX">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">WhatsApp Number (digits only)</label>
+                                <input type="text" name="whatsapp" value="${Admin.escapeHtml(c.whatsapp || '')}" class="field-input mono" placeholder="995XXXXXXXXX">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Email Address</label>
+                                <input type="email" name="email" value="${Admin.escapeHtml(c.email || '')}" class="field-input" placeholder="info@georgiahills.com">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Business Address</label>
+                                <input type="text" name="address" value="${Admin.escapeHtml(c.address || '')}" class="field-input" placeholder="Tbilisi, Georgia">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><div class="card-title-icon" style="background:#f5f3ff;color:#8b5cf6"><i class="fa-solid fa-share-nodes"></i></div>Social Media Links</div>
+                    </div>
+                    <div class="card-p">
+                        <div class="grid-2">
+                            <div class="field-group">
+                                <label class="field-label"><i class="fa-brands fa-facebook" style="color:#1877f2"></i>&nbsp; Facebook URL</label>
+                                <input type="url" name="social.facebook" value="${Admin.escapeHtml(s.facebook || '')}" class="field-input" placeholder="https://facebook.com/georgiahills">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label"><i class="fa-brands fa-instagram" style="color:#e1306c"></i>&nbsp; Instagram URL</label>
+                                <input type="url" name="social.instagram" value="${Admin.escapeHtml(s.instagram || '')}" class="field-input" placeholder="https://instagram.com/georgiahills">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Settings
+                    </button>
+                </div>
+            </form>
+        </div>`;
+
+        document.getElementById('settings-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            const data = { social: {} };
+            for (let [k, v] of fd.entries()) {
+                if (k.startsWith('social.')) data.social[k.split('.')[1]] = v;
+                else data[k] = v;
+            }
+            try {
+                await Data.saveSettings('contact', data);
+                UI.toast("Global settings saved!", "success");
+            } catch (err) { UI.toast(err.message, 'error'); }
+        });
+    },
+
+    // ── Navbar Settings ──────────────────────────────────────────────────────
+    renderNavbarSettings(container) {
+        container.innerHTML = `
+        <div class="space-y" style="max-width:720px">
+            <div class="page-section-header">
+                <div>
+                    <div class="page-section-title">Navigation Menu</div>
+                    <div class="page-section-sub">Edit the links shown in the site header navbar</div>
+                </div>
+                <div style="display:flex;gap:8px">
+                    <button onclick="window.Admin.loadNavbarDefaults()" class="btn btn-amber btn-sm">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Reset to Defaults
+                    </button>
+                    <button onclick="window.Admin.addNavbarItem()" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-plus"></i> Add Link
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><div class="card-title-icon" style="background:#f8fafc;color:#475569"><i class="fa-solid fa-bars"></i></div>Menu Items</div>
+                    <span class="badge badge-gray">${State.settings.navbar.length} items</span>
+                </div>
+                <div id="navbar-list" style="padding:16px;display:flex;flex-direction:column;gap:10px">
+                    ${State.settings.navbar.length === 0 ? `<div class="empty-state" style="padding:24px"><div class="empty-title" style="font-size:13px">No menu items</div><div class="empty-desc">Add links using the button above.</div></div>` :
+                    State.settings.navbar.map((item, idx) => `
+                    <div class="card-p" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:28px 1fr 1fr 2fr 32px;gap:10px;align-items:center" data-idx="${idx}">
+                        <div style="color:#94a3b8;cursor:grab;text-align:center"><i class="fa-solid fa-grip-vertical"></i></div>
+                        <input type="text" placeholder="Label EN" value="${Admin.escapeHtml(item.label_en || '')}" class="field-input nav-input" data-field="label_en" style="font-size:12px">
+                        <input type="text" placeholder="الاسم بالعربية" value="${Admin.escapeHtml(item.label_ar || '')}" dir="rtl" class="field-input nav-input" data-field="label_ar" style="font-size:12px">
+                        <input type="text" placeholder="URL (e.g. services.html or #section)" value="${Admin.escapeHtml(item.link || '')}" class="field-input nav-input mono" data-field="link" style="font-size:11px">
+                        <button onclick="window.Admin.removeNavbarItem(${idx})" class="btn btn-danger btn-sm btn-icon" title="Remove">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>`).join('')}
+                </div>
+                <div style="padding:14px 20px;border-top:1px solid #e2e8f0;display:flex;justify-content:flex-end">
+                    <button onclick="window.Admin.saveNavbar()" class="btn btn-primary">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Menu
+                    </button>
+                </div>
+            </div>
+        </div>`;
+    },
+
+    // ── Media Library ────────────────────────────────────────────────────────
+    async renderMediaLibrary(container) {
+        await Data.fetchMediaLibrary();
+        const assets = State.mediaAssets || [];
+
+        container.innerHTML = `
+        <div class="space-y">
+            <div class="page-section-header">
+                <div>
+                    <div class="page-section-title">Media Library</div>
+                    <div class="page-section-sub">Manage uploaded images and assets (${assets.length} files)</div>
+                </div>
+                <button onclick="window.Admin.refreshMediaLibrary()" class="btn btn-ghost">
+                    <i class="fa-solid fa-rotate"></i> Refresh
+                </button>
+            </div>
+
+            <!-- Search/Filter -->
+            <div class="card card-p" style="padding:16px">
+                <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end">
+                    <div class="field-group">
+                        <label class="field-label">Search by filename</label>
+                        <input id="media-query" type="text" value="${Admin.escapeHtml(State.mediaFilters.query || '')}" class="field-input" placeholder="Search…">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Filter by tag</label>
+                        <input id="media-tag" type="text" value="${Admin.escapeHtml(State.mediaFilters.tag || '')}" class="field-input" placeholder="e.g. hero, destination">
+                    </div>
+                    <button onclick="window.Admin.applyMediaFilters()" class="btn btn-dark">
+                        <i class="fa-solid fa-magnifying-glass"></i> Apply
+                    </button>
+                </div>
+            </div>
+
+            ${assets.length === 0 ? `
+            <div class="card">
+                <div class="empty-state">
+                    <div class="empty-icon">🖼️</div>
+                    <div class="empty-title">No Media Found</div>
+                    <div class="empty-desc">Upload images via the page editors, or adjust your search filters.</div>
+                </div>
+            </div>` : `
+            <div class="media-grid">
+                ${assets.map((a, idx) => `
+                <div class="media-card">
+                    <div class="media-thumb">
+                        <img src="${Admin.escapeHtml(a.url)}" loading="lazy" alt="${Admin.escapeHtml(a.alt || '')}" onerror="this.style.display='none'">
+                        <div class="media-thumb-overlay">
+                            <a href="${Admin.escapeHtml(a.url)}" target="_blank" class="btn btn-ghost btn-sm" style="background:rgba(255,255,255,0.9)">
+                                <i class="fa-solid fa-external-link-alt"></i> Open
+                            </a>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <div class="media-filename" title="${Admin.escapeHtml(a.path || a.url)}">${Admin.escapeHtml((a.path || a.url).split('/').pop())}</div>
+                        <div class="media-meta">${Math.round((a.size || 0) / 1024)} KB &nbsp;·&nbsp; ${(a.usages || []).length} usage(s)</div>
+                        <input id="media-alt-${idx}" type="text" value="${Admin.escapeHtml(a.alt || '')}" placeholder="Alt text…" class="field-input" style="font-size:11px;padding:5px 8px">
+                        <input id="media-tags-${idx}" type="text" value="${Admin.escapeHtml((a.tags || []).join(', '))}" placeholder="tags, comma-separated" class="field-input" style="font-size:11px;padding:5px 8px">
+                        <div style="display:flex;gap:6px;flex-wrap:wrap">
+                            <button onclick="window.Admin.saveMediaAssetMeta(${idx})" class="btn btn-success btn-sm" style="flex:1">
+                                <i class="fa-solid fa-floppy-disk"></i> Save
+                            </button>
+                            ${Security.isAdmin() ? `<button onclick="window.Admin.replaceMediaAssetPrompt(${idx})" class="btn btn-amber btn-sm">
+                                <i class="fa-solid fa-arrows-rotate"></i>
+                            </button>` : ''}
+                        </div>
+                    </div>
+                </div>`).join('')}
+            </div>`}
+        </div>`;
+    },
+
+    // ── Helpers ───────────────────────────────────────────────────────────────
     getNestedValue(obj, path) {
         return path.split('.').reduce((o, i) => o ? o[i] : null, obj);
     },
-    
     setNestedValue(obj, path, value) {
         const keys = path.split('.');
         let current = obj;
@@ -967,264 +1224,12 @@ const UI = {
             current = current[keys[i]];
         }
         current[keys[keys.length - 1]] = value;
-    },
-
-    renderGlobalSettings(container) {
-        const c = State.settings.contact || {};
-        const s = State.settings.social || {};
-        
-        container.innerHTML = `
-            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h2 class="text-xl font-bold mb-6 pb-2 border-b">Global Settings</h2>
-                <div class="flex justify-between items-center mb-6 pb-2 border-b">
-                    <h2 class="text-xl font-bold">Global Settings</h2>
-                    <button type="button" onclick="window.Admin.loadGlobalDefaults()" class="bg-white border border-yellow-300 text-yellow-700 px-3 py-1.5 rounded-lg hover:bg-yellow-50 font-medium shadow-sm transition-colors flex items-center text-sm">
-                        <i class="fa-solid fa-magic mr-2"></i> Defaults
-                    </button>
-                </div>
-                <form id="settings-form" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number (Main)</label>
-                            <input type="text" name="phone" value="${c.phone || ''}" class="w-full border rounded-lg p-2.5">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp Number</label>
-                            <input type="text" name="whatsapp" value="${c.whatsapp || ''}" class="w-full border rounded-lg p-2.5">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input type="email" name="email" value="${c.email || ''}" class="w-full border rounded-lg p-2.5">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Address</label>
-                            <input type="text" name="address" value="${c.address || ''}" class="w-full border rounded-lg p-2.5">
-                        </div>
-                    </div>
-                    
-                    <div class="pt-4 border-t">
-                        <h3 class="font-bold text-gray-900 mb-3">Social Media Links</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><label class="text-xs uppercase text-gray-500 font-bold">Facebook URL</label><input name="social.facebook" value="${s.facebook || ''}" class="w-full border rounded p-2 text-sm"></div>
-                            <div><label class="text-xs uppercase text-gray-500 font-bold">Instagram URL</label><input name="social.instagram" value="${s.instagram || ''}" class="w-full border rounded p-2 text-sm"></div>
-                        </div>
-                    </div>
-
-                    <div class="pt-6 text-right">
-                        <button type="submit" class="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 font-medium shadow-sm transition-transform active:scale-95">Save Settings</button>
-                    </div>
-                </form>
-            </div>
-        `;
-        
-        document.getElementById('settings-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const fd = new FormData(e.target);
-            const data = { social: {} };
-            for(let [k, v] of fd.entries()) {
-                if(k.startsWith('social.')) data.social[k.split('.')[1]] = v;
-                else data[k] = v;
-            }
-            try {
-                await Data.saveSettings('contact', data);
-                UI.toast("Settings saved!", "success");
-            } catch(e) { UI.toast(e.message, 'error'); }
-        });
-    },
-
-    renderNavbarSettings(container) {
-        container.innerHTML = `
-            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-bold">Navbar Items</h2>
-                    <button onclick="window.Admin.addNavbarItem()" class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded text-gray-700 border border-gray-300 font-medium">
-                        + Add Item
-                    </button>
-                    <div class="flex gap-2">
-                        <button type="button" onclick="window.Admin.loadNavbarDefaults()" class="text-sm bg-white border border-yellow-300 text-yellow-700 hover:bg-yellow-50 px-3 py-1.5 rounded font-medium border-gray-300 shadow-sm flex items-center">
-                            <i class="fa-solid fa-magic mr-2"></i> Defaults
-                        </button>
-                        <button onclick="window.Admin.addNavbarItem()" class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded text-gray-700 border border-gray-300 font-medium">
-                            + Add Item
-                        </button>
-                    </div>
-                </div>
-                
-                <div id="navbar-list" class="space-y-3">
-                    ${State.settings.navbar.map((item, idx) => `
-                        <div class="flex items-center gap-3 bg-gray-50 p-3 rounded border border-gray-200" data-idx="${idx}">
-                            <div class="cursor-move text-gray-400 px-2"><i class="fa-solid fa-grip-vertical"></i></div>
-                            <div class="flex-1 grid grid-cols-2 gap-4">
-                                <input type="text" placeholder="Label (EN)" value="${item.label_en || ''}" class="nav-input w-full border rounded px-2 py-1 text-sm bg-white" data-field="label_en">
-                                <input type="text" placeholder="Label (AR)" value="${item.label_ar || ''}" class="nav-input w-full border rounded px-2 py-1 text-sm text-right bg-white" data-field="label_ar">
-                                <input type="text" placeholder="Link URL (e.g., #tours or page.html)" value="${item.link || ''}" class="nav-input w-full border rounded px-2 py-1 text-sm col-span-2 bg-white" data-field="link">
-                            </div>
-                            <button onclick="window.Admin.removeNavbarItem(${idx})" class="text-red-500 hover:bg-red-50 p-2 rounded"><i class="fa-solid fa-times"></i></button>
-                        </div>
-                    `).join('')}
-                    ${State.settings.navbar.length === 0 ? '<p class="text-gray-500 text-center py-4 italic">No items defined.</p>' : ''}
-                </div>
-
-                <div class="mt-6 pt-4 border-t flex justify-end">
-                    <button onclick="window.Admin.saveNavbar()" class="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 font-medium shadow-sm">Save Menu</button>
-                </div>
-            </div>
-        `;
-    },
-
-    async renderMediaLibrary(container) {
-        await Data.fetchMediaLibrary();
-        const assets = State.mediaAssets || [];
-        container.innerHTML = `
-            <div class="space-y-6">
-                <div class="flex items-center justify-between flex-wrap gap-3">
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-800">Media Library</h2>
-                        <p class="text-sm text-gray-500">Search, tag, replace references, and inspect optimization variants.</p>
-                    </div>
-                    <button onclick="window.Admin.refreshMediaLibrary()" class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">
-                        <i class="fa-solid fa-rotate mr-1"></i> Refresh
-                    </button>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <input id="media-query" type="text" placeholder="Search by file name..." value="${Admin.escapeHtml(State.mediaFilters.query || '')}" class="border border-gray-300 rounded px-3 py-2 text-sm">
-                    <input id="media-tag" type="text" placeholder="Filter by tag..." value="${Admin.escapeHtml(State.mediaFilters.tag || '')}" class="border border-gray-300 rounded px-3 py-2 text-sm">
-                    <button onclick="window.Admin.applyMediaFilters()" class="px-4 py-2 rounded bg-slate-100 hover:bg-slate-200 text-sm">Apply Filters</button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    ${assets.map((a, idx) => `
-                        <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                            <div class="h-44 bg-slate-100 flex items-center justify-center">
-                                <img src="${a.url}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'">
-                            </div>
-                            <div class="p-3 space-y-2">
-                                <div class="text-xs font-mono text-gray-500 truncate" title="${Admin.escapeHtml(a.path)}">${Admin.escapeHtml(a.path)}</div>
-                                <div class="text-xs text-gray-600">${Math.round((a.size || 0) / 1024)} KB</div>
-                                <input id="media-alt-${idx}" type="text" value="${Admin.escapeHtml(a.alt || '')}" placeholder="Alt text..." class="w-full border border-gray-300 rounded px-2 py-1 text-xs">
-                                <input id="media-tags-${idx}" type="text" value="${Admin.escapeHtml((a.tags || []).join(', '))}" placeholder="tags, comma-separated" class="w-full border border-gray-300 rounded px-2 py-1 text-xs">
-                                <div class="text-[11px] text-gray-500">Usages: ${(a.usages || []).length}</div>
-                                <div class="text-[11px] text-gray-500">Optimized variants: ${(a.optimizedVariants || []).length}</div>
-                                <div class="flex gap-2 pt-1">
-                                    <button onclick="window.Admin.saveMediaAssetMeta(${idx})" class="px-2 py-1 text-xs rounded bg-emerald-100 text-emerald-800 hover:bg-emerald-200">Save Meta</button>
-                                    <button onclick="window.Admin.replaceMediaAssetPrompt(${idx})" class="px-2 py-1 text-xs rounded bg-amber-100 text-amber-800 hover:bg-amber-200">Replace Refs</button>
-                                    <a href="${a.url}" target="_blank" class="px-2 py-1 text-xs rounded bg-slate-100 text-slate-700 hover:bg-slate-200">Open</a>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    },
-
-    openDestinationModal(id = null) {
-        const dest = id ? State.destinations.find(d => d.id === id) : {};
-        const modalPanel = document.getElementById('modal-panel');
-        const backdrop = document.getElementById('modal-backdrop');
-        
-        // Populate modal
-        modalPanel.innerHTML = `
-            <div class="h-full flex flex-col">
-                <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-                    <h3 class="text-lg font-bold text-gray-800">${id ? 'Edit Destination' : 'New Destination'}</h3>
-                    <button onclick="window.Admin.closeModal()" class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-times text-xl"></i></button>
-                </div>
-                
-                <div class="flex-1 overflow-y-auto p-6 space-y-6">
-                    <form id="dest-form">
-                        <div class="space-y-4">
-                            <!-- Internal ID -->
-                            <div class="bg-gray-50 p-3 rounded border border-gray-100 flex items-center gap-2 text-sm text-gray-500">
-                                <i class="fa-solid fa-database"></i>
-                                <input type="text" name="id" value="${dest.id || ''}" placeholder="Auto-generated ID" ${id ? 'readonly' : ''} class="bg-transparent border-none w-full focus:ring-0 p-0 text-sm">
-                            </div>
-
-                            <!-- Basic Info -->
-                            <div class="grid grid-cols-2 gap-4">
-                                <div><label class="block text-xs uppercase font-bold text-gray-500 mb-1">Name (EN)</label><input type="text" name="title_en" value="${dest.title?.en || ''}" class="w-full border p-2 rounded focus:border-blue-500"></div>
-                                <div><label class="block text-xs uppercase font-bold text-gray-500 mb-1 text-right">الاسم (AR)</label><input type="text" name="title_ar" value="${dest.title?.ar || ''}" dir="rtl" class="w-full border p-2 rounded focus:border-blue-500"></div>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Google Maps Embed URL</label>
-                                <input type="text" name="map_url" value="${dest.map_url || ''}" class="w-full border p-2 rounded text-sm font-mono text-gray-600" placeholder="https://www.google.com/maps/embed?pb=...">
-                            </div>
-
-                            <!-- Image Uploader -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Thumbnail Image</label>
-                                <div class="flex gap-2">
-                                    <input type="text" name="thumbnail" value="${dest.thumbnail || ''}" id="dest-thumb" class="flex-1 border p-2 rounded text-sm text-gray-500 bg-gray-50">
-                                    <label class="bg-white border hover:bg-gray-50 px-3 py-2 rounded cursor-pointer text-sm font-medium shadow-sm">
-                                        Upload <input type="file" class="hidden" onchange="window.Admin.handleImageUpload(this, 'dest-thumb')">
-                                    </label>
-                                </div>
-                                <img id="dest-preview" src="${dest.thumbnail || ''}" class="mt-2 h-32 w-full object-cover rounded border border-gray-200 ${!dest.thumbnail ? 'hidden' : ''}">
-                            </div>
-                            
-                            <div class="grid grid-cols-2 gap-4">
-                                <div><label class="block text-xs uppercase font-bold text-gray-500 mb-1">Price (Text)</label><input type="text" name="price" value="${dest.price || ''}" class="w-full border p-2 rounded"></div>
-                                <div><label class="block text-xs uppercase font-bold text-gray-500 mb-1">Duration</label><input type="text" name="duration" value="${dest.duration || ''}" class="w-full border p-2 rounded"></div>
-                            </div>
-
-                            <div class="space-y-4 pt-4 border-t">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Description (EN)</label>
-                                    <textarea name="desc_en" rows="3" class="w-full border p-2 rounded focus:ring-blue-500 focus:border-blue-500">${dest.desc?.en || ''}</textarea>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1 text-right">الوصف (AR)</label>
-                                    <textarea name="desc_ar" rows="3" dir="rtl" class="w-full border p-2 rounded focus:ring-blue-500 focus:border-blue-500">${dest.desc?.ar || ''}</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="p-4 border-t border-gray-200 bg-gray-50 flex justify-end gap-3">
-                    <button onclick="window.Admin.closeModal()" class="px-4 py-2 text-gray-600 hover:bg-gray-200 rounded font-medium">Cancel</button>
-                    <button onclick="window.Admin.submitDestForm('${dest.id || ''}')" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 font-medium">Save Destination</button>
-                </div>
-            </div>
-        `;
-        
-        backdrop.classList.remove('hidden');
-        // Trigger reflow
-        void backdrop.offsetWidth;
-        backdrop.classList.remove('opacity-0');
-        modalPanel.classList.remove('translate-x-full');
-    },
-
-    closeModal() {
-        const modalPanel = document.getElementById('modal-panel');
-        const backdrop = document.getElementById('modal-backdrop');
-        modalPanel.classList.add('translate-x-full');
-        backdrop.classList.add('opacity-0');
-        setTimeout(() => {
-            backdrop.classList.add('hidden');
-            modalPanel.innerHTML = ''; 
-        }, 300);
-    },
-
-    toast(msg, type = 'info') {
-        const container = document.getElementById('toast-container');
-        const el = document.createElement('div');
-        el.className = `toast border-l-4 ${type === 'error' ? 'border-red-500 text-red-700' : 'border-green-500 text-gray-800'}`;
-        el.innerHTML = `
-            <i class="fa-solid ${type === 'error' ? 'fa-triangle-exclamation text-red-500' : 'fa-check-circle text-green-500'}"></i>
-            <span class="font-medium text-sm">${msg}</span>
-        `;
-        container.appendChild(el);
-        setTimeout(() => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(10px)';
-            setTimeout(() => el.remove(), 300);
-        }, 3000);
     }
 };
 
+// ── App ──────────────────────────────────────────────────────────────────────
 const App = {
-    init: () => {
+    init() {
         UI.showLoading();
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -1233,17 +1238,12 @@ const App = {
                     const tokenResult = await user.getIdTokenResult(true);
                     const claims = tokenResult.claims || {};
                     State.userRole = claims.admin === true ? 'admin' : (claims.role || 'viewer');
-                } catch (_e) {
-                    State.userRole = 'viewer';
-                }
-                try {
-                    await Data.loadAll();
-                } catch (e) {
-                    console.error("Critical:", e);
-                } finally {
+                } catch (_e) { State.userRole = 'viewer'; }
+                try { await Data.loadAll(); } catch (e) { console.error("Critical load:", e); }
+                finally {
                     UI.renderLayout();
                     if (!Security.canEdit()) {
-                        UI.toast("Read-only account. Ask admin for editor/admin access.", "error");
+                        UI.toast("Read-only account. Contact admin for edit access.", "warning");
                     }
                 }
             } else {
@@ -1253,372 +1253,235 @@ const App = {
             }
         });
     },
-
-    logout: async () => {
-        try {
-            await signOut(auth);
-            // State resets on reload or re-render
-            window.location.reload();
-        } catch(e) { console.error(e); }
+    async logout() {
+        try { await signOut(auth); window.location.reload(); } catch (e) { console.error(e); }
     }
 };
 
-// --- Window Exports - Core Logic ---
+// ── Admin Exports ────────────────────────────────────────────────────────────
 const Admin = {
-    init: App.init, // Expose init if needed specifically
-    
-    // --- Actions ---
+    init: App.init,
     logout: App.logout,
     switchTab: (tab) => UI.loadTab(tab),
-    openDestinationModal: UI.openDestinationModal,
-    openArticleModal: (id) => UI.openArticleModal(id),
-    closeModal: UI.closeModal,
+    closeModal: () => UI.closeModal(),
     getNestedValue: UI.getNestedValue,
     setNestedValue: UI.setNestedValue,
-    
-    loadPageDefaults: (pageId) => {
-        if (!confirm('This will fill any EMPTY fields with the original website content. Existing content will NOT be overwritten.')) return;
-        
-        const defaults = DefaultContent[pageId];
-        if (!defaults) {
-            UI.toast('No defaults found for this page.', 'error');
-            return;
-        }
 
-        const form = document.getElementById(`page-form-${pageId}`);
-        if (!form) return;
-
-        let fills = 0;
-        Array.from(form.elements).forEach(el => {
-            const key = el.name;
-            if (!key) return;
-
-            // Look up value in defaults object using the dot notation key
-            const val = UI.getNestedValue(defaults, key);
-            
-            // Only fill if field is empty to prevent data loss
-            if (val && !el.value) {
-                el.value = val;
-                fills++;
-                // Special handling for image previews
-                if(key.includes('.image') || key.includes('.bg_image')) {
-                    const previewId = `preview-input-${key.replace(/\./g, '-')}`;
-                    const img = document.getElementById(previewId);
-                    if(img) img.src = val;
-                }
-            }
-        });
-        
-        if (fills > 0) UI.toast(`Filled ${fills} fields with default content. Don't forget to save!`, 'success');
-        else UI.toast('All fields already have content.', 'info');
+    toggleSidebar() {
+        document.getElementById('sidebar')?.classList.toggle('collapsed');
+    },
+    openMobileSidebar() {
+        document.getElementById('sidebar')?.classList.add('mobile-open');
+        document.getElementById('sb-overlay')?.classList.add('active');
+    },
+    closeMobileSidebar() {
+        document.getElementById('sidebar')?.classList.remove('mobile-open');
+        document.getElementById('sb-overlay')?.classList.remove('active');
     },
 
-    loadGlobalDefaults: () => {
-        if (!confirm('This will fill empty fields with default contact info.')) return;
+    // ── Defaults loaders ─────────────────────────────────────────────────────
+    loadPageDefaults(pageId) {
+        if (!confirm('Fill empty fields with original default content? Existing content will NOT be overwritten.')) return;
+        const defaults = DefaultContent[pageId];
+        if (!defaults) { UI.toast('No defaults found for this page.', 'error'); return; }
+        const form = document.getElementById(`page-form-${pageId}`);
+        if (!form) return;
+        let fills = 0;
+        Array.from(form.elements).forEach(el => {
+            const key = el.name; if (!key) return;
+            const val = UI.getNestedValue(defaults, key);
+            if (val && !el.value) { el.value = val; fills++; }
+        });
+        UI.toast(fills > 0 ? `Filled ${fills} fields with defaults. Save when ready!` : 'All fields already have content.', fills > 0 ? 'success' : 'info');
+    },
+
+    loadGlobalDefaults() {
+        if (!confirm('Fill empty fields with default contact info?')) return;
         const defaults = DefaultContent.settings_global;
         const form = document.getElementById('settings-form');
         if (!form) return;
-
-        const setIfEmpty = (name, val) => {
-            const el = form.querySelector(`[name="${name}"]`);
-            if (el && !el.value) el.value = val;
-        };
-
-        setIfEmpty('phone', defaults.phone);
-        setIfEmpty('whatsapp', defaults.whatsapp);
-        setIfEmpty('email', defaults.email);
-        setIfEmpty('address', defaults.address);
-        setIfEmpty('social.facebook', defaults.social.facebook);
-        setIfEmpty('social.instagram', defaults.social.instagram);
-        
-        UI.toast('Global defaults loaded.', 'success');
+        const setIfEmpty = (name, val) => { const el = form.querySelector(`[name="${name}"]`); if (el && !el.value) el.value = val; };
+        setIfEmpty('phone', defaults.phone); setIfEmpty('whatsapp', defaults.whatsapp);
+        setIfEmpty('email', defaults.email); setIfEmpty('address', defaults.address);
+        setIfEmpty('social.facebook', defaults.social.facebook); setIfEmpty('social.instagram', defaults.social.instagram);
+        UI.toast('Defaults loaded.', 'success');
     },
 
-    loadNavbarDefaults: () => {
+    loadNavbarDefaults() {
         if (!confirm('This will REPLACE current menu items with defaults. Continue?')) return;
         State.settings.navbar = JSON.parse(JSON.stringify(DefaultContent.settings_navbar));
         UI.loadTab('settings-navbar');
         UI.toast('Navbar defaults loaded.', 'success');
     },
 
-    deleteDestination: async (id) => {
-        if (!Security.isAdmin()) {
-            UI.toast("Only admin can delete destinations.", "error");
-            return;
-        }
-        if(!confirm("Are you sure? This cannot be undone.")) return;
+    // ── Destination actions ──────────────────────────────────────────────────
+    async deleteDestination(id) {
+        if (!Security.isAdmin()) { UI.toast("Only admins can delete destinations.", "error"); return; }
+        if (!confirm("Delete this destination? This cannot be undone.")) return;
         try {
             await Data.deleteDestination(id);
-            UI.toast("Destination deleted", "success");
+            UI.toast("Destination deleted.", "success");
             UI.loadTab('destinations');
-        } catch(e) {
-            UI.toast("Error deleting: " + e.message, "error");
-        }
-    },
-    
-    deleteArticle: async (id) => {
-        if (!Security.isAdmin()) {
-            UI.toast("Only admin can delete articles.", "error");
-            return;
-        }
-        if(!confirm("Delete this article?")) return;
-        try {
-            await Data.deleteArticle(id);
-            UI.toast("Article deleted", "success");
-            UI.loadTab('articles');
-        } catch(e) {
-            UI.toast("Error: " + e.message, "error");
-        }
+        } catch (e) { UI.toast("Delete failed: " + e.message, "error"); }
     },
 
-    handleImageUpload: async (input, targetId) => {
+    // ── Article actions ──────────────────────────────────────────────────────
+    async deleteArticle(id) {
+        if (!Security.isAdmin()) { UI.toast("Only admins can delete articles.", "error"); return; }
+        if (!confirm("Delete this article?")) return;
+        try {
+            await Data.deleteArticle(id);
+            UI.toast("Article deleted.", "success");
+            UI.loadTab('articles');
+        } catch (e) { UI.toast("Delete failed: " + e.message, "error"); }
+    },
+
+    // ── Image upload ─────────────────────────────────────────────────────────
+    async handleImageUpload(input, targetId) {
         if (!input.files || !input.files[0]) return;
         const file = input.files[0];
-        const btn = input.parentElement;
-        const originalHtml = btn.innerHTML;
-        
-        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
-        btn.classList.add('cursor-wait', 'opacity-50');
-        
+        const btn = input.closest('label');
+        if (btn) { btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>'; btn.style.pointerEvents = 'none'; }
         try {
             const url = await Data.uploadImage(file, 'uploads');
-            document.getElementById(targetId).value = url;
-            
-            // Try to find a preview element
-            // const preview = document.getElementById(targetId).parentElement.nextElementSibling; // Old logic
-            // Check specific ID first
-            const previewId = "preview-" + targetId.replace('input-', ''); // Heuristic
-            const specificPreview = document.getElementById(previewId) || document.getElementById('dest-preview');
-            
-            if(specificPreview && specificPreview.tagName === 'IMG') {
-                specificPreview.src = url;
-                specificPreview.classList.remove('hidden');
-            }
-            
+            const target = document.getElementById(targetId);
+            if (target) target.value = url;
+            const preview = document.getElementById('preview-' + targetId) || document.getElementById(targetId.replace('input-', 'preview-'));
+            if (preview && preview.tagName === 'IMG') { preview.src = url; preview.style.display = 'block'; }
             UI.toast("Image uploaded!", "success");
         } catch (e) {
             UI.toast("Upload failed: " + e.message, "error");
         } finally {
-            btn.innerHTML = originalHtml;
-            btn.classList.remove('cursor-wait', 'opacity-50');
+            if (btn) { btn.innerHTML = '<i class="fa-solid fa-upload"></i> Upload'; btn.style.pointerEvents = ''; }
         }
     },
 
-    submitDestForm: async (existingId) => {
-        const form = document.getElementById('dest-form');
-        const fd = new FormData(form);
-        const data = {
-            title: { en: fd.get('title_en'), ar: fd.get('title_ar') },
-            desc: { en: fd.get('desc_en'), ar: fd.get('desc_ar') },
-            price: fd.get('price'),
-            duration: fd.get('duration'),
-            thumbnail: fd.get('thumbnail'),
-            map_url: fd.get('map_url')
-        };
-        const id = fd.get('id') || existingId;
-        
-        try {
-            await Data.saveDestination(id, data);
-            UI.closeModal();
-            UI.toast("Destination saved successfully!", "success");
-            
-            // Slight delay to allow write to propagate locally or just optimistic update happens via re-fetch
-            setTimeout(() => UI.loadTab('destinations'), 100); 
-        } catch(e) {
-            UI.toast("Error saving: " + e.message, "error");
-        }
-    },
-
-    addNavbarItem: () => {
-        State.settings.navbar.push({ label_en: 'New Link', label_ar: 'جديد', link: '#' });
+    // ── Navbar actions ───────────────────────────────────────────────────────
+    addNavbarItem() {
+        State.settings.navbar.push({ label_en: 'New Link', label_ar: 'رابط جديد', link: '#' });
         UI.loadTab('settings-navbar');
     },
-    
-    removeNavbarItem: (idx) => {
-        // Confirm? Nah, simple action
+    removeNavbarItem(idx) {
         State.settings.navbar.splice(idx, 1);
         UI.loadTab('settings-navbar');
     },
-    
-    saveNavbar: async () => {
-        if (!Security.isAdmin()) {
-            UI.toast("Only admin can update navigation settings.", "error");
-            return;
-        }
-        const rows = document.querySelectorAll('#navbar-list > div');
+    async saveNavbar() {
+        if (!Security.isAdmin()) { UI.toast("Only admins can update the navigation.", "error"); return; }
+        const rows = document.querySelectorAll('#navbar-list > div[data-idx]');
         const newItems = [];
         rows.forEach(row => {
-            const inputs = row.querySelectorAll('input');
             const item = {};
-            inputs.forEach(inp => item[inp.dataset.field] = inp.value);
-            if(item.label_en) newItems.push(item);
+            row.querySelectorAll('.nav-input').forEach(inp => { item[inp.dataset.field] = inp.value; });
+            if (item.label_en) newItems.push(item);
         });
-        
         try {
             await Data.saveSettings('navbar', { items: newItems });
             State.settings.navbar = newItems;
-            UI.toast("Menu configuration saved!", "success");
-        } catch(e) {
-            UI.toast("Failed to update menu: " + e.message, "error");
-        }
+            UI.toast("Navigation menu saved!", "success");
+        } catch (e) { UI.toast("Failed: " + e.message, "error"); }
     },
 
-    refreshMediaLibrary: async () => {
+    // ── Media actions ─────────────────────────────────────────────────────────
+    async refreshMediaLibrary() {
         await Data.fetchMediaLibrary();
         UI.loadTab('media-library');
     },
-
-    applyMediaFilters: async () => {
-        const q = document.getElementById('media-query')?.value || '';
-        const tag = document.getElementById('media-tag')?.value || '';
-        State.mediaFilters = { query: q.trim(), tag: tag.trim() };
+    async applyMediaFilters() {
+        State.mediaFilters = {
+            query: (document.getElementById('media-query')?.value || '').trim(),
+            tag: (document.getElementById('media-tag')?.value || '').trim()
+        };
         await Data.fetchMediaLibrary();
         UI.loadTab('media-library');
     },
-
-    saveMediaAssetMeta: async (idx) => {
+    async saveMediaAssetMeta(idx) {
         const asset = (State.mediaAssets || [])[idx];
         if (!asset) return;
         const alt = document.getElementById(`media-alt-${idx}`)?.value || '';
-        const tagsRaw = document.getElementById(`media-tags-${idx}`)?.value || '';
-        const tags = tagsRaw.split(',').map((t) => t.trim()).filter(Boolean);
+        const tags = (document.getElementById(`media-tags-${idx}`)?.value || '').split(',').map(t => t.trim()).filter(Boolean);
         try {
             await Data.saveMediaMeta(asset.url, tags, alt);
-            UI.toast('Media metadata updated', 'success');
-            await Data.fetchMediaLibrary();
-        } catch (e) {
-            UI.toast(`Failed: ${e.message}`, 'error');
-        }
+            UI.toast('Metadata saved.', 'success');
+        } catch (e) { UI.toast(`Failed: ${e.message}`, 'error'); }
     },
-
-    replaceMediaAssetPrompt: async (idx) => {
-        if (!Security.isAdmin()) {
-            UI.toast("Only admin can replace media references.", "error");
-            return;
-        }
+    async replaceMediaAssetPrompt(idx) {
+        if (!Security.isAdmin()) { UI.toast("Only admins can replace media.", "error"); return; }
         const asset = (State.mediaAssets || [])[idx];
         if (!asset) return;
-        const newUrl = prompt('Enter replacement URL:', asset.url);
+        const newUrl = prompt('Replacement URL:', asset.url);
         if (!newUrl || newUrl === asset.url) return;
         try {
             const res = await Data.replaceMediaAsset(asset.url, newUrl.trim());
-            UI.toast(`Updated ${res.updatedDocs || 0} documents`, 'success');
+            UI.toast(`Updated ${res.updatedDocs || 0} references.`, 'success');
             await Data.fetchMediaLibrary();
             UI.loadTab('media-library');
-        } catch (e) {
-            UI.toast(`Replace failed: ${e.message}`, 'error');
-        }
+        } catch (e) { UI.toast(`Replace failed: ${e.message}`, 'error'); }
     },
 
-    publishPage: async (pageId) => {
+    // ── Publish / version control ─────────────────────────────────────────────
+    async publishPage(pageId) {
         const checklist = Admin.runPrePublishChecklist(pageId);
-        if (checklist.critical.length > 0) {
-            alert(`Cannot publish yet:\n- ${checklist.critical.join('\n- ')}`);
-            return;
-        }
-        if (checklist.warnings.length > 0) {
-            const proceed = confirm(`Publish with warnings?\n- ${checklist.warnings.join('\n- ')}`);
-            if (!proceed) return;
-        }
+        if (checklist.critical.length > 0) { alert(`Cannot publish:\n• ${checklist.critical.join('\n• ')}`); return; }
+        if (checklist.warnings.length > 0) { if (!confirm(`Publish with warnings?\n• ${checklist.warnings.join('\n• ')}`)) return; }
         const note = document.getElementById(`publish-note-${pageId}`)?.value || '';
         const changeSummary = document.getElementById(`change-summary-${pageId}`)?.value || '';
         try {
             await Data.publishPage(pageId, { note, changeSummary });
-            UI.toast(`Published ${pageId} page`, "success");
+            UI.toast(`"${pageId}" page published!`, "success");
             State.unsavedChanges = false;
             UI.loadTab(`page-${pageId}`);
-        } catch (e) {
-            UI.toast(`Publish failed: ${e.message}`, "error");
-        }
+        } catch (e) { UI.toast(`Publish failed: ${e.message}`, "error"); }
     },
 
-    schedulePublish: async (pageId) => {
+    async schedulePublish(pageId) {
         const scheduledAt = document.getElementById(`schedule-at-${pageId}`)?.value || '';
         const note = document.getElementById(`publish-note-${pageId}`)?.value || '';
         const changeSummary = document.getElementById(`change-summary-${pageId}`)?.value || '';
-        if (!scheduledAt) {
-            UI.toast("Pick a schedule time first", "error");
-            return;
-        }
+        if (!scheduledAt) { UI.toast("Pick a date and time first.", "error"); return; }
         try {
             await Data.schedulePublish(pageId, scheduledAt, note, changeSummary);
-            UI.toast(`Scheduled publish for ${pageId}`, "success");
-            if (Security.isAdmin()) {
-                const run = await Data.runScheduledPublishes();
-                if ((run.processed || 0) > 0) {
-                    UI.toast(`Processed ${run.processed} due scheduled publish(es)`, "success");
-                }
-            }
+            UI.toast(`Scheduled publish for "${pageId}".`, "success");
             UI.loadTab(`page-${pageId}`);
-        } catch (e) {
-            UI.toast(`Schedule failed: ${e.message}`, "error");
-        }
+        } catch (e) { UI.toast(`Schedule failed: ${e.message}`, "error"); }
     },
 
-    rollbackPage: async (pageId) => {
+    async rollbackPage(pageId) {
         const select = document.getElementById(`revision-select-${pageId}`);
-        if (!select || !select.value) {
-            UI.toast("Select a revision first", "error");
-            return;
-        }
+        if (!select || !select.value) { UI.toast("Select a revision first.", "error"); return; }
         const publishNow = confirm("Rollback and publish immediately?");
         try {
             await Data.rollbackPage(pageId, select.value, publishNow);
-            UI.toast(`Rolled back ${pageId}`, "success");
+            UI.toast(`Rolled back "${pageId}".`, "success");
             UI.loadTab(`page-${pageId}`);
-        } catch (e) {
-            UI.toast(`Rollback failed: ${e.message}`, "error");
-        }
+        } catch (e) { UI.toast(`Rollback failed: ${e.message}`, "error"); }
     }
 };
 
-// Export to window
 window.Admin = Admin;
 
-// --- Extension: Translation & Sections Support ---
+// ── Utility Methods ───────────────────────────────────────────────────────────
+Admin.escapeHtml = function(value) {
+    return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+};
 
 Admin.flattenObject = function(obj, prefix = '', out = {}) {
     if (!obj || typeof obj !== 'object') return out;
-    Object.keys(obj).forEach((key) => {
+    Object.keys(obj).forEach(key => {
         const path = prefix ? `${prefix}.${key}` : key;
         const val = obj[key];
-        if (val && typeof val === 'object' && !Array.isArray(val)) {
-            Admin.flattenObject(val, path, out);
-        } else {
-            out[path] = val;
-        }
+        if (val && typeof val === 'object' && !Array.isArray(val)) Admin.flattenObject(val, path, out);
+        else out[path] = val;
     });
     return out;
 };
 
-Admin.escapeHtml = function(value) {
-    return String(value ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-};
-
 Admin.getLocalDraftKey = (pageId) => `gh_admin_localdraft_${pageId}`;
-
 Admin.readLocalDraft = function(pageId) {
-    try {
-        const raw = localStorage.getItem(Admin.getLocalDraftKey(pageId));
-        return raw ? JSON.parse(raw) : null;
-    } catch (_e) {
-        return null;
-    }
+    try { const r = localStorage.getItem(Admin.getLocalDraftKey(pageId)); return r ? JSON.parse(r) : null; } catch (_e) { return null; }
 };
-
 Admin.writeLocalDraft = function(pageId, data) {
-    try {
-        localStorage.setItem(Admin.getLocalDraftKey(pageId), JSON.stringify({
-            savedAt: Date.now(),
-            data
-        }));
-    } catch (_e) {}
+    try { localStorage.setItem(Admin.getLocalDraftKey(pageId), JSON.stringify({ savedAt: Date.now(), data })); } catch (_e) {}
 };
-
 Admin.clearLocalDraft = function(pageId) {
     try { localStorage.removeItem(Admin.getLocalDraftKey(pageId)); } catch (_e) {}
 };
@@ -1626,381 +1489,227 @@ Admin.clearLocalDraft = function(pageId) {
 Admin.runPrePublishChecklist = function(pageId) {
     const data = State.pages[pageId] || {};
     const schema = PageSchemas[pageId] || [];
-    const critical = [];
-    const warnings = [];
-
-    const requiredSeo = ['seo.meta_title', 'seo.meta_description'];
-    requiredSeo.forEach((k) => {
+    const critical = [], warnings = [];
+    ['seo.meta_title','seo.meta_description'].forEach(k => {
         const v = Admin.getNestedValue(data, k);
         if (!v || !String(v).trim()) critical.push(`${k} is required`);
     });
-
-    schema.filter((f) => f.type && f.key).forEach((f) => {
+    schema.filter(f => f.type && f.key).forEach(f => {
         const v = Admin.getNestedValue(data, f.key);
-        if ((f.key.endsWith('_en') || f.key.endsWith('_ar')) && (!v || !String(v).trim())) {
-            warnings.push(`${f.key} is empty`);
-        }
+        if ((f.key.endsWith('_en') || f.key.endsWith('_ar')) && (!v || !String(v).trim())) warnings.push(`${f.key} is empty`);
         if ((f.type === 'image' || /url|image|thumbnail|map_url/i.test(f.key)) && v) {
             const s = String(v).trim();
             const valid = /^(https?:\/\/|\/|\.\/|[a-zA-Z0-9._-]+\.(webp|png|jpe?g|gif|svg|avif))/i.test(s);
-            if (!valid) critical.push(`${f.key} has invalid URL format`);
-        }
-        if (/title/i.test(f.key) && (!v || !String(v).trim())) {
-            warnings.push(`Heading-like field ${f.key} is empty`);
+            if (!valid) critical.push(`${f.key} has invalid URL`);
         }
     });
-
-    // Alt text quality check for image fields.
-    schema.filter((f) => f.type === 'image').forEach((imgField) => {
-        const base = imgField.key.replace(/(\.bg_image|\.image|thumbnail)$/i, '');
-        const altCandidates = [
-            `${base}.alt_en`, `${base}.alt_ar`,
-            `${imgField.key}_alt_en`, `${imgField.key}_alt_ar`,
-            `${imgField.key}.alt_en`, `${imgField.key}.alt_ar`
-        ];
-        const hasAlt = altCandidates.some((k) => {
-            const v = Admin.getNestedValue(data, k);
-            return v && String(v).trim().length > 0;
-        });
-        if (!hasAlt) warnings.push(`Missing alt text near image field: ${imgField.key}`);
-    });
-
-    // Broken link heuristic check in content text.
-    const flattened = Admin.flattenObject(data);
-    Object.keys(flattened).forEach((k) => {
-        const v = flattened[k];
-        if (typeof v !== 'string') return;
-        const links = v.match(/https?:\/\/[^\s"'<>()]+/g) || [];
-        links.forEach((u) => {
-            if (!/^https?:\/\/[^\s]+$/i.test(u)) warnings.push(`Possibly broken link in ${k}`);
-        });
-    });
-
     return { critical, warnings: warnings.slice(0, 8) };
 };
 
 Admin.validateContentData = function(pageId, schema, newData) {
-    const errors = [];
-    const warnings = [];
+    const errors = [], warnings = [];
     const seoTitle = Admin.getNestedValue(newData, 'seo.meta_title');
     const seoDesc = Admin.getNestedValue(newData, 'seo.meta_description');
-
     if (!seoTitle || !String(seoTitle).trim()) errors.push('SEO meta title is required');
     if (!seoDesc || !String(seoDesc).trim()) errors.push('SEO meta description is required');
-    if (seoTitle && String(seoTitle).length > 70) warnings.push('SEO meta title is longer than recommended (70)');
-    if (seoDesc && String(seoDesc).length > 180) warnings.push('SEO meta description is longer than recommended (180)');
-
-    schema.filter((f) => f.type && f.key).forEach((f) => {
-        const v = Admin.getNestedValue(newData, f.key);
-        if (typeof v !== 'string') return;
-        if (f.type === 'text' && v.length > 300) errors.push(`${f.key} exceeds 300 chars`);
-        if (f.type === 'textarea' && v.length > 5000) errors.push(`${f.key} exceeds 5000 chars`);
-        if ((f.type === 'image' || /url|image|thumbnail|map_url/i.test(f.key)) && v) {
-            const ok = /^(https?:\/\/|\/|\.\/|[a-zA-Z0-9._-]+\.(webp|png|jpe?g|gif|svg|avif))/i.test(v.trim());
-            if (!ok) errors.push(`${f.key} has invalid URL format`);
-        }
-    });
-
+    if (seoTitle && String(seoTitle).length > 70) warnings.push('SEO title > 70 chars (recommended max)');
+    if (seoDesc && String(seoDesc).length > 180) warnings.push('SEO description > 180 chars (recommended max)');
     return { errors, warnings };
 };
 
 Admin.openDiffModal = function(pageId) {
     const draft = State.pages[pageId] || {};
     const published = State.pageMeta[pageId]?.published || {};
-    const dFlat = Admin.flattenObject(draft);
-    const pFlat = Admin.flattenObject(published);
+    const dFlat = Admin.flattenObject(draft), pFlat = Admin.flattenObject(published);
     const keys = Array.from(new Set([...Object.keys(dFlat), ...Object.keys(pFlat)])).sort();
-    const rows = keys
-        .filter((k) => String(dFlat[k] ?? '') !== String(pFlat[k] ?? ''))
-        .map((k) => `
-            <tr class="border-b">
-                <td class="px-3 py-2 text-xs font-mono">${Admin.escapeHtml(k)}</td>
-                <td class="px-3 py-2 text-xs text-red-700 whitespace-pre-wrap">${Admin.escapeHtml(pFlat[k] ?? '')}</td>
-                <td class="px-3 py-2 text-xs text-emerald-700 whitespace-pre-wrap">${Admin.escapeHtml(dFlat[k] ?? '')}</td>
-            </tr>
-        `).join('');
+    const changedKeys = keys.filter(k => String(dFlat[k] ?? '') !== String(pFlat[k] ?? ''));
 
-    const modalPanel = document.getElementById('modal-panel');
-    const backdrop = document.getElementById('modal-backdrop');
-    modalPanel.innerHTML = `
-        <div class="h-full flex flex-col">
-            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between bg-gray-50">
-                <h3 class="text-lg font-bold text-gray-800">Draft vs Published: ${pageId}</h3>
-                <button type="button" onclick="window.Admin.closeModal()" class="text-gray-500 hover:text-gray-700">
-                    <i class="fa-solid fa-times text-xl"></i>
-                </button>
+    const panel = document.getElementById('modal-panel');
+    panel.innerHTML = `
+        <div class="modal-header">
+            <div>
+                <div class="modal-title"><i class="fa-solid fa-code-compare" style="color:#8b5cf6;margin-right:8px"></i>Diff: "${pageId}"</div>
+                <div class="modal-subtitle">${changedKeys.length} field(s) changed vs. published version</div>
             </div>
-            <div class="p-4 overflow-auto">
-                <table class="min-w-full bg-white border border-gray-200 rounded">
-                    <thead class="bg-gray-50 text-xs uppercase text-gray-500">
-                        <tr>
-                            <th class="px-3 py-2 text-left">Field</th>
-                            <th class="px-3 py-2 text-left">Published</th>
-                            <th class="px-3 py-2 text-left">Draft</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${rows || '<tr><td colspan="3" class="px-3 py-6 text-center text-gray-500">No differences</td></tr>'}
-                    </tbody>
-                </table>
-            </div>
+            <button onclick="window.Admin.closeModal()" class="btn btn-ghost btn-sm btn-icon"><i class="fa-solid fa-xmark"></i></button>
         </div>
-    `;
-    backdrop.classList.remove('hidden');
-    void backdrop.offsetWidth;
-    backdrop.classList.remove('opacity-0');
-    modalPanel.classList.remove('translate-x-full');
+        <div class="modal-body">
+            ${changedKeys.length === 0 ? `<div class="empty-state"><div class="empty-icon">✅</div><div class="empty-title">No Differences</div><div class="empty-desc">Draft matches published version.</div></div>` : `
+            <table class="data-table">
+                <thead><tr><th>Field</th><th style="color:#ef4444">Published</th><th style="color:#10b981">Draft</th></tr></thead>
+                <tbody>
+                    ${changedKeys.map(k => `
+                    <tr>
+                        <td class="font-mono" style="font-size:10px;white-space:nowrap;color:#64748b">${Admin.escapeHtml(k)}</td>
+                        <td style="font-size:11px;color:#991b1b;max-width:160px;word-break:break-all">${Admin.escapeHtml(String(pFlat[k] ?? ''))}</td>
+                        <td style="font-size:11px;color:#065f46;max-width:160px;word-break:break-all">${Admin.escapeHtml(String(dFlat[k] ?? ''))}</td>
+                    </tr>`).join('')}
+                </tbody>
+            </table>`}
+        </div>`;
+    UI.openModal();
 };
 
-// Helper for rendering schema-based forms with sections & translation
+// ── Form Container (Page / Destination / Article editor) ─────────────────────
 Admin.renderFormContainer = function(container, schema, data, title, onSave, isModal = false, pageId = null) {
-    // Group schema
     const sections = [];
-    let currentSection = { title: "General Info", fields: [] };
-    
+    let cur = { title: "General Info", fields: [], icon: 'fa-file' };
     schema.forEach(item => {
         if (item.section) {
-            if (currentSection.fields.length > 0) sections.push(currentSection);
-            currentSection = { title: item.section, description: item.description, fields: [] };
-        } else if (item.type) { 
-            currentSection.fields.push(item);
-        }
+            if (cur.fields.length > 0) sections.push(cur);
+            cur = { title: item.section, description: item.description, icon: item.icon || 'fa-folder', fields: [] };
+        } else if (item.type) { cur.fields.push(item); }
     });
-    if (currentSection.fields.length > 0) sections.push(currentSection);
+    if (cur.fields.length > 0) sections.push(cur);
 
     const formId = pageId ? `page-form-${pageId}` : `form-${Math.random().toString(36).substr(2, 9)}`;
+    const previewUrls = { home: '/', about: '/about.html', services: '/services.html', contact: '/contact.html' };
+    const previewUrl = previewUrls[pageId] || '/';
 
-    // Determine preview URL
-    let previewUrl = '/';
-    if (pageId === 'about') previewUrl = '/about.html';
-    if (pageId === 'services') previewUrl = '/services.html';
-    if (pageId === 'contact') previewUrl = '/contact.html';
+    const wrapClass = isModal ? 'modal-body' : 'page-editor-wrap space-y';
 
-    const defaultsBtn = pageId ? `
-        <button type="button" onclick="window.Admin.loadPageDefaults('${pageId}')" class="bg-white border border-yellow-300 text-yellow-700 px-4 py-2 rounded-lg hover:bg-yellow-50 font-medium shadow-sm transition-colors flex items-center" title="Fill empty fields with defaults">
-            <i class="fa-solid fa-magic mr-2"></i> Defaults
-        </button>
-    ` : '';
-
-    const headerHtml = isModal ? 
-        `<div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50 sticky top-0 z-20">
-            <h3 class="text-lg font-bold text-gray-800">${title}</h3>
-            <div class="flex gap-2">
-                 <button type="button" id="edit-btn-${formId}" class="bg-gray-200 text-gray-700 px-3 py-1.5 rounded hover:bg-gray-300 text-sm font-medium transition-colors">
-                    <i class="fa-solid fa-pen mr-1"></i> Edit
-                </button>
-                <button type="submit" form="${formId}" id="save-btn-${formId}" disabled class="bg-blue-600 text-white px-4 py-1.5 rounded hover:bg-blue-700 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-                    Save
-                </button>
-                <button type="button" onclick="window.Admin.closeModal()" class="ml-2 text-gray-400 hover:text-gray-600">
-                    <i class="fa-solid fa-times text-xl"></i>
-                </button>
+    if (isModal) {
+        container.innerHTML = `
+            <div class="modal-header">
+                <div>
+                    <div class="modal-title">${Admin.escapeHtml(title)}</div>
+                    <div class="modal-subtitle">Fill in both English and Arabic fields</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                    <button type="button" id="edit-btn-${formId}" class="btn btn-ghost btn-sm"><i class="fa-solid fa-pen"></i> Enable Edit</button>
+                    <button type="submit" form="${formId}" id="save-btn-${formId}" disabled class="btn btn-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                    <button type="button" onclick="window.Admin.closeModal()" class="btn btn-ghost btn-sm btn-icon"><i class="fa-solid fa-xmark"></i></button>
+                </div>
             </div>
-        </div>` 
-        : 
-        `<div class="flex justify-between items-center bg-white p-6 rounded-xl shadow-sm border border-gray-200 sticky top-0 z-10">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-900 capitalize">${title}</h2>
-                <p class="text-gray-500 text-sm mt-1">View and Manage Data</p>
+            <div class="${wrapClass}" style="padding:20px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;flex:1">
+                <form id="${formId}" class="space-y">${_renderSections(sections, data, formId)}</form>
             </div>
-            <div class="flex gap-3">
-                ${defaultsBtn}
-                <a href="${previewUrl}" target="_blank" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 font-medium shadow-sm transition-colors flex items-center text-decoration-none">
-                    <i class="fa-solid fa-eye mr-2"></i> Preview
-                </a>
-                <button type="button" id="edit-btn-${formId}" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 font-medium shadow-sm transition-colors flex items-center">
-                    <i class="fa-solid fa-pen mr-2"></i> Enable Editing
-                </button>
-                <button type="submit" form="${formId}" id="save-btn-${formId}" disabled class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-sm hover:bg-blue-700 font-medium transition-transform active:scale-95 flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
-                    <i class="fa-solid fa-save mr-2"></i> Save Changes
-                </button>
-            </div>
-        </div>`;
+            <div class="modal-footer">
+                <button type="button" onclick="window.Admin.closeModal()" class="btn btn-ghost">Cancel</button>
+                <button type="submit" form="${formId}" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+            </div>`;
+    } else {
+        container.innerHTML = `
+            <div class="${wrapClass}">
+                <div class="editor-toolbar">
+                    <div class="editor-toolbar-left">
+                        <div class="editor-page-title">${Admin.escapeHtml(title)}</div>
+                        <div class="editor-status">
+                            <span class="badge ${(State.pageMeta[pageId]?.status || 'draft') === 'published' ? 'badge-green' : 'badge-amber'}">${State.pageMeta[pageId]?.status || 'draft'}</span>
+                            ${pageId ? `<span>·</span><span>Last save: ${State.pageMeta[pageId]?.updatedAt ? new Date(State.pageMeta[pageId].updatedAt?.seconds * 1000).toLocaleString() : 'Never'}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="editor-toolbar-right">
+                        ${pageId ? `<button type="button" onclick="window.Admin.loadPageDefaults('${pageId}')" class="btn btn-amber btn-sm"><i class="fa-solid fa-wand-magic-sparkles"></i> Defaults</button>` : ''}
+                        ${previewUrl ? `<a href="${previewUrl}" target="_blank" class="btn btn-ghost btn-sm"><i class="fa-solid fa-eye"></i> Preview</a>` : ''}
+                        <button type="button" id="edit-btn-${formId}" class="btn btn-ghost"><i class="fa-solid fa-pen"></i> Enable Editing</button>
+                        <button type="submit" form="${formId}" id="save-btn-${formId}" disabled class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Draft</button>
+                    </div>
+                </div>
+                <form id="${formId}" class="space-y">${_renderSections(sections, data, formId)}</form>
+            </div>`;
 
-    container.innerHTML = `
-        <div class="${isModal ? 'h-full flex flex-col' : 'max-w-5xl mx-auto space-y-6'}">
-            ${headerHtml}
-            
-            <div class="${isModal ? 'flex-1 overflow-y-auto p-6 space-y-6' : ''}">
-                <form id="${formId}" class="space-y-6">
-                    ${sections.map((sec, secIdx) => `
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                             <div class="px-6 py-4 bg-gray-50 border-b border-gray-200 flex justify-between items-center cursor-pointer select-none" onclick="window.Admin.toggleSection(this)">
-                                <div>
-                                    <h3 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                                        <span class="w-1.5 h-6 bg-blue-500 rounded-full inline-block"></span>
-                                        ${sec.title}
-                                    </h3>
-                                    ${sec.description ? `<p class="text-sm text-gray-500 mt-0.5 ml-3.5">${sec.description}</p>` : ''}
-                                </div>
-                                <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-200"></i>
-                            </div>
-                            
-                            <div class="p-6 grid grid-cols-1 gap-6 transition-all duration-300 section-content">
-                                ${sec.fields.map(field => {
-                                    const val = Admin.getNestedValue(data, field.key) || '';
-                                    const isAr = field.key.endsWith('_ar') || field.dir === 'rtl';
-                                    const isEn = field.key.endsWith('_en') || !isAr;
-                                    
-                                    // Image
-                                    if (field.type === 'image') {
-                                        const inputId = `img-${field.key.replace(/\./g, '-')}-${Math.random().toString(36).substr(2, 5)}`;
-                                        return `
-                                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                                <label class="block text-sm font-bold text-gray-700 mb-2">${field.label}</label>
-                                                <div class="flex items-start gap-4">
-                                                    <div class="w-24 h-24 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0 border border-gray-300 relative group">
-                                                        <img src="${val || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNjY2MiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzIiB5PSIzIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxjaXJjbGUgY3g9IjguNSIgY3k9IjguNSIgcj0iMS41Ij48L2NpcmNsZT48cG9seWxpbmUgcG9pbnRzPSIyMSAxNSAxNiAxMCA1IDIxIj48L3BvbHlsaW5lPjwvc3ZnPg=='}" 
-                                                             id="preview-${inputId}" 
-                                                             class="w-full h-full object-cover bg-white">
-                                                    </div>
-                                                    <div class="flex-1">
-                                                        <div class="flex gap-2">
-                                                            <input type="text" name="${field.key}" value="${val}" id="${inputId}" disabled class="flex-1 border-gray-300 rounded-lg shadow-sm border py-2 px-3 text-sm bg-gray-50 text-gray-500 disabled:bg-gray-100 disabled:text-gray-400">
-                                                            <label class="cursor-pointer bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg shadow-sm whitespace-nowrap file-upload-btn opacity-50 pointer-events-none">
-                                                                <span>Upload</span>
-                                                                <input type="file" disabled class="hidden" onchange="window.Admin.handleImageUpload(this, '${inputId}')">
-                                                            </label>
-                                                        </div>
-                                                        <p class="text-xs text-gray-400 mt-1">Image URL or Upload</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        `;
-                                    }
+        // CMS workflow panel (publish, diff, rollback)
+        if (pageId) {
+            const meta = State.pageMeta[pageId] || { revisions: [] };
+            const revs = (meta.revisions || []).map(r => {
+                const t = r.createdAt?.seconds ? new Date(r.createdAt.seconds * 1000).toLocaleString() : '—';
+                return `<option value="${r.id}">${r.type || 'revision'} – ${t}</option>`;
+            }).join('');
 
-                                    // Checkbox/Toggle
-                                    if(field.type === 'checkbox') {
-                                         return `
-                                            <div class="flex items-center gap-3 bg-gray-50 p-3 rounded border border-gray-200">
-                                                <input type="checkbox" name="${field.key}" id="chk-${field.key}" ${val ? 'checked' : ''} disabled class="h-5 w-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300 disabled:opacity-50">
-                                                <label for="chk-${field.key}" class="font-medium text-gray-700">${field.label}</label>
-                                            </div>
-                                        `;
-                                    }
-                                    
-                                    // Text Fields
-                                    const isTextarea = field.type === 'textarea';
-                                    let partnerKey = null;
-                                    if(isEn && field.key.includes('_en')) partnerKey = field.key.replace('_en', '_ar');
-                                    else if(isAr && field.key.includes('_ar')) partnerKey = field.key.replace('_ar', '_en');
-                                    
-                                    const fieldId = `field-${field.key.replace(/\./g, '-')}-${Math.random().toString(36).substr(2,5)}`;
-                                    
-                                    // Escape double quotes for input value attribute to prevent HTML breakage
-                                    const safeVal = typeof val === 'string' ? val.replace(/"/g, '&quot;') : val;
-
-                                    const transBtn = partnerKey ? `
-                                        <button type="button" 
-                                                onclick="window.Admin.translateField('${fieldId}', '${isEn ? 'en' : 'ar'}', '${partnerKey}')"
-                                                class="trans-btn absolute top-2 ${isAr ? 'left-2' : 'right-2'} text-gray-400 hover:text-blue-600 transition-colors p-1.5 rounded hover:bg-blue-50 hidden"
-                                                title="Translate">
-                                            <i class="fa-solid fa-language text-lg"></i>
-                                        </button>
-                                    ` : '';
-
-                                    const inputTag = isTextarea 
-                                        ? `<textarea id="${fieldId}" name="${field.key}" rows="3" dir="${field.dir || 'ltr'}" disabled class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border transition-colors disabled:bg-gray-100 disabled:text-gray-500 ${ transBtn ? (isAr ? 'pl-10' : 'pr-10') : '' }">${val}</textarea>`
-                                        : `<input type="text" id="${fieldId}" name="${field.key}" value="${safeVal}" dir="${field.dir || 'ltr'}" disabled class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border transition-colors disabled:bg-gray-100 disabled:text-gray-500 ${ transBtn ? (isAr ? 'pl-10' : 'pr-10') : '' }">`;
-
-                                    return `
-                                        <div class="relative">
-                                            <label class="block text-sm font-medium text-gray-700 mb-1">${field.label}</label>
-                                            <div class="relative group">
-                                                ${inputTag}
-                                                ${transBtn}
-                                            </div>
-                                        </div>
-                                    `;
-                                }).join('')}
+            const cmsHtml = `
+                <div class="cms-panel">
+                    <div class="cms-panel-row">
+                        <div class="cms-info">
+                            <div class="cms-label"><i class="fa-solid fa-code-branch" style="color:#8b5cf6;margin-right:6px"></i>CMS Workflow</div>
+                            <div class="cms-detail">Published: ${meta.publishedAt?.seconds ? new Date(meta.publishedAt.seconds * 1000).toLocaleString() : 'Not published yet'}</div>
+                        </div>
+                        <div class="cms-actions">
+                            <button onclick="window.Admin.openDiffModal('${pageId}')" class="btn btn-ghost btn-sm"><i class="fa-solid fa-code-compare"></i> View Diff</button>
+                            <button onclick="window.Admin.publishPage('${pageId}')" ${Security.canEdit() ? '' : 'disabled'} class="btn btn-success btn-sm"><i class="fa-solid fa-cloud-arrow-up"></i> Publish</button>
+                        </div>
+                    </div>
+                    <div class="divider" style="margin:12px 0"></div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:end">
+                        <div class="field-group">
+                            <label class="field-label">Publish Note (optional)</label>
+                            <input id="publish-note-${pageId}" type="text" value="${Admin.escapeHtml(meta.lastPublishNote || '')}" class="field-input" placeholder="What changed?">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Change Summary</label>
+                            <input id="change-summary-${pageId}" type="text" value="${Admin.escapeHtml(meta.lastChangeSummary || '')}" class="field-input" placeholder="Brief summary">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Schedule Publish</label>
+                            <div style="display:flex;gap:6px">
+                                <input id="schedule-at-${pageId}" type="datetime-local" class="field-input" style="flex:1">
+                                <button onclick="window.Admin.schedulePublish('${pageId}')" ${Security.canEdit() ? '' : 'disabled'} class="btn btn-violet btn-sm"><i class="fa-solid fa-clock"></i></button>
                             </div>
                         </div>
-                    `).join('')}
-                </form>
-            </div>
-        </div>
-    `;
+                    </div>
+                    ${revs ? `<div class="divider" style="margin:12px 0"></div><div style="display:flex;gap:8px;align-items:center"><select id="revision-select-${pageId}" class="field-input" style="flex:1"><option value="">Select revision to rollback…</option>${revs}</select><button onclick="window.Admin.rollbackPage('${pageId}')" ${Security.isAdmin() ? '' : 'disabled'} class="btn btn-amber btn-sm"><i class="fa-solid fa-rotate-left"></i> Rollback</button></div>` : ''}
+                </div>`;
+            container.querySelector('.page-editor-wrap').insertAdjacentHTML('afterbegin', cmsHtml);
+        }
+    }
 
-    // Handle Edit Mode Toggle
+    // Toggle edit mode
     const editBtn = document.getElementById(`edit-btn-${formId}`);
     const saveBtn = document.getElementById(`save-btn-${formId}`);
     const form = document.getElementById(formId);
+    if (!Security.canEdit() && editBtn) { editBtn.disabled = true; editBtn.style.opacity = '0.4'; }
 
-    if (!Security.canEdit()) {
+    const setEditMode = (editing) => {
+        const inputs = form.querySelectorAll('input,textarea,select');
+        inputs.forEach(el => el.disabled = !editing);
+        form.querySelectorAll('.file-upload-btn').forEach(el => el.classList.toggle('disabled-upload', !editing));
+        form.querySelectorAll('.trans-btn').forEach(el => el.style.display = editing ? '' : 'none');
+        if (saveBtn) saveBtn.disabled = !editing;
         if (editBtn) {
-            editBtn.disabled = true;
-            editBtn.classList.add('opacity-50', 'cursor-not-allowed');
-        }
-        if (saveBtn) saveBtn.disabled = true;
-    }
-    const collectFormData = () => {
-        const formData = new FormData(form);
-        const newData = JSON.parse(JSON.stringify(data));
-        for(let [key, value] of formData.entries()) {
-            if(key.includes('.')) Admin.setNestedValue(newData, key, value);
-            else newData[key] = value;
-
-            const checkbox = form.querySelector(`input[name="${key}"][type="checkbox"]`);
-            if(checkbox) newData[key] = checkbox.checked;
-        }
-        form.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-            if(!formData.has(chk.name)) {
-                if(chk.name.includes('.')) Admin.setNestedValue(newData, chk.name, false);
-                else newData[chk.name] = false;
+            if (editing) {
+                editBtn.className = editBtn.className.replace('btn-ghost', 'btn-danger');
+                editBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Cancel Edit';
+                editBtn.classList.add('active-edit');
+            } else {
+                editBtn.className = editBtn.className.replace('btn-danger', 'btn-ghost');
+                editBtn.innerHTML = isModal ? '<i class="fa-solid fa-pen"></i> Enable Edit' : '<i class="fa-solid fa-pen"></i> Enable Editing';
+                editBtn.classList.remove('active-edit');
             }
-        });
-        return newData;
+        }
     };
 
+    setEditMode(false);
+
+    if (editBtn) {
+        editBtn.addEventListener('click', () => {
+            if (!Security.canEdit()) return;
+            setEditMode(!editBtn.classList.contains('active-edit'));
+        });
+    }
+
+    // Restore local draft
     if (pageId) {
         const localDraft = Admin.readLocalDraft(pageId);
         if (localDraft?.data && confirm('Local autosave draft found. Restore it?')) {
-            data = localDraft.data;
-            form.querySelectorAll('input[name], textarea[name], select[name]').forEach((el) => {
-                const v = Admin.getNestedValue(data, el.name);
-                if (el.type === 'checkbox') el.checked = !!v;
-                else el.value = v ?? '';
+            form.querySelectorAll('input[name],textarea[name],select[name]').forEach(el => {
+                const v = Admin.getNestedValue(localDraft.data, el.name);
+                if (el.type === 'checkbox') el.checked = !!v; else if (v !== null && v !== undefined) el.value = v;
             });
         }
     }
-    
-    editBtn.addEventListener('click', () => {
-        if (!Security.canEdit()) return;
-        const isEditing = editBtn.classList.contains('active-edit');
-        if(!isEditing) {
-            // Enable
-            editBtn.classList.add('active-edit', 'bg-red-50', 'text-red-700', 'border-red-200');
-            editBtn.classList.remove('bg-white', 'text-gray-700');
-            editBtn.innerHTML = '<i class="fa-solid fa-lock mr-2"></i> Cancel Edit';
-            
-            saveBtn.disabled = false;
-            
-            // Enable inputs
-            form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
-            // Enable file uploads
-            form.querySelectorAll('input[type="file"]').forEach(el => el.disabled = false);
-            form.querySelectorAll('.file-upload-btn').forEach(el => {
-                el.classList.remove('opacity-50', 'pointer-events-none');
-            });
-            // Show translate buttons
-            form.querySelectorAll('.trans-btn').forEach(el => el.classList.remove('hidden'));
-        } else {
-            // Disable (Cancel)
-            editBtn.classList.remove('active-edit', 'bg-red-50', 'text-red-700', 'border-red-200');
-            editBtn.classList.add('bg-white', 'text-gray-700');
-            editBtn.innerHTML = isModal ? '<i class="fa-solid fa-pen mr-1"></i> Edit' : '<i class="fa-solid fa-pen mr-2"></i> Enable Editing';
-            
-            saveBtn.disabled = true;
-            
-            // Disable inputs
-            form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
-            form.querySelectorAll('input[type="file"]').forEach(el => el.disabled = true);
-            form.querySelectorAll('.file-upload-btn').forEach(el => {
-                el.classList.add('opacity-50', 'pointer-events-none');
-            });
-            form.querySelectorAll('.trans-btn').forEach(el => el.classList.add('hidden'));
+
+    // Collect form data
+    const collectFormData = () => {
+        const fd = new FormData(form);
+        const newData = JSON.parse(JSON.stringify(data));
+        for (let [key, value] of fd.entries()) {
+            if (key.includes('.')) Admin.setNestedValue(newData, key, value); else newData[key] = value;
         }
-    });
+        form.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+            if (chk.name.includes('.')) Admin.setNestedValue(newData, chk.name, chk.checked); else newData[chk.name] = chk.checked;
+        });
+        return newData;
+    };
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -2016,157 +1725,190 @@ Admin.renderFormContainer = function(container, schema, data, title, onSave, isM
             State.currentEditorPage = pageId;
             const snapshot = collectFormData();
             Admin.writeLocalDraft(pageId, snapshot);
-
             if (State.autosaveTimers[pageId]) clearTimeout(State.autosaveTimers[pageId]);
             State.autosaveTimers[pageId] = setTimeout(async () => {
-                if (!editBtn.classList.contains('active-edit')) return;
-                try {
-                    await Data.savePage(pageId, snapshot);
-                    State.pages[pageId] = snapshot;
-                } catch (_e) {}
+                if (!editBtn?.classList.contains('active-edit')) return;
+                try { await Data.savePage(pageId, snapshot); State.pages[pageId] = snapshot; } catch (_e) {}
             }, 3000);
         });
     }
+
+    // Add char count listeners
+    form.querySelectorAll('[data-maxlen]').forEach(el => {
+        const maxLen = parseInt(el.dataset.maxlen);
+        const countEl = el.parentElement?.querySelector('.char-count');
+        if (!countEl) return;
+        const update = () => {
+            const len = el.value.length;
+            countEl.textContent = `${len}/${maxLen}`;
+            countEl.className = `char-count${len > maxLen ? ' danger' : len > maxLen * 0.85 ? ' warn' : ''}`;
+        };
+        el.addEventListener('input', update);
+        update();
+    });
 };
 
+// Section renderer
+function _renderSections(sections, data, formId) {
+    return sections.map((sec, i) => `
+        <div class="editor-section">
+            <div class="editor-section-header" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('hidden');this.querySelector('.section-chevron').classList.toggle('open')">
+                <div class="editor-section-left">
+                    <div class="section-accent"></div>
+                    <div>
+                        <div class="section-title">${Admin.escapeHtml(sec.title)}</div>
+                        ${sec.description ? `<div class="section-desc">${Admin.escapeHtml(sec.description)}</div>` : ''}
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-down section-chevron open"></i>
+            </div>
+            <div class="editor-section-body">
+                ${sec.fields.map(field => _renderField(field, data)).join('')}
+            </div>
+        </div>`).join('');
+}
+
+function _renderField(field, data) {
+    const val = Admin.getNestedValue(data, field.key) || '';
+    const isAr = field.key.endsWith('_ar') || field.dir === 'rtl';
+    const isEn = !isAr;
+    const maxLen = field.maxLen;
+
+    if (field.type === 'image') {
+        const inputId = `img-${field.key.replace(/\./g, '-')}-${Math.random().toString(36).substr(2, 5)}`;
+        return `
+            <div class="field-group">
+                <label class="field-label">${Admin.escapeHtml(field.label)}</label>
+                <div class="img-upload-block">
+                    <img src="${Admin.escapeHtml(val) || 'data:image/svg+xml;charset=utf-8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 60 45%22><rect width=%2260%22 height=%2245%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-size=%2210%22 fill=%22%2394a3b8%22>IMG</text></svg>'}" id="preview-${inputId}" class="img-preview" alt="">
+                    <div class="img-upload-controls">
+                        <input type="text" name="${field.key}" value="${Admin.escapeHtml(val)}" id="${inputId}" disabled class="field-input mono" placeholder="Image URL or upload below" style="font-size:11px">
+                        <div class="img-upload-actions">
+                            <label class="btn btn-ghost btn-sm file-upload-btn disabled-upload" style="cursor:pointer">
+                                <i class="fa-solid fa-upload"></i> Upload Image
+                                <input type="file" class="hidden" accept="image/*" style="display:none" disabled onchange="window.Admin.handleImageUpload(this,'${inputId}')">
+                            </label>
+                        </div>
+                        <div style="font-size:10px;color:#94a3b8">Supports: WebP, JPEG, PNG, AVIF</div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    if (field.type === 'checkbox') {
+        return `
+            <div class="toggle-wrap">
+                <label class="toggle">
+                    <input type="checkbox" name="${field.key}" ${val ? 'checked' : ''} disabled>
+                    <div class="toggle-track"></div>
+                    <div class="toggle-thumb"></div>
+                </label>
+                <span class="toggle-label">${Admin.escapeHtml(field.label)}</span>
+            </div>`;
+    }
+
+    const isTextarea = field.type === 'textarea';
+    const fieldId = `field-${field.key.replace(/\./g, '-')}-${Math.random().toString(36).substr(2, 5)}`;
+    const safeVal = typeof val === 'string' ? val.replace(/"/g, '&quot;') : val;
+
+    let partnerKey = null;
+    if (isEn && field.key.includes('_en')) partnerKey = field.key.replace('_en', '_ar');
+    else if (isAr && field.key.includes('_ar')) partnerKey = field.key.replace('_ar', '_en');
+
+    const transBtn = partnerKey ? `
+        <button type="button"
+            onclick="window.Admin.translateField('${fieldId}', '${isEn ? 'en' : 'ar'}', '${partnerKey}')"
+            class="trans-btn btn btn-ghost btn-sm btn-icon" title="Auto-translate"
+            style="position:absolute;${isAr ? 'left:6px' : 'right:6px'};top:50%;transform:translateY(-50%);display:none;z-index:1">
+            <i class="fa-solid fa-language"></i>
+        </button>` : '';
+
+    const inputEl = isTextarea
+        ? `<textarea id="${fieldId}" name="${field.key}" rows="3" dir="${field.dir || 'ltr'}" disabled
+            class="field-input field-textarea" data-maxlen="${maxLen || ''}"
+            ${isAr ? 'style="padding-left:38px"' : transBtn ? 'style="padding-right:38px"' : ''}>${Admin.escapeHtml(val)}</textarea>`
+        : `<input type="text" id="${fieldId}" name="${field.key}" value="${safeVal}" dir="${field.dir || 'ltr'}" disabled
+            class="field-input" data-maxlen="${maxLen || ''}"
+            ${isAr ? 'style="padding-left:38px"' : transBtn ? 'style="padding-right:38px"' : ''}>`;
+
+    return `
+        <div class="field-group">
+            <label class="field-label">
+                ${Admin.escapeHtml(field.label)}
+                <span style="display:flex;align-items:center;gap:6px">
+                    ${field.hint ? `<span class="field-hint">${Admin.escapeHtml(field.hint)}</span>` : ''}
+                    ${maxLen ? `<span class="char-count" data-maxlen="${maxLen}">0/${maxLen}</span>` : ''}
+                </span>
+            </label>
+            <div style="position:relative">
+                ${inputEl}
+                ${transBtn}
+            </div>
+        </div>`;
+}
+
+// ── Page Editor ───────────────────────────────────────────────────────────────
 Admin.renderPageEditor = function(container, pageId) {
     const schema = PageSchemas[pageId];
     const data = State.pages[pageId] || {};
-    const meta = State.pageMeta[pageId] || { revisions: [] };
-
     if (!schema) {
-        container.innerHTML = `<div class="p-10 text-center text-gray-500">No editor schema defined for ${pageId}</div>`;
+        container.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-title">No Schema</div><div class="empty-desc">No editor schema defined for "${pageId}".</div></div>`;
         return;
     }
-    
-    Admin.renderFormContainer(container, schema, data, `${pageId.replace('page_', '')} Content`, async (newData) => {
-        try {
-            const validation = Admin.validateContentData(pageId, schema, newData);
-            if (validation.errors.length > 0) {
-                UI.toast(validation.errors[0], 'error');
-                return;
-            }
-            if (validation.warnings.length > 0) {
-                const proceed = confirm(`Save with warnings?\n- ${validation.warnings.join('\n- ')}`);
-                if (!proceed) return;
-            }
-            await Data.savePage(pageId, newData);
-            UI.toast('Page saved successfully', 'success');
-        } catch (err) {
-            UI.toast(err.message, 'error');
-        }
+    Admin.renderFormContainer(container, schema, data, `${pageId.charAt(0).toUpperCase() + pageId.slice(1)} Page Content`, async (newData) => {
+        const validation = Admin.validateContentData(pageId, schema, newData);
+        if (validation.errors.length > 0) { UI.toast(validation.errors[0], 'error'); return; }
+        if (validation.warnings.length > 0 && !confirm(`Save with warnings?\n• ${validation.warnings.join('\n• ')}`)) return;
+        await Data.savePage(pageId, newData);
+        UI.toast('Draft saved!', 'success');
     }, false, pageId);
-
-    const wrapper = container.querySelector('.max-w-5xl');
-    if (wrapper) {
-        const revisions = (meta.revisions || []).map((r) => {
-            const t = r.createdAt?.seconds ? new Date(r.createdAt.seconds * 1000) : null;
-            const label = `${r.type || 'revision'} ${t ? `- ${t.toLocaleString()}` : ''}`;
-            return `<option value="${r.id}">${label}</option>`;
-        }).join('');
-
-        const publishedAt = meta.publishedAt?.seconds
-            ? new Date(meta.publishedAt.seconds * 1000).toLocaleString()
-            : 'Not published yet';
-
-        wrapper.insertAdjacentHTML('afterbegin', `
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                <div>
-                    <div class="text-sm font-semibold text-gray-800">CMS Workflow</div>
-                    <div class="text-xs text-gray-500">Status: ${meta.status || 'draft'} | Last publish: ${publishedAt}</div>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="window.Admin.openDiffModal('${pageId}')" class="px-3 py-2 bg-slate-100 text-slate-800 rounded hover:bg-slate-200 text-sm font-medium">
-                        <i class="fa-solid fa-code-compare mr-1"></i> View Diff
-                    </button>
-                    <button onclick="window.Admin.publishPage('${pageId}')" ${Security.canEdit() ? '' : 'disabled'} class="px-3 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
-                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish
-                    </button>
-                    <select id="revision-select-${pageId}" class="px-3 py-2 border border-gray-300 rounded text-sm bg-white">
-                        <option value="">Select revision</option>
-                        ${revisions}
-                    </select>
-                    <button onclick="window.Admin.rollbackPage('${pageId}')" ${Security.isAdmin() ? '' : 'disabled'} class="px-3 py-2 bg-amber-100 text-amber-800 rounded hover:bg-amber-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
-                        <i class="fa-solid fa-rotate-left mr-1"></i> Rollback
-                    </button>
-                </div>
-            </div>
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-3">
-                <input id="publish-note-${pageId}" type="text" value="${Admin.escapeHtml(meta.lastPublishNote || '')}" placeholder="Publish note (optional)" class="border border-gray-300 rounded px-3 py-2 text-sm">
-                <input id="change-summary-${pageId}" type="text" value="${Admin.escapeHtml(meta.lastChangeSummary || '')}" placeholder="Change summary (optional)" class="border border-gray-300 rounded px-3 py-2 text-sm">
-                <div class="flex gap-2">
-                    <input id="schedule-at-${pageId}" type="datetime-local" class="border border-gray-300 rounded px-3 py-2 text-sm flex-1">
-                    <button onclick="window.Admin.schedulePublish('${pageId}')" ${Security.canEdit() ? '' : 'disabled'} class="px-3 py-2 bg-violet-100 text-violet-800 rounded hover:bg-violet-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
-                        <i class="fa-solid fa-clock mr-1"></i> Schedule
-                    </button>
-                </div>
-            </div>
-        `);
-    }
 };
 
-// Destination Modal using the same engine
+// ── Destination Modal ─────────────────────────────────────────────────────────
 Admin.openDestinationModal = function(id = null) {
-    const existingDest = id ? State.destinations.find(d => d.id === id) : null;
-    const dest = existingDest ? {
-        ...existingDest,
-        title_en: existingDest.title_en || existingDest.title?.en || '',
-        title_ar: existingDest.title_ar || existingDest.title?.ar || '',
-        desc_en: existingDest.desc_en || existingDest.desc?.en || '',
-        desc_ar: existingDest.desc_ar || existingDest.desc?.ar || ''
+    const existing = id ? State.destinations.find(d => d.id === id) : null;
+    const dest = existing ? {
+        ...existing,
+        title_en: existing.title_en || existing.title?.en || '',
+        title_ar: existing.title_ar || existing.title?.ar || '',
+        desc_en: existing.desc_en || existing.desc?.en || '',
+        desc_ar: existing.desc_ar || existing.desc?.ar || ''
     } : { active: true };
-    const modalPanel = document.getElementById('modal-panel');
-    const backdrop = document.getElementById('modal-backdrop');
-    
-    const destSchema = [
-        { section: "Basic Details", description: "Main information for the destination card." },
-        { type: "checkbox", key: "active", label: "Active (Visible on Site)" },
+    const panel = document.getElementById('modal-panel');
+
+    const schema = [
+        { section: "Basic Details", description: "Main card information.", icon: "fa-info-circle" },
+        { type: "checkbox", key: "active", label: "Active — visible on website" },
         { type: "image", key: "thumbnail", label: "Thumbnail Image" },
         { type: "text", key: "title_en", label: "Title (English)" },
         { type: "text", key: "title_ar", label: "Title (Arabic)", dir: "rtl" },
-        { type: "text", key: "price", label: "Price Text (e.g. 'From $500')" },
-        { type: "text", key: "duration", label: "Duration (e.g. '5 Days')" },
-        
-        { section: "Details", description: "Full description and location." },
+        { type: "text", key: "price", label: "Price (e.g. From $500)" },
+        { type: "text", key: "duration", label: "Duration (e.g. 5 Days)" },
+        { section: "Description", description: "Full text shown on the destination page.", icon: "fa-align-left" },
         { type: "textarea", key: "desc_en", label: "Description (English)" },
         { type: "textarea", key: "desc_ar", label: "Description (Arabic)", dir: "rtl" },
         { type: "text", key: "map_url", label: "Google Maps Embed URL" }
     ];
 
-    Admin.renderFormContainer(modalPanel, destSchema, dest, id ? 'Edit Destination' : 'New Destination', async (newData) => {
-        try {
-            const normalized = {
-                ...newData,
-                title: {
-                    en: (newData.title_en || '').trim(),
-                    ar: (newData.title_ar || '').trim()
-                },
-                desc: {
-                    en: (newData.desc_en || '').trim(),
-                    ar: (newData.desc_ar || '').trim()
-                }
-            };
-            delete normalized.title_en;
-            delete normalized.title_ar;
-            delete normalized.desc_en;
-            delete normalized.desc_ar;
-
-            await Data.saveDestination(id, normalized);
-            UI.toast('Destination saved', 'success');
-            await Data.fetchDestinations();
-            UI.loadTab('destinations');
-            window.Admin.closeModal();
-        } catch (e) {
-            UI.toast(e.message, 'error');
-        }
+    Admin.renderFormContainer(panel, schema, dest, id ? 'Edit Destination' : 'New Destination', async (newData) => {
+        const normalized = {
+            ...newData,
+            title: { en: (newData.title_en || '').trim(), ar: (newData.title_ar || '').trim() },
+            desc: { en: (newData.desc_en || '').trim(), ar: (newData.desc_ar || '').trim() }
+        };
+        delete normalized.title_en; delete normalized.title_ar;
+        delete normalized.desc_en; delete normalized.desc_ar;
+        await Data.saveDestination(id, normalized);
+        UI.toast('Destination saved!', 'success');
+        await Data.fetchDestinations();
+        UI.loadTab('destinations');
+        Admin.closeModal();
     }, true);
-    
-    backdrop.classList.remove('hidden');
-    void backdrop.offsetWidth;
-    backdrop.classList.remove('opacity-0');
-    modalPanel.classList.remove('translate-x-full');
+
+    UI.openModal();
 };
 
+// ── Article Modal ─────────────────────────────────────────────────────────────
 Admin.openArticleModal = function(id = null) {
     const existing = id ? State.articles.find(a => a.id === id) : null;
     const article = existing ? {
@@ -2179,105 +1921,59 @@ Admin.openArticleModal = function(id = null) {
         content_ar: existing.content?.ar || ''
     } : { date: new Date().toISOString().split('T')[0] };
 
-    const modalPanel = document.getElementById('modal-panel');
-    const backdrop = document.getElementById('modal-backdrop');
-
+    const panel = document.getElementById('modal-panel');
     const schema = [
-        { section: "Article Info", description: "Basic metadata." },
+        { section: "Article Info", description: "Metadata and cover image.", icon: "fa-file-alt" },
         { type: "image", key: "image", label: "Cover Image" },
         { type: "text", key: "date", label: "Publish Date (YYYY-MM-DD)" },
         { type: "text", key: "title_en", label: "Title (English)" },
         { type: "text", key: "title_ar", label: "Title (Arabic)", dir: "rtl" },
         { type: "textarea", key: "excerpt_en", label: "Short Excerpt (English)" },
         { type: "textarea", key: "excerpt_ar", label: "Short Excerpt (Arabic)", dir: "rtl" },
-        { section: "Content", description: "Main article body." },
-        { type: "textarea", key: "content_en", label: "Content (English - HTML allowed)" },
-        { type: "textarea", key: "content_ar", label: "Content (Arabic - HTML allowed)", dir: "rtl" }
+        { section: "Article Body", description: "Full content (HTML supported).", icon: "fa-align-left" },
+        { type: "textarea", key: "content_en", label: "Content (English — HTML allowed)" },
+        { type: "textarea", key: "content_ar", label: "Content (Arabic — HTML allowed)", dir: "rtl" }
     ];
 
-    Admin.renderFormContainer(modalPanel, schema, article, id ? 'Edit Article' : 'New Article', async (newData) => {
+    Admin.renderFormContainer(panel, schema, article, id ? 'Edit Article' : 'New Article', async (newData) => {
         const normalized = { ...newData };
         normalized.title = { en: newData.title_en, ar: newData.title_ar };
         normalized.excerpt = { en: newData.excerpt_en, ar: newData.excerpt_ar };
         normalized.content = { en: newData.content_en, ar: newData.content_ar };
         ['title_en','title_ar','excerpt_en','excerpt_ar','content_en','content_ar'].forEach(k => delete normalized[k]);
-
         await Data.saveArticle(id, normalized);
-        UI.toast('Article saved', 'success');
-        window.Admin.closeModal();
+        UI.toast('Article saved!', 'success');
+        Admin.closeModal();
         UI.loadTab('articles');
     }, true);
-    
-    backdrop.classList.remove('hidden');
-    void backdrop.offsetWidth;
-    backdrop.classList.remove('opacity-0');
-    modalPanel.classList.remove('translate-x-full');
+
+    UI.openModal();
 };
 
-
-Admin.toggleSection = function(header) {
-    const content = header.nextElementSibling;
-    const icon = header.querySelector('.fa-chevron-down');
-    if(content.classList.contains('hidden')) {
-        content.classList.remove('hidden');
-        icon.classList.remove('rotate-180');
-    } else {
-        content.classList.add('hidden');
-        icon.classList.add('rotate-180');
-    }
-};
-
+// ── Translation helper ────────────────────────────────────────────────────────
 Admin.translateField = async function(sourceId, sourceLang, targetKey) {
     const sourceInput = document.getElementById(sourceId);
-    if (!sourceInput || !sourceInput.value.trim()) {
-        UI.toast('Please enter text to translate', 'warning');
-        return;
-    }
-
-    const targetInput = sourceInput
-        .closest('form')
-        ?.querySelector(`[name="${targetKey}"]`);
-    
-    if (!targetInput) {
-        UI.toast('Target field not found: ' + targetKey, 'error');
-        return;
-    }
-
-    const btn = sourceInput
-        .closest('.relative')
-        ?.querySelector('button.trans-btn');
-    if (!btn) return;
-    const originalIcon = btn.innerHTML;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-    btn.disabled = true;
-
+    if (!sourceInput || !sourceInput.value.trim()) { UI.toast('Enter text to translate first.', 'warning'); return; }
+    const targetInput = sourceInput.closest('form')?.querySelector(`[name="${targetKey}"]`);
+    if (!targetInput) { UI.toast('Target field not found.', 'error'); return; }
+    const btn = sourceInput.closest('[style*="relative"]')?.querySelector('.trans-btn');
+    if (btn) { btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>'; btn.disabled = true; }
     try {
-        const text = sourceInput.value;
         const targetLang = sourceLang === 'en' ? 'ar' : 'en';
-        
-        // Call Free Google Translate API
-        // Using `translate.googleapis.com` undocumented API
-        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
-        
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(sourceInput.value)}`;
         const res = await fetch(url);
-        const data = await res.json();
-        
-        if (data && data[0]) {
-            // data[0] is array of [translated_segment, source_segment, ...]
-            const translatedText = data[0].map(s => s[0]).join('');
-            targetInput.value = translatedText;
-            UI.toast('Translated!', 'success');
-        } else {
-            throw new Error("Invalid response");
-        }
-    } catch (error) {
-        console.error(error);
+        const d = await res.json();
+        if (d?.[0]) { targetInput.value = d[0].map(s => s[0]).join(''); UI.toast('Translated!', 'success'); }
+        else throw new Error('Invalid response');
+    } catch (err) {
         UI.toast('Translation failed. Rate limit or network error.', 'error');
     } finally {
-        btn.innerHTML = originalIcon;
-        btn.disabled = false;
+        if (btn) { btn.innerHTML = '<i class="fa-solid fa-language"></i>'; btn.disabled = false; }
     }
 };
 
-// Start app
+// ── Modal backdrop click to close ─────────────────────────────────────────────
+document.getElementById('modal-backdrop').addEventListener('click', () => Admin.closeModal());
+
+// ── Start ─────────────────────────────────────────────────────────────────────
 App.init();

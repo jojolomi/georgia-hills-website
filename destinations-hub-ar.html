@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+    <link rel="preload" as="style" href="style.min.css?v=16">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -20,9 +19,9 @@
   <link rel="alternate" hreflang="en" href="https://georgiahills.com/destinations-hub.html">
   <link rel="alternate" hreflang="ar" href="https://georgiahills.com/destinations-hub-ar.html">
   <link rel="alternate" hreflang="x-default" href="https://georgiahills.com/destinations-hub.html">
-  <link rel="stylesheet" href="style.css?v=7">
-  <script src="shared-navbar.js" defer></script>
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.min.css?v=16">
+  <script src="shared-navbar.min.js" defer=""></script>
+  <script src="script.min.js" defer=""></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -66,23 +65,643 @@
     ]
   }
   </script>
-</head>
+<style>
+    /* Itineraries Hub Page Specific Styles (RTL-aware) */
+    .itinerary-hero {
+      min-height: 70vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      border-bottom-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 5rem;
+      background: #112d1e;
+    }
+    .itinerary-hero-bg {
+      position: absolute;
+      inset: -5%;
+      z-index: 0;
+    }
+    .itinerary-hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      animation: breathe 25s infinite alternate ease-in-out;
+    }
+    .itinerary-hero-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(2,6,23,0.5) 0%, rgba(2,6,23,0.3) 40%, rgba(2,6,23,0.95) 100%);
+      z-index: 1;
+    }
+    .itinerary-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 3rem;
+      color: #ffffff;
+    }
+    .itinerary-hero-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .itinerary-hero-subtitle {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.9);
+      font-weight: 400;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-stats-row {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-family: 'Cairo', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #C29B57;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.05em;
+      margin-top: 0.25rem;
+    }
+
+    /* Itinerary Card Styles */
+    .itinerary-card {
+      background: #ffffff;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .itinerary-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.12);
+      border-color: rgba(194, 155, 87, 0.3);
+    }
+    .itinerary-card-featured {
+      border: 2px solid #C29B57;
+      position: relative;
+    }
+    .itinerary-card-featured::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #C29B57, #8c6b36);
+      z-index: 2;
+    }
+    .itinerary-card-img {
+      height: 240px;
+      position: relative;
+      overflow: hidden;
+    }
+    .itinerary-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .itinerary-card:hover .itinerary-card-img img {
+      transform: scale(1.08);
+    }
+    .itinerary-card-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+    }
+    .itinerary-duration-badge {
+      position: absolute;
+      top: 1.25rem;
+      left: 1.25rem;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 0.4rem 1.2rem;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      z-index: 1;
+    }
+    .itinerary-duration-badge.featured-badge {
+      background: #C29B57;
+      border-color: #C29B57;
+    }
+    .itinerary-popular-tag {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: #112d1e;
+      color: #C29B57;
+      padding: 0.35rem 1rem;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      z-index: 1;
+    }
+    .itinerary-card-body {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .itinerary-card-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 0.5rem;
+    }
+    .itinerary-card-subtitle {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .itinerary-day-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .itinerary-day-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: rgba(15, 23, 42, 0.02);
+      border: 1px solid rgba(0,0,0,0.04);
+      border-radius: 1rem;
+      font-size: 0.9rem;
+      color: #475569;
+      transition: all 0.3s ease;
+    }
+    .itinerary-day-item:hover {
+      background: rgba(194, 155, 87, 0.06);
+      border-color: rgba(194, 155, 87, 0.2);
+      transform: translateX(-5px);
+    }
+    .itinerary-day-num {
+      background: #112d1e;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .itinerary-card-cta {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #C29B57;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .itinerary-card-cta:hover {
+      color: #112d1e;
+      gap: 0.75rem;
+    }
+    .itinerary-card-cta i {
+      transition: transform 0.3s ease;
+    }
+    .itinerary-card-cta:hover i {
+      transform: translateX(-4px);
+    }
+
+    /* Highlights Section */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      background: #ffffff;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.04);
+      transition: all 0.4s ease;
+    }
+    .highlight-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08);
+      border-color: rgba(194, 155, 87, 0.3);
+    }
+    .highlight-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: rgba(194, 155, 87, 0.1);
+      color: #C29B57;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      transition: transform 0.4s ease;
+    }
+    .highlight-item:hover .highlight-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+    .highlight-title {
+      font-weight: 700;
+      color: #0F172A;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .highlight-text {
+      font-size: 0.9rem;
+      color: #475569;
+      line-height: 1.7;
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: #112d1e;
+      border-radius: 2.5rem;
+      padding: 4rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(194, 155, 87, 0.2), transparent 70%);
+      border-radius: 50%;
+    }
+    .cta-banner-content {
+      position: relative;
+      z-index: 1;
+    }
+    .cta-banner h2 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 2.2rem;
+      color: #fff !important;
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+      font-weight: 800;
+    }
+    .cta-banner p {
+      color: rgba(255,255,255,0.8) !important;
+      font-size: 1.1rem !important;
+      max-width: 500px;
+    }
+
+    /* Resource Links */
+    .resource-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .resource-links li a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: rgba(15, 23, 42, 0.02);
+      border: 1px solid rgba(0,0,0,0.04);
+      border-radius: 1rem;
+      color: #0F172A;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .resource-links li a:hover {
+      background: rgba(194, 155, 87, 0.08);
+      border-color: rgba(194, 155, 87, 0.3);
+      transform: translateX(-5px);
+      color: #112d1e;
+    }
+    .resource-links li a i {
+      color: #C29B57;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      .itinerary-hero { min-height: 60vh; border-bottom-left-radius: 1.5rem; border-bottom-right-radius: 1.5rem; margin-bottom: 3rem; }
+      .itinerary-hero-content { padding: 1.5rem; }
+      .itinerary-hero-title { font-size: 2.2rem !important; }
+      .itinerary-hero-subtitle { font-size: 1.05rem; }
+      .hero-stats-row { gap: 1.5rem; }
+      .hero-stat-num { font-size: 1.8rem; }
+      .itinerary-card-img { height: 200px; }
+      .itinerary-card-body { padding: 1.5rem; }
+      .cta-banner { padding: 2.5rem 1.5rem; text-align: center; justify-content: center; }
+      .cta-banner h2 { font-size: 1.6rem; }
+    }
+
+    /* Lazy-render off-screen sections to speed initial paint */
+    .lazy-section {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
+  
+    .mobile-back-btn { display: none; }
+    @media (max-width: 768px) {
+      .mobile-back-btn {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        position: absolute; top: 1.5rem; z-index: 100;
+        color: white; background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+        padding: 0.5rem 1rem; border-radius: 2rem; text-decoration: none; font-size: 0.9rem;
+      }
+      html[dir="ltr"] .mobile-back-btn { left: 1rem; }
+      html[dir="rtl"] .mobile-back-btn { right: 1rem; }
+    }
+</style></head>
 <body class="secondary-page page-about">
   <a href="#main-content" class="skip-link">تخطي إلى المحتوى</a>
   <nav id="navbar" class="navbar"></nav>
   <main id="main-content" class="container" style="padding-top:8rem; padding-bottom:4rem;">
-    <h1 class="section-title" style="margin-bottom:1rem;">دليل الوجهات</h1>
-    <p class="section-desc" style="margin-bottom:2rem;">صفحة محورية لتحسين الربط الداخلي وبناء سلطة المحتوى في محركات البحث.</p>
-    <section class="content-card" style="padding:2rem;">
-      <h2 class="section-heading">روابط مرتبطة</h2>
-      <ul>
-        <li><a href="destinations-hub-ar.html">دليل الوجهات</a></li>
-        <li><a href="itineraries-hub-ar.html">خطط الرحلات</a></li>
-        <li><a href="halal-travel-hub-ar.html">السياحة الحلال</a></li>
-        <li><a href="family-travel-hub-ar.html">السفر العائلي</a></li>
-        <li><a href="safety-hub-ar.html">دليل الأمان</a></li>
-      </ul>
-    </section>
+
+    <!-- Breadcrumbs -->
+    <div class="premium-grid" style="margin-bottom: 0;">
+      <div class="col-12">
+        <div class="breadcrumbs">
+          <a href="arabic.html">الرئيسية</a>
+          <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; opacity: 0.5;"></i>
+          <span>خطط الرحلات</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Itinerary Cards Grid ===== -->
+    <div class="premium-grid" style="margin-bottom: 5rem;">
+      <div class="col-12" style="text-align: center; margin-bottom: 1rem;">
+        <span class="hero-badge" style="background: rgba(194, 155, 87, 0.1); color: #C29B57; border-color: rgba(194, 155, 87, 0.3);"><i class="fa-solid fa-compass"></i> اختر إيقاعك</span>
+        <h2 style="font-family: 'Cairo', sans-serif; font-size: 2.5rem; color: #0F172A; margin-top: 1rem; margin-bottom: 0.75rem; font-weight: 800;">أهم الوجهات السياحية</h2>
+        <p style="color: #475569; font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">اكتشف تنوع الطبيعة في جورجيا، من المدن العريقة إلى الجبال الشاهقة.</p>
+      </div>
+
+      <!-- 5 أيام - إجازة سريعة -->
+      <div class="col-4">
+        <div class="itinerary-card">
+          <div class="itinerary-card-img">
+            <img src="tbilisi-old-town-1024.webp" alt="المدينة القديمة في تبليسي مع الشرفات الملونة" loading="lazy" width="600" height="400">
+            <div class="itinerary-card-img-overlay"></div>
+            <div class="itinerary-duration-badge">العاصمة</div>
+          <div class="itinerary-popular-tag" style="background:#112d1e;color:#C29B57;"><i class="fa-solid fa-star"></i> تاريخ وثقافة</div></div>
+          <div class="itinerary-card-body">
+            <h3 class="itinerary-card-title">تبليسي</h3>
+            <p class="itinerary-card-subtitle">العاصمة النابضة بالحياة حيث يلتقي التاريخ بالحداثة.</p>
+            <ul class="itinerary-day-list">
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>قلعة ناريكالا</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>حمامات الكبريت</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>شارع روستافيلي</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>مقاهي المدينة القديمة</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>تلفريك تبليسي</span>
+                    </li>
+                </ul>
+            <a href="booking-ar.html" class="itinerary-card-cta">اكتشف المزيد <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 أيام - جورجيا الكلاسيكية (مميز) -->
+      <div class="col-4">
+        <div class="itinerary-card itinerary-card-featured">
+          <div class="itinerary-card-img">
+            <img src="kazbegi-hero-1024.webp" alt="مناظر جبال كازبيجي مع كنيسة جيرجيتي الثالوث" loading="lazy" width="600" height="400">
+            <div class="itinerary-card-img-overlay"></div>
+            <div class="itinerary-duration-badge featured-badge">الجبال</div>
+            <div class="itinerary-popular-tag"><i class="fa-solid fa-star"></i> طبيعة</div>
+          </div>
+          <div class="itinerary-card-body">
+            <h3 class="itinerary-card-title">كازبيجي</h3>
+            <p class="itinerary-card-subtitle">قمم جبلية درامية وطبيعة تخطف الأنفاس.</p>
+            <ul class="itinerary-day-list">
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>كنيسة جيرجيتي</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>وادي داريالي</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>شلالات جفيليتي</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>إطلالات فندق رومز</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>الأنشطة الجبلية</span>
+                    </li>
+                </ul>
+            <a href="booking-ar.html" class="itinerary-card-cta">اكتشف المزيد <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 أيام - الجولة الكبرى -->
+      <div class="col-4">
+        <div class="itinerary-card">
+          <div class="itinerary-card-img">
+            <img src="Batumi.webp" alt="ساحل البحر الأسود في باتومي مع العمارة الحديثة" loading="lazy" width="600" height="400">
+            <div class="itinerary-card-img-overlay"></div>
+            <div class="itinerary-duration-badge">الساحل</div>
+          <div class="itinerary-popular-tag" style="background:#112d1e;color:#C29B57;"><i class="fa-solid fa-star"></i> استجمام</div></div>
+          <div class="itinerary-card-body">
+            <h3 class="itinerary-card-title">باتومي</h3>
+            <p class="itinerary-card-subtitle">لؤلؤة البحر الأسود والهندسة المعمارية الحديثة.</p>
+            <ul class="itinerary-day-list">
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>ممشى باتومي</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>تمثال علي ونينو</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>الحديقة النباتية</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>ساحة بيازا</span>
+                    </li>
+                
+                    <li class="itinerary-day-item">
+                        <span class="itinerary-day-num" style="background:rgba(194,155,87,0.2); color:#112d1e;"><i class="fa-solid fa-check"></i></span>
+                        <span>عروض الدلافين</span>
+                    </li>
+                </ul>
+            <a href="booking-ar.html" class="itinerary-card-cta">اكتشف المزيد <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== لماذا Georgia Hills ===== -->
+    <div class="premium-grid lazy-section" style="margin-bottom: 5rem;">
+      <div class="col-12" style="text-align: center; margin-bottom: 1rem;">
+        <span class="hero-badge" style="background: rgba(194, 155, 87, 0.1); color: #C29B57; border-color: rgba(194, 155, 87, 0.3);"><i class="fa-solid fa-gem"></i> ما يميز جورجيا هيلز</span>
+        <h2 style="font-family: 'Cairo', sans-serif; font-size: 2.5rem; color: #0F172A; margin-top: 1rem; margin-bottom: 0.75rem; font-weight: 800;">لماذا تزور هذه الوجهات معنا</h2>
+        <p style="color: #475569; font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">كل تفاصيل رحلتك تُعالج بعناية ودقة.</p>
+      </div>
+      <div class="col-12">
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <div class="highlight-icon"><i class="fa-solid fa-map"></i></div>
+            <div>
+              <div class="highlight-title">معرفة الخبراء</div>
+              <div class="highlight-text">نعرف الأماكن المخفية وأفضل الطرق المريحة للعوائل.</div>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon"><i class="fa-solid fa-camera"></i></div>
+            <div>
+              <div class="highlight-title">أجمل الإطلالات</div>
+              <div class="highlight-text">توقف في أفضل نقاط التصوير البانورامية.</div>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <div class="highlight-title">مرونة تامة</div>
+              <div class="highlight-text">اقضِ الوقت الذي تريده في كل مكان بدون استعجال.</div>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon"><i class="fa-solid fa-car"></i></div>
+            <div>
+              <div class="highlight-title">سفر مريح</div>
+              <div class="highlight-text">سيارات فخمة ومريحة للرحلات الجبلية الطويلة.</div>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div>
+              <div class="highlight-title">مطاعم مميزة</div>
+              <div class="highlight-text">نرشدك لأفضل المطاعم الحلال في كل مدينة.</div>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+            <div>
+              <div class="highlight-title">تنوع الطبيعة</div>
+              <div class="highlight-text">من القمم الثلجية إلى الشواطئ الدافئة.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CTA Banner ===== -->
+    <div class="premium-grid lazy-section" style="margin-bottom: 5rem;">
+      <div class="col-12">
+        <div class="cta-banner">
+          <div class="cta-banner-content">
+            <h2>هل أنت مستعد لحجز رحلتك؟</h2>
+            <p>تواصل معنا على الواتساب لترتيب خطتك المخصصة مجاناً.</p>
+          </div>
+          <a href="booking-ar.html" class="btn-premium" style="position: relative; z-index: 1;">
+            احصل على عرض سعر مجاني <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== روابط مرتبطة ===== -->
+    <div class="premium-grid lazy-section" style="margin-bottom: 3rem;">
+      <div class="col-12">
+        <div class="soft-card">
+          <h2 style="font-family: 'Cairo', sans-serif; font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 800;">المزيد من موارد السفر</h2>
+          <ul class="resource-links">
+            <li><a href="destinations-hub-ar.html"><i class="fa-solid fa-map-location-dot"></i> دليل الوجهات</a></li>
+            <li><a href="halal-travel-hub-ar.html"><i class="fa-solid fa-mosque"></i> السياحة الحلال</a></li>
+            <li><a href="family-travel-hub-ar.html"><i class="fa-solid fa-people-roof"></i> السفر العائلي</a></li>
+            <li><a href="safety-hub-ar.html"><i class="fa-solid fa-shield-halved"></i> دليل الأمان</a></li>
+            <li><a href="honeymoon-ar.html"><i class="fa-solid fa-heart"></i> باقة شهر العسل</a></li>
+            <li><a href="guide-ar.html"><i class="fa-solid fa-book-open"></i> دليل السفر لجورجيا</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
   </main>
-</body>
-</html>
+
+
+
+</body></html>

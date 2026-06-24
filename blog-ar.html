@@ -1,210 +1,314 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <link rel="preload" as="style" href="style.min.css?v=16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    
-    <!-- SEO: Primary Meta Tags -->
     <title>مدونة السياحة في جورجيا | نصائح وجداول سياحية</title>
     <meta name="description" content="اقرأ أحدث المقالات عن السياحة في جورجيا. جداول سياحية للعوائل، أفضل المطاعم الحلال، ونصائح السفر إلى تبليسي وباتومي.">
-    <meta name="keywords" content="مدونة جورجيا, السياحة في جورجيا للعوائل, جدول سياحي جورجيا, مطاعم حلال تبليسي, الامان في جورجيا">
-    <meta name="author" content="Georgia Hills">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://georgiahills.com/blog-ar.html">
-    <meta property="og:title" content="مدونة السياحة في جورجيا | Georgia Hills">
-    <meta property="og:description" content="مقالات ونصائح عملية للسفر إلى جورجيا للعوائل والمسافرين العرب.">
-    <meta property="og:image" content="https://georgiahills.com/image-1600.webp">
-
-    <!-- Multilingual -->
+    <link rel="canonical" href="https://georgiahills.com/blog-ar.html">
     <link rel="alternate" hreflang="en" href="https://georgiahills.com/blog.html" />
     <link rel="alternate" hreflang="ar" href="https://georgiahills.com/blog-ar.html" />
-    <link rel="alternate" hreflang="x-default" href="https://georgiahills.com/blog.html" />
-    <link rel="canonical" href="https://georgiahills.com/blog-ar.html">
-
-    <!-- Styles & Scripts -->
-        <style>
-            :root{--color-gray-400:#9CA3AF}
-            html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;background:#fff}
-            .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
-            .skip-link:focus{left:0;top:0;width:auto;height:auto;padding:.5rem;background:#111;color:#fff;z-index:9999}
-            .navbar{position:relative;z-index:50;background:transparent}
-            .hero-img{width:100%;height:auto;display:block;object-fit:cover}
-            .hero{position:relative;overflow:hidden}
-            .container{max-width:1200px;margin-left:auto;margin-right:auto;padding:0 1rem}
-        </style>
-        <link rel="stylesheet" href="style.css?v=7">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap"></noscript>
-    <script src="shared-navbar.js" defer></script>
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.min.css?v=16">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="shared-navbar.min.js" defer></script>
+    <script src="script.min.js" defer></script>
+    <style>
+        /* Blog Grid Polish */
+        .premium-blog-container {
+            background: #fafaf9; /* Extremely subtle warm off-white */
+            padding: 5rem 0 8rem;
+            position: relative;
+        }
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .premium-card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f1f5f9;
+            height: 100%;
+            position: relative;
+        }
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #e2e8f0;
+        }
+        .premium-card-img-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            position: relative;
+            background: #e2e8f0;
+        }
+        .premium-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+            display: block;
+        }
+        .premium-card:hover .premium-card-img {
+            transform: scale(1.05);
+        }
+        /* Category Badge overlay on image */
+        .premium-card-badge {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            color: #C29B57;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            z-index: 2;
+        }
+        
+        .premium-card-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            background: #ffffff;
+        }
+        
+        .premium-card-title {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.6rem;
+            color: #0f172a;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            transition: color 0.3s ease;
+        }
+        .premium-card:hover .premium-card-title {
+            color: #C29B57;
+        }
+        .premium-card-excerpt {
+            color: #64748b;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Author & Date Footer */
+        .premium-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 1.25rem;
+            margin-top: auto;
+        }
+        .premium-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .premium-card-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: #C29B57;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        .premium-card-author-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .premium-card-author {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #0f172a;
+        }
+        .premium-card-date {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+        .premium-card-link {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.3s ease;
+        }
+        .premium-card:hover .premium-card-link {
+            color: #C29B57;
+        }
+    </style>
 </head>
-<body class="secondary-page page-about page-blog">
-    <a href="#main-content" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
-    <div id="network-toast"><i class="fa-solid fa-wifi-slash"></i> <span>لا يوجد اتصال بالانترنت</span></div>
+<body class="secondary-page page-blog" style="font-family: 'Cairo', sans-serif;">
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="text-center">
-            <div class="preloader-circle animate-bounce">
-                <img src="favicon.ico" width="80" height="80" style="object-fit:contain;" alt="Georgia Hills Logo" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden')">
-                <i class="fa-solid fa-mountain-sun text-primary hidden" style="font-size:2.25rem;"></i>
-            </div>
-            <div class="preloader-text">جار التحميل</div>
-        </div>
-    </div>
-
-    <!-- Navbar -->
     <nav id="navbar" class="navbar"></nav>
 
-    <!-- Premium Hero -->
-    <section class="about-premium-hero" aria-labelledby="blog-hero-title">
-        <div class="about-premium-hero-bg" aria-hidden="true"></div>
-        <div class="hero-overlay-gradient"></div>
-        <div class="container hero-content-container">
-            <div class="hero-text-content fade-in-up">
-                <span class="hero-badge"><i class="fa-solid fa-pen-nib"></i> قصصنا</span>
-                <h1 class="section-title about-premium-title" id="blog-hero-title">
-                    مدونة السفر <br>
-                    <span class="text-gradient-gold">والإلهام</span>
-                </h1>
-                <p class="section-desc about-premium-subtitle">
-                    نصائح الخبراء، أسرار محلية، وجداول رحلات ملهمة.
-                    <span class="highlight-text">خطط رحلتك المثالية مع أدلتنا.</span>
-                </p>
-                
-                <div class="hero-actions">
-                    <a href="#latest" class="btn-hero-primary">
-                        <span>أحدث المقالات</span>
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </a>
-                    <a href="guide-ar.html" class="btn-hero-secondary">
-                        <i class="fa-solid fa-book-open"></i> الدليل الكامل
-                    </a>
-                </div>
-            </div>
+    <!-- Using the exact abt-hero they loved, but with a dark image (kazbegi) so text pops -->
+    <header class="abt-hero">
+        <div class="abt-hero-bg" style="background-image: url('kazbegi-hero-1600.webp'); background-position: center; opacity: 0.5;"></div>
+        <div class="abt-hero-glow abt-hero-glow--left"></div>
+        <div class="abt-hero-glow abt-hero-glow--right"></div>
+        <div class="container abt-hero-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <span class="abt-hero-label" style="margin: 0 auto 1.5rem; font-family: 'Cairo', sans-serif;">
+                <i class="fa-solid fa-pen-nib"></i> قصص السفر
+            </span>
+            <h1 class="abt-hero-title" style="font-family: inherit;">
+                إلهام <span class="abt-hero-accent" style="font-family: inherit;">السياحة</span>
+            </h1>
+            <p class="abt-hero-desc" style="margin: 0 auto; font-family: inherit; font-weight: 600;">نصائح الخبراء، أسرار محلية، وجداول رحلات ملهمة. خطط رحلتك المثالية معنا.</p>
         </div>
-    </section>
+    </header>
 
-    <!-- Trust Strip -->
-    <section class="trust-strip-pro about-brand-strip" aria-label="لماذا تقرأ مدونتنا">
-        <div class="container trust-strip-inner">
-            <span class="trust-item-pro"><i class="fa-solid fa-feather-pointed text-accent"></i> مؤلفون محليون</span>
-            <span class="trust-item-pro"><i class="fa-solid fa-camera text-accent"></i> تجارب حقيقية</span>
-            <span class="trust-item-pro"><i class="fa-solid fa-map text-accent"></i> معلومات موثوقة</span>
+    <main class="premium-blog-container">
+        
+        <div class="container text-center" style="margin-bottom: 4rem;">
+            <h2 style="font-family: inherit; font-size: 2.5rem; font-weight: 800; color: #0f172a;">أحدث المقالات والأدلة</h2>
+            <div style="width: 60px; height: 3px; background: #C29B57; margin: 1rem auto 0; border-radius: 2px;"></div>
         </div>
-    </section>
 
-    <!-- Blog Content -->
-    <section class="section-py about-premium-content" id="latest">
-        <main class="container" id="main-content">
+        <!-- Polished Grid -->
+        <div class="premium-grid">
             
-            <!-- Section Title -->
-            <div class="about-section-intro">
-                <span class="eyebrow-text">اقرأ أحدث مقالاتنا</span>
-                <h2 class="display-heading">إلهام السفر</h2>
-                <p class="lead-text">كل ما تحتاج معرفته قبل السفر.</p>
-            </div>
+            <!-- Card 1 -->
+            <a href="article-7-days-georgia-ar.html" style="text-decoration: none; display: block; height: 100%;">
+                <article class="premium-card">
+                    <div class="premium-card-img-wrap">
+                        <div class="premium-card-badge"><i class="fa-solid fa-map-location-dot"></i> جدول سياحي</div>
+                        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=800&q=80" class="premium-card-img" alt="جبال كازبيجي" decoding="async">
+                    </div>
+                    <div class="premium-card-content">
+                        <h2 class="premium-card-title">جدول سياحي لمدة 7 أيام في جورجيا</h2>
+                        <p class="premium-card-excerpt">اكتشف كيف يمكنك استكشاف شوارع تبليسي القديمة، وقمم كازبيجي الخلابة، وسحر باتومي الساحلي في أسبوع واحد تماماً.</p>
+                        <div class="premium-card-footer">
+                            <div class="premium-card-meta">
+                                <div class="premium-card-avatar"><i class="fa-solid fa-mountain"></i></div>
+                                <div class="premium-card-author-info">
+                                    <span class="premium-card-author">فريق جورجيا هيلز</span>
+                                    <span class="premium-card-date">دليل محدث</span>
+                                </div>
+                            </div>
+                            <span class="premium-card-link">اقرأ <i class="fa-solid fa-arrow-left"></i></span>
+                        </div>
+                    </div>
+                </article>
+            </a>
 
-            <!-- Blog Grid -->
-            <div class="blog-grid" style="margin-bottom:4rem;">
-                <!-- Article 1 -->
-                <article class="blog-card reveal">
-                    <div class="blog-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1582236357876-0f836526154b?auto=format&fit=crop&w=600&q=80" width="600" height="400" class="blog-img" alt="الأكل الجورجي" decoding="async">
+            <!-- Card 2 -->
+            <a href="article-georgian-food-ar.html" style="text-decoration: none; display: block; height: 100%;">
+                <article class="premium-card">
+                    <div class="premium-card-img-wrap">
+                        <div class="premium-card-badge"><i class="fa-solid fa-utensils"></i> طعام</div>
+                        <img src="https://images.unsplash.com/photo-1582236357876-0f836526154b?auto=format&fit=crop&w=800&q=80" class="premium-card-img" alt="الأكل الجورجي" decoding="async">
                     </div>
-                    <div class="blog-content">
-                        <div class="blog-meta"><i class="fa-solid fa-utensils"></i> طعام وشراب</div>
-                        <h2 class="blog-title">أشهر 5 أطباق جورجية يجب تجربتها</h2>
-                        <p class="blog-excerpt">من الخينكالي إلى الخاتشابوري، اكتشف النكهات التي تجعل جورجيا جنة لعشاق الطعام. وأين تجد الأكل الحلال.</p>
-                        <a href="article-georgian-food-ar.html" class="blog-link">اقرأ المقال <i class="fa-solid fa-arrow-left"></i></a>
-                    </div>
-                </article>
-                <!-- Article 2 -->
-                <article class="blog-card reveal">
-                    <div class="blog-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=600&q=80" width="600" height="400" class="blog-img" alt="جبال كازبيجي" decoding="async">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta"><i class="fa-solid fa-map-location-dot"></i> جدول سياحي</div>
-                        <h2 class="blog-title">جدول سياحي لمدة 7 أيام في جورجيا</h2>
-                        <p class="blog-excerpt">دليل شامل لزيارة تبليسي، كازبيجي، وباتومي في أسبوع واحد. مثالي للعوائل والعرسان.</p>
-                        <a href="article-7-days-georgia-ar.html" class="blog-link">اقرأ المقال <i class="fa-solid fa-arrow-left"></i></a>
+                    <div class="premium-card-content">
+                        <h2 class="premium-card-title">أشهر 5 أطباق جورجية يجب تجربتها</h2>
+                        <p class="premium-card-excerpt">من الخينكالي إلى الخاتشابوري، اكتشف النكهات التي تجعل جورجيا جنة لعشاق الطعام. وأين تجد الأكل الحلال بسهولة.</p>
+                        <div class="premium-card-footer">
+                            <div class="premium-card-meta">
+                                <div class="premium-card-avatar"><i class="fa-solid fa-mountain"></i></div>
+                                <div class="premium-card-author-info">
+                                    <span class="premium-card-author">فريق جورجيا هيلز</span>
+                                    <span class="premium-card-date">دليل محدث</span>
+                                </div>
+                            </div>
+                            <span class="premium-card-link">اقرأ <i class="fa-solid fa-arrow-left"></i></span>
+                        </div>
                     </div>
                 </article>
-                <!-- Article 3 -->
-                <article class="blog-card reveal">
-                    <div class="blog-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1539656206689-d4198db85834?auto=format&fit=crop&w=600&q=80" width="600" height="400" class="blog-img" alt="الأمان في جورجيا" decoding="async">
+            </a>
+
+            <!-- Card 3 -->
+            <a href="article-is-georgia-safe-ar.html" style="text-decoration: none; display: block; height: 100%;">
+                <article class="premium-card">
+                    <div class="premium-card-img-wrap">
+                        <div class="premium-card-badge"><i class="fa-solid fa-shield-halved"></i> أمان</div>
+                        <img src="https://images.unsplash.com/photo-1539656206689-d4198db85834?auto=format&fit=crop&w=800&q=80" class="premium-card-img" alt="الأمان في جورجيا" decoding="async">
                     </div>
-                    <div class="blog-content">
-                        <div class="blog-meta"><i class="fa-solid fa-shield-halved"></i> نصائح</div>
-                        <h2 class="blog-title">هل جورجيا آمنة للعوائل؟</h2>
-                        <p class="blog-excerpt">كل ما تحتاج معرفته عن الأمان، المواصلات، والعادات المحلية. ولماذا السائق الخاص هو الخيار الأكثر أماناً.</p>
-                        <a href="article-is-georgia-safe-ar.html" class="blog-link">اقرأ المقال <i class="fa-solid fa-arrow-left"></i></a>
+                    <div class="premium-card-content">
+                        <h2 class="premium-card-title">هل جورجيا آمنة للعوائل؟</h2>
+                        <p class="premium-card-excerpt">تُصنف جورجيا باستمرار كواحدة من أكثر الدول أمانًا للسياح. تعرف على ما يخص الأمان والمواصلات ولماذا يعتبر السائق الخاص خيارك الأفضل.</p>
+                        <div class="premium-card-footer">
+                            <div class="premium-card-meta">
+                                <div class="premium-card-avatar"><i class="fa-solid fa-mountain"></i></div>
+                                <div class="premium-card-author-info">
+                                    <span class="premium-card-author">فريق جورجيا هيلز</span>
+                                    <span class="premium-card-date">دليل محدث</span>
+                                </div>
+                            </div>
+                            <span class="premium-card-link">اقرأ <i class="fa-solid fa-arrow-left"></i></span>
+                        </div>
                     </div>
                 </article>
-            </div>
-            
-            <div class="text-center">
-                <p class="section-desc">المزيد من الأدلة قريباً...</p>
-                <a href="booking-ar.html" class="btn-hero-primary" style="display:inline-flex;">خطط لرحلتك الخاصة <i class="fa-solid fa-arrow-left" style="margin-right:0.5rem;"></i></a>
-            </div>
-        </main>
-    </section>
+            </a>
+
+        </div>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
+    <footer class="footer" style="direction: rtl;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; padding: 4rem 0;">
                 <div>
-                    <div class="footer-brand">
-                        <div class="footer-brand-icon"><i class="fa-solid fa-mountain"></i></div>
-                        <span class="footer-brand-text">Georgia Hills</span>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; color: #fff; font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700;">
+                        <i class="fa-solid fa-mountain" style="color: #C29B57;"></i>
+                        <span style="font-family: 'Cairo', sans-serif;">جورجيا هيلز</span>
                     </div>
-                    <p style="color:var(--color-gray-300); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem;">حلول نقل فاخرة في جورجيا. أمان وراحة وخبرة محلية في كل ميل.</p>
-                    <div class="footer-social">
-                        <a href="https://instagram.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://facebook.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <button onclick="App.share()" class="social-btn" aria-label="Share Website"><i class="fa-solid fa-share-nodes"></i></button>
-                    </div>
-                    <div style="margin-top:1.5rem; display:flex; gap:1rem; font-size:0.75rem; color:var(--color-gray-400);">
-                        <a href="legal.html" style="color:inherit;">سياسة الخصوصية</a>
-                    </div>
+                    <p style="color: var(--color-gray-300); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem; font-family: 'Cairo', sans-serif; font-weight: 600;">حلول نقل احترافية في جورجيا مع تركيز على الأمان والراحة والخبرة المحلية.</p>
                 </div>
                 <div>
-                    <h3>روابط سريعة</h3>
-                    <ul>
-                        <li><a href="arabic.html">الرئيسية</a></li>
-                        <li><a href="arabic.html#fleet">السيارات</a></li>
-                        <li><a href="arabic.html#reviews">الآراء</a></li>
-                        <li><a href="booking-ar.html">احجز الآن</a></li>
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem; font-family: 'Cairo', sans-serif; font-weight: 800;">روابط سريعة</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; font-family: 'Cairo', sans-serif; font-weight: 600;">
+                        <li><a href="arabic.html" style="color: var(--color-gray-400); text-decoration: none;">الرئيسية</a></li>
+                        <li><a href="services-ar.html" style="color: var(--color-gray-400); text-decoration: none;">الخدمات</a></li>
+                        <li><a href="guide-ar.html" style="color: var(--color-gray-400); text-decoration: none;">الدليل</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3>اتصل بنا</h3>
-                    <ul style="color:var(--color-gray-400);">
-                        <li class="footer-contact-item"><i class="fa-solid fa-phone text-accent"></i> <span dir="ltr">+995 579 08 85 37</span></li>
-                        <li class="footer-contact-item"><i class="fa-brands fa-whatsapp text-accent"></i> <span dir="ltr">+995 579 08 85 37</span></li>
-                        <li class="footer-contact-item"><i class="fa-solid fa-envelope text-accent"></i> info@georgiahills.com</li>
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem; font-family: 'Cairo', sans-serif; font-weight: 800;">اتصل بنا</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem; color: var(--color-gray-400); font-family: 'Cairo', sans-serif; font-weight: 600;">
+                        <li><i class="fa-solid fa-phone" style="color: #C29B57; width: 20px;"></i> <a href="tel:+995579088537" dir="ltr" style="color: inherit; text-decoration: none;">+995 579 08 85 37</a></li>
+                        <li><i class="fa-brands fa-whatsapp" style="color: #C29B57; width: 20px;"></i> <a href="https://wa.me/995579088537" target="_blank" rel="noopener noreferrer" dir="ltr" style="color: inherit; text-decoration: none;">+995 579 08 85 37</a></li>
                     </ul>
                 </div>
-                <div>
-                    <div class="footer-map-container">
-                        <span class="footer-map-overlay"><i class="fa-solid fa-map-location-dot"></i> <span>موقعنا</span></span>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                &copy; <span id="year">2026</span> Georgia Hills. جميع الحقوق محفوظة.
             </div>
         </div>
     </footer>
 </body>
 </html>
-
 

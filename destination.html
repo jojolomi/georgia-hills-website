@@ -1,102 +1,124 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    <link rel="preload" as="style" href="style.min.css?v=16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Destinations | Georgia Hills</title>
+    <title>Destinations | Georgia Hills Private Travel</title>
     <meta name="description" content="Discover popular destinations in Georgia. Book private tours to Tbilisi, Batumi, Kazbegi, and more.">
-    <link rel="stylesheet" href="style.css?v=15">
+    <link rel="stylesheet" href="style.min.css?v=16">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="shared-navbar.js" defer></script>
-    <script src="script.js" defer></script>
+    <script src="shared-navbar.min.js" defer></script>
+    <script src="script.min.js" defer></script>
 </head>
-<body class="secondary-page page-about">
+<body class="secondary-page page-destination">
 
-    
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    <div id="network-toast"><i class="fa-solid fa-wifi-slash"></i> <span>You are offline</span></div>
-
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="text-center">
-            <div class="preloader-circle animate-bounce">
-                <img src="favicon.ico" width="80" height="80" style="object-fit:contain;" alt="Georgia Hills Logo" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden')">
-                <i class="fa-solid fa-mountain-sun text-primary hidden" style="font-size:2.25rem;"></i>
-            </div>
-            <div class="preloader-text">Loading</div>
-        </div>
-    </div>
-
-    <!-- Navbar -->
     <nav id="navbar" class="navbar"></nav>
 
-
-    <header class="about-premium-hero">
-        <div class="about-premium-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1543165365-07232ed12fad?q=80&w=2574&auto=format&fit=crop');"></div>
-        <div class="premium-hero-content reveal">
-            <h1 class="section-title">Explore Georgia.</h1>
-            <p class="section-desc">From the ancient streets of Tbilisi to the emerald peaks of Kazbegi. Discover the most beautiful locations accessible comfortably by our premium fleet.</p>
+    <!-- Hero Section -->
+    <header class="abt-hero">
+        <div class="abt-hero-bg" style="background-image: url('tbilisi_old_town.webp'); background-position: center;"></div>
+        <div class="abt-hero-glow abt-hero-glow--left"></div>
+        <div class="abt-hero-glow abt-hero-glow--right"></div>
+        <div class="container abt-hero-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <span class="abt-hero-label">
+                <i class="fa-solid fa-map-location-dot"></i> Tour Locations
+            </span>
+            <h1 class="abt-hero-title">
+                Explore <span class="abt-hero-accent">Georgia.</span>
+            </h1>
+            <p class="abt-hero-desc">From the ancient streets of Tbilisi to the emerald peaks of Kazbegi. Discover the most beautiful locations accessible comfortably by our premium fleet.</p>
         </div>
     </header>
 
-    <main class="container about-feature-grid">
-        
-        <div class="feature-card col-6 reveal" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-            <img src="tbilisi_old_town.webp" style="width: 100%; height: 300px; object-fit: cover;" alt="Tbilisi">
-            <div style="padding: 2.5rem;">
-                <h3 style="font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: #112d1e;">Tbilisi</h3>
-                <p style="color: #475569; margin-bottom: 2rem;">The vibrant capital. Discover Old Town, Sulphur Baths, and Narikala Fortress.</p>
-                <a href="tbilisi.html" class="btn-premium">Explore Tbilisi</a>
-            </div>
-        </div>
-
-        <div class="feature-card col-6 reveal" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-            <img src="kazbegi.webp" style="width: 100%; height: 300px; object-fit: cover;" alt="Kazbegi">
-            <div style="padding: 2.5rem;">
-                <h3 style="font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: #112d1e;">Kazbegi</h3>
-                <p style="color: #475569; margin-bottom: 2rem;">Journey to Stepantsminda on the Georgian Military Highway. Visit Gergeti Trinity Church.</p>
-                <a href="kazbegi.html" class="btn-premium">Explore Kazbegi</a>
-            </div>
-        </div>
-
-        <div class="feature-card col-6 reveal" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-            <img src="batumi.webp" style="width: 100%; height: 300px; object-fit: cover;" alt="Batumi">
-            <div style="padding: 2.5rem;">
-                <h3 style="font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: #112d1e;">Batumi</h3>
-                <p style="color: #475569; margin-bottom: 2rem;">Pearl of the Black Sea. Known for its modern architecture, botanical garden, and beaches.</p>
-                <a href="batumi.html" class="btn-premium">Explore Batumi</a>
-            </div>
-        </div>
-
-        <div class="feature-card col-6 reveal" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-            <img src="martvili.webp" style="width: 100%; height: 300px; object-fit: cover;" alt="Martvili">
-            <div style="padding: 2.5rem;">
-                <h3 style="font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: #112d1e;">Martvili Canyon</h3>
-                <p style="color: #475569; margin-bottom: 2rem;">A surreal experience with emerald green waters, waterfalls, and relaxing boat trips.</p>
-                <a href="martvili.html" class="btn-premium">Explore Martvili</a>
-            </div>
-        </div>
-
-    </main>
-
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-brand">
-                        <div class="footer-brand-icon"><i class="fa-solid fa-mountain"></i></div>
-                        <span class="footer-brand-text">Georgia Hills</span>
+    <main id="main-content" style="padding: 5rem 0; background: #f8fafc;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+                
+                <!-- Tbilisi -->
+                <div style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                    <img src="tbilisi_old_town.webp" style="width: 100%; height: 300px; object-fit: cover;" alt="Tbilisi">
+                    <div style="padding: 2.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3 style="font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: #0f172a;">Tbilisi</h3>
+                        <p style="color: #475569; margin-bottom: 2rem; line-height: 1.6; flex-grow: 1;">The vibrant capital. Discover Old Town, Sulphur Baths, and Narikala Fortress.</p>
+                        <a href="tbilisi.html" class="abt-hero-btn-ghost" style="text-align: center; color: #0f172a; border-color: #0f172a; text-decoration: none;">Explore Tbilisi</a>
                     </div>
-                    <p style="color:var(--color-gray-300); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem;">Luxury transport solutions in Georgia. Safety, comfort, and local expertise in every mile.</p>
+                </div>
+
+                <!-- Kazbegi -->
+                <div style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                    <img src="kazbegi.webp" style="width: 100%; height: 300px; object-fit: cover;" alt="Kazbegi">
+                    <div style="padding: 2.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3 style="font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: #0f172a;">Kazbegi</h3>
+                        <p style="color: #475569; margin-bottom: 2rem; line-height: 1.6; flex-grow: 1;">Journey to Stepantsminda on the Georgian Military Highway. Visit Gergeti Trinity Church.</p>
+                        <a href="kazbegi.html" class="abt-hero-btn-ghost" style="text-align: center; color: #0f172a; border-color: #0f172a; text-decoration: none;">Explore Kazbegi</a>
+                    </div>
+                </div>
+
+                <!-- Batumi -->
+                <div style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                    <img src="batumi.webp" style="width: 100%; height: 300px; object-fit: cover;" alt="Batumi">
+                    <div style="padding: 2.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3 style="font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: #0f172a;">Batumi</h3>
+                        <p style="color: #475569; margin-bottom: 2rem; line-height: 1.6; flex-grow: 1;">Pearl of the Black Sea. Known for its modern architecture, botanical garden, and beaches.</p>
+                        <a href="batumi.html" class="abt-hero-btn-ghost" style="text-align: center; color: #0f172a; border-color: #0f172a; text-decoration: none;">Explore Batumi</a>
+                    </div>
+                </div>
+
+                <!-- Martvili -->
+                <div style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                    <img src="martvili.webp" style="width: 100%; height: 300px; object-fit: cover;" alt="Martvili">
+                    <div style="padding: 2.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3 style="font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: #0f172a;">Martvili Canyon</h3>
+                        <p style="color: #475569; margin-bottom: 2rem; line-height: 1.6; flex-grow: 1;">A surreal experience with emerald green waters, waterfalls, and relaxing boat trips.</p>
+                        <a href="martvili.html" class="abt-hero-btn-ghost" style="text-align: center; color: #0f172a; border-color: #0f172a; text-decoration: none;">Explore Martvili</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                &copy; <span id="year">2026</span> Georgia Hills. All Rights Reserved.
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; padding: 4rem 0;">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; color: #fff; font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700;">
+                        <i class="fa-solid fa-mountain" style="color: #C29B57;"></i>
+                        <span>Georgia Hills</span>
+                    </div>
+                    <p style="color: var(--color-gray-300); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Professional transport solutions in Georgia focused on safety, comfort, and local expertise.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="https://instagram.com/georgiahills" target="_blank" rel="noopener noreferrer" style="color: white; font-size: 1.25rem;"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://facebook.com/georgiahills" target="_blank" rel="noopener noreferrer" style="color: white; font-size: 1.25rem;"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Quick Links</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="index.html" style="color: var(--color-gray-400); text-decoration: none;">Home</a></li>
+                        <li><a href="services.html" style="color: var(--color-gray-400); text-decoration: none;">Services</a></li>
+                        <li><a href="guide.html" style="color: var(--color-gray-400); text-decoration: none;">Guide</a></li>
+                        <li><a href="booking.html" style="color: var(--color-gray-400); text-decoration: none;">Book Now</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Contact</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem; color: var(--color-gray-400);">
+                        <li><i class="fa-solid fa-phone" style="color: #C29B57; width: 20px;"></i> <a href="tel:+995579088537" dir="ltr" style="color: inherit; text-decoration: none;">+995 579 08 85 37</a></li>
+                        <li><i class="fa-brands fa-whatsapp" style="color: #C29B57; width: 20px;"></i> <a href="https://wa.me/995579088537" target="_blank" rel="noopener noreferrer" dir="ltr" style="color: inherit; text-decoration: none;">+995 579 08 85 37</a></li>
+                        <li><i class="fa-solid fa-envelope" style="color: #C29B57; width: 20px;"></i> info@georgiahills.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; color: var(--color-gray-400); font-size: 0.875rem;">
+                &copy; <span id="year">2026</span> Georgia Hills. All rights reserved.
             </div>
         </div>
     </footer>
 </body>
-
 </html>
+

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
+    <link rel="preload" as="style" href="style.min.css?v=16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     
@@ -169,7 +170,7 @@
             .hero-content{position:relative;z-index:10;text-align:center;color:#fff;padding:0 1rem;max-width:64rem;margin-top:2.5rem}
             .container{max-width:1200px;margin-left:auto;margin-right:auto;padding:0 1rem}
         </style>
-        <link rel="stylesheet" href="style.css?v=7">
+        <link rel="stylesheet" href="style.min.css?v=16">
 
     <!-- Inline Critical CSS for Icons (prevents flash) -->
     <style>
@@ -195,8 +196,8 @@
     <!-- PWA Manifest & Icons -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0F172A">
-    <link rel="icon" type="image/png" href="favicon.ico">
-    <link rel="apple-touch-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -207,8 +208,8 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <!-- Main Script Deferred -->
-    <script src="shared-navbar.js" defer></script>
-    <script src="script.js" defer></script>
+    <script src="shared-navbar.min.js" defer></script>
+    <script src="script.min.js" defer></script>
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             const hero = document.getElementById('home');
@@ -253,7 +254,7 @@
     <div id="preloader" style="display:none;">
         <div class="text-center">
             <div class="preloader-circle animate-bounce">
-                <img src="favicon.ico" width="80" height="80" style="object-fit:contain;" alt="Georgia Hills Logo" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden')">
+                <img src="logo-256.webp" width="80" height="80" style="object-fit:contain;" alt="Georgia Hills Logo" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden')">
                 <i class="fa-solid fa-mountain-sun text-primary hidden" style="font-size:2.25rem;"></i>
             </div>
             <div class="preloader-text">جاري التحميل</div>
@@ -279,7 +280,7 @@
         <div class="hero-content">
             <div class="hero-logo-container">
                 <div class="hero-logo-circle">
-                    <img src="favicon.ico" width="96" height="96" style="width:100%; height:100%; object-fit:cover;" alt="شعار جورجيا هيلز">
+                    <img src="logo-256.webp" width="96" height="96" style="width:100%; height:100%; object-fit:cover;" alt="شعار جورجيا هيلز">
                 </div>
             </div>
             
@@ -452,22 +453,7 @@
         </div>
     </section>
 
-    <!-- SERVICES PREVIEW -->
-    <section id="packages" class="section-py">
-        <div class="container">
-            <div class="reveal text-center" style="margin-bottom:3rem;">
-                <span class="section-label">مركز الخدمات</span>
-                <h2 class="section-title">الباقات والسيارات والأسعار</h2>
-                <p class="section-desc" style="max-width:48rem; margin:0 auto;">استعرض التفاصيل الكاملة في صفحة الخدمات المخصصة.</p>
-            </div>
-            <div class="guide-grid">
-                <div class="guide-box reveal"><div class="guide-icon"><i class="fa-solid fa-map"></i></div><h3 class="guide-title">الباقات</h3><p class="guide-text">خطط عائلية وشهر عسل وجولات متعددة المدن.</p></div>
-                <div class="guide-box reveal"><div class="guide-icon"><i class="fa-solid fa-car-side"></i></div><h3 class="guide-title">السيارات</h3><p class="guide-text">سيدان وميني فان مع أسعار يومية واضحة.</p></div>
-                <div class="guide-box reveal"><div class="guide-icon"><i class="fa-solid fa-road"></i></div><h3 class="guide-title">المسارات</h3><p class="guide-text">أسعار أشهر خطوط التنقل داخل جورجيا.</p></div>
-            </div>
-            <div class="text-center" style="margin-top:2rem;"><a href="services-ar.html" class="btn-book-nav">افتح صفحة الخدمات</a></div>
-        </div>
-    </section>
+    
 
     <!-- Fleet Section -->
     <section id="fleet" class="section-py bg-gray-50">
@@ -614,36 +600,7 @@
         </div>
     </section>
 
-    <!-- Guide Section -->
-    <section id="guide" class="section-py">
-        <div class="container">
-            <div class="reveal text-center" style="margin-bottom:3rem;">
-                <span class="section-label">مركز المحتوى</span>
-                <h2 class="section-title">الدليل والأسئلة والمدونة</h2>
-            </div>
-            <div class="guide-grid">
-                <div class="guide-box reveal">
-                    <div class="guide-icon"><i class="fa-solid fa-passport"></i></div>
-                    <h3 class="guide-title">الدليل</h3>
-                    <p class="guide-text">معلومات الفيزا والمواسم والتجهيزات قبل السفر.</p>
-                </div>
-                <div class="guide-box reveal">
-                    <div class="guide-icon"><i class="fa-solid fa-circle-question"></i></div>
-                    <h3 class="guide-title">الأسئلة الشائعة</h3>
-                    <p class="guide-text">إجابات عن الدفع والسائقين العرب وتفاصيل الحجز.</p>
-                </div>
-                <div class="guide-box reveal">
-                    <div class="guide-icon"><i class="fa-solid fa-newspaper"></i></div>
-                    <h3 class="guide-title">المدونة</h3>
-                    <p class="guide-text">أفكار برامج سياحية وتجارب وأحدث النصائح.</p>
-                </div>
-            </div>
-            <div class="text-center" style="margin-top:2rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
-                <a href="guide-ar.html" class="action-btn">افتح الدليل</a>
-                <a href="blog-ar.html" class="action-btn">افتح المدونة</a>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- FAQ Preview -->
     <section id="faq" class="section-py">
@@ -938,3 +895,4 @@
 
 </body>
 </html>
+

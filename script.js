@@ -1837,13 +1837,17 @@ const MainApp = {
              slider.insertBefore(clone, slider.firstChild);
          });
 
+         let cachedMetrics = null;
          const getMetrics = () => {
+             if (cachedMetrics) return cachedMetrics;
              const style = window.getComputedStyle(slider);
              const gap = parseFloat(style.gap) || 0;
              const itemWidth = originalCards[0].offsetWidth + gap;
              const totalWidth = itemWidth * originalCards.length;
-             return { itemWidth, totalWidth };
+             cachedMetrics = { itemWidth, totalWidth };
+             return cachedMetrics;
          };
+         window.addEventListener('resize', () => { cachedMetrics = null; });
 
          const jumpToStart = () => {
              const { totalWidth } = getMetrics();

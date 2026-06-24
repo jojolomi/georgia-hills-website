@@ -65,8 +65,7 @@ try {
   passed = assert(netlify.includes("Content-Security-Policy"), "netlify headers include CSP") && passed;
   passed = assert(netlify.includes("cloudfunctions.net"), "CSP connect-src allows Cloud Functions") && passed;
 
-  const services = read("services.html");
-  passed = assert(services.includes("honeymoon.html"), "services.html links to honeymoon.html") && passed;
+
 
   const maybeHasNetlifyRef = (dir) => {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {

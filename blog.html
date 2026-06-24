@@ -1,221 +1,314 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    <link rel="preload" as="style" href="style.min.css?v=16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    
-    <!-- SEO: Primary Meta Tags -->
-    <title>Georgia Travel Blog | Tips, Itineraries & Guides</title>
-    <meta name="description" content="Read our latest travel guides for Georgia. Discover 7-day itineraries, halal food spots in Tbilisi, and safety tips for solo travelers.">
-    <meta name="keywords" content="georgia travel blog, tbilisi travel guide, georgia itinerary 7 days, halal food georgia, is georgia safe, georgia hills blog">
-    <meta name="author" content="Georgia Hills">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="blog">
-    <meta property="og:url" content="https://georgiahills.com/blog.html">
-    <meta property="og:title" content="Georgia Travel Blog | Expert Guides">
-    <meta property="og:description" content="Expert advice for your trip to Georgia. Itineraries, food guides, and safety tips.">
-    <meta property="og:image" content="https://georgiahills.com/image-1600.webp">
-
-    <!-- Canonical URL -->
+    <title>Georgia Travel Blog | Expert Guides & Inspiration</title>
+    <meta name="description" content="Discover Georgia with our premium travel guides, 7-day itineraries, and insider tips.">
     <link rel="canonical" href="https://georgiahills.com/blog.html">
     <link rel="alternate" hreflang="en" href="https://georgiahills.com/blog.html" />
     <link rel="alternate" hreflang="ar" href="https://georgiahills.com/blog-ar.html" />
-    <link rel="alternate" hreflang="x-default" href="https://georgiahills.com/blog.html" />
-
-    <!-- Styles & Scripts -->
-    <style>:root{--color-gray-400:#9CA3AF}.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{left:0;top:0;width:auto;height:auto;padding:.5rem;background:#111;color:#fff;z-index:9999}.navbar{position:relative;z-index:50;background:transparent}.container{max-width:1200px;margin-left:auto;margin-right:auto;padding:0 1rem}</style>
-    <link rel="stylesheet" href="style.css?v=15">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <script src="shared-navbar.js" defer></script>
-    <script src="script.js" defer></script>
-
-    <!-- SEO: Blog Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "Georgia Hills Travel Blog",
-      "url": "https://georgiahills.com/blog.html",
-      "description": "Travel tips and guides for visiting Georgia.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Georgia Hills",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://georgiahills.com/favicon.ico"
+    <link rel="stylesheet" href="style.min.css?v=16">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="shared-navbar.min.js" defer></script>
+    <script src="script.min.js" defer></script>
+    <style>
+        /* Blog Grid Polish */
+        .premium-blog-container {
+            background: #fafaf9; /* Extremely subtle warm off-white */
+            padding: 5rem 0 8rem;
+            position: relative;
         }
-      }
-    }
-    </script>
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .premium-card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f1f5f9;
+            height: 100%;
+            position: relative;
+        }
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #e2e8f0;
+        }
+        .premium-card-img-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            position: relative;
+            background: #e2e8f0;
+        }
+        .premium-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+            display: block;
+        }
+        .premium-card:hover .premium-card-img {
+            transform: scale(1.05);
+        }
+        /* Category Badge overlay on image */
+        .premium-card-badge {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            color: #C29B57;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            z-index: 2;
+        }
+        
+        .premium-card-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            background: #ffffff;
+        }
+        
+        .premium-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: #0f172a;
+            line-height: 1.35;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        .premium-card:hover .premium-card-title {
+            color: #C29B57;
+        }
+        .premium-card-excerpt {
+            color: #64748b;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Author & Date Footer */
+        .premium-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 1.25rem;
+            margin-top: auto;
+        }
+        .premium-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .premium-card-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: #C29B57;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        .premium-card-author-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .premium-card-author {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #0f172a;
+        }
+        .premium-card-date {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        .premium-card-link {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.3s ease;
+        }
+        .premium-card:hover .premium-card-link {
+            color: #C29B57;
+        }
+    </style>
 </head>
-<body class="secondary-page page-about page-blog">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    <div id="network-toast"><i class="fa-solid fa-wifi-slash"></i> <span>You are offline</span></div>
+<body class="secondary-page page-blog">
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="text-center">
-            <div class="preloader-circle animate-bounce">
-                <img src="favicon.ico" width="80" height="80" style="object-fit:contain;" alt="Georgia Hills Logo" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden')">
-                <i class="fa-solid fa-mountain-sun text-primary hidden" style="font-size:2.25rem;"></i>
-            </div>
-            <div class="preloader-text">Loading</div>
-        </div>
-    </div>
-
-    <!-- Navbar -->
     <nav id="navbar" class="navbar"></nav>
 
-    <!-- Premium Hero -->
-    <section class="about-premium-hero" aria-labelledby="blog-hero-title">
-        <div class="about-premium-hero-bg" aria-hidden="true"></div>
-        <div class="hero-overlay-gradient"></div>
-        <div class="container hero-content-container">
-            <div class="hero-text-content fade-in-up">
-                <span class="hero-badge"><i class="fa-solid fa-pen-nib"></i> Our Journal</span>
-                <h1 class="section-title about-premium-title" id="blog-hero-title">
-                    Stories from<br>
-                    <span class="text-gradient-gold">Georgia.</span>
-                </h1>
-                <p class="section-desc about-premium-subtitle">
-                    Expert advice, local secrets, and inspiring itineraries.
-                    <span class="highlight-text">Plan your perfect trip with our guides.</span>
-                </p>
-                
-                <div class="hero-actions">
-                    <a href="#latest" class="btn-hero-primary">
-                        <span>Latest Articles</span>
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </a>
-                    <a href="guide.html" class="btn-hero-secondary">
-                        <i class="fa-solid fa-book-open"></i> Full Guide
-                    </a>
-                </div>
-            </div>
+    <!-- Using the exact abt-hero they loved, but with a dark image (kazbegi) so text pops -->
+    <header class="abt-hero">
+        <div class="abt-hero-bg" style="background-image: url('kazbegi-hero-1600.webp'); background-position: center; opacity: 0.5;"></div>
+        <div class="abt-hero-glow abt-hero-glow--left"></div>
+        <div class="abt-hero-glow abt-hero-glow--right"></div>
+        <div class="container abt-hero-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <span class="abt-hero-label" style="margin: 0 auto 1.5rem;">
+                <i class="fa-solid fa-pen-nib"></i> Our Journal
+            </span>
+            <h1 class="abt-hero-title">
+                Travel <span class="abt-hero-accent">Stories.</span>
+            </h1>
+            <p class="abt-hero-desc" style="margin: 0 auto;">Expert itineraries, local food guides, and practical tips to plan your perfect trip to Georgia.</p>
         </div>
-    </section>
+    </header>
 
-    <!-- Trust Strip -->
-    <section class="trust-strip-pro about-brand-strip" aria-label="Why read our blog">
-        <div class="container trust-strip-inner">
-            <span class="trust-item-pro"><i class="fa-solid fa-feather-pointed text-accent"></i> Local Authors</span>
-            <span class="trust-item-pro"><i class="fa-solid fa-camera text-accent"></i> Real Experiences</span>
-            <span class="trust-item-pro"><i class="fa-solid fa-map text-accent"></i> Verified Info</span>
+    <main class="premium-blog-container">
+        
+        <div class="container text-center" style="margin-bottom: 4rem;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #0f172a;">Latest Guides & Inspiration</h2>
+            <div style="width: 60px; height: 3px; background: #C29B57; margin: 1rem auto 0; border-radius: 2px;"></div>
         </div>
-    </section>
 
-    <!-- Blog Content -->
-    <section class="section-py about-premium-content" id="latest">
-        <main class="container" id="main-content">
+        <!-- Polished Grid -->
+        <div class="premium-grid">
             
-            <!-- Section Title -->
-            <div class="about-section-intro">
-                <span class="eyebrow-text">Read Our Latest</span>
-                <h2 class="display-heading">Travel Inspiration</h2>
-                <p class="lead-text">Everything you need to know before you go.</p>
-            </div>
+            <!-- Card 1 -->
+            <a href="article-7-days-georgia.html" style="text-decoration: none; display: block; height: 100%;">
+                <article class="premium-card">
+                    <div class="premium-card-img-wrap">
+                        <div class="premium-card-badge"><i class="fa-solid fa-map-location-dot"></i> Itinerary</div>
+                        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=800&q=80" class="premium-card-img" alt="Kazbegi Mountains" decoding="async">
+                    </div>
+                    <div class="premium-card-content">
+                        <h2 class="premium-card-title">7 Days in Georgia: The Ultimate Road Trip</h2>
+                        <p class="premium-card-excerpt">Discover how to seamlessly explore the ancient streets of Tbilisi, the breathtaking peaks of Kazbegi, and the coastal charm of Batumi in exactly one week.</p>
+                        <div class="premium-card-footer">
+                            <div class="premium-card-meta">
+                                <div class="premium-card-avatar"><i class="fa-solid fa-mountain"></i></div>
+                                <div class="premium-card-author-info">
+                                    <span class="premium-card-author">Georgia Hills Team</span>
+                                    <span class="premium-card-date">Updated Guide</span>
+                                </div>
+                            </div>
+                            <span class="premium-card-link">Read <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </article>
+            </a>
 
-            <!-- Blog Grid -->
-            <div class="blog-grid" style="margin-bottom:4rem;">
-                <!-- Article 1 -->
-                <article class="blog-card soft-card reveal-item">
-                    <div class="blog-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1582236357876-0f836526154b?auto=format&fit=crop&w=600&q=80" width="600" height="400" class="blog-img" alt="Georgian Food" decoding="async">
+            <!-- Card 2 -->
+            <a href="article-georgian-food.html" style="text-decoration: none; display: block; height: 100%;">
+                <article class="premium-card">
+                    <div class="premium-card-img-wrap">
+                        <div class="premium-card-badge"><i class="fa-solid fa-utensils"></i> Food</div>
+                        <img src="https://images.unsplash.com/photo-1582236357876-0f836526154b?auto=format&fit=crop&w=800&q=80" class="premium-card-img" alt="Georgian Food" decoding="async">
                     </div>
-                    <div class="blog-content">
-                        <div class="blog-meta"><i class="fa-solid fa-utensils"></i> Food & Drink</div>
-                        <h2 class="blog-title">Top 5 Must-Try Georgian Dishes</h2>
-                        <p class="blog-excerpt">From Khinkali to Khachapuri, discover the flavors that make Georgia a culinary paradise. Learn where to find the best Halal options in Tbilisi.</p>
-                        <a href="article-georgian-food.html" class="blog-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </article>
-                <!-- Article 2 -->
-                <article class="blog-card soft-card reveal-item">
-                    <div class="blog-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=600&q=80" width="600" height="400" class="blog-img" alt="Kazbegi Mountains" decoding="async">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta"><i class="fa-solid fa-map-location-dot"></i> Itinerary</div>
-                        <h2 class="blog-title">7 Days in Georgia: The Perfect Itinerary</h2>
-                        <p class="blog-excerpt">A complete guide to seeing Tbilisi, Kazbegi, and Batumi in one week. Perfect for families and couples looking for a mix of city and nature.</p>
-                        <a href="article-7-days-georgia.html" class="blog-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="premium-card-content">
+                        <h2 class="premium-card-title">Top 5 Must-Try Georgian Dishes</h2>
+                        <p class="premium-card-excerpt">From hot cheese-filled Khachapuri to traditional Khinkali dumplings, discover the flavors that make Georgia a culinary paradise. Plus, our guide to Halal dining.</p>
+                        <div class="premium-card-footer">
+                            <div class="premium-card-meta">
+                                <div class="premium-card-avatar"><i class="fa-solid fa-mountain"></i></div>
+                                <div class="premium-card-author-info">
+                                    <span class="premium-card-author">Georgia Hills Team</span>
+                                    <span class="premium-card-date">Updated Guide</span>
+                                </div>
+                            </div>
+                            <span class="premium-card-link">Read <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
                     </div>
                 </article>
-                <!-- Article 3 -->
-                <article class="blog-card soft-card reveal-item">
-                    <div class="blog-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1539656206689-d4198db85834?auto=format&fit=crop&w=600&q=80" width="600" height="400" class="blog-img" alt="Safety in Georgia" decoding="async">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta"><i class="fa-solid fa-shield-halved"></i> Travel Tips</div>
-                        <h2 class="blog-title">Is Georgia Safe for Solo Travelers?</h2>
-                        <p class="blog-excerpt">Everything you need to know about safety, transport, and local customs. Why hiring a private driver is the safest (and easiest) option.</p>
-                        <a href="article-is-georgia-safe.html" class="blog-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </article>
-            </div>
-            
-            <!-- Newsletter / CTA Strip -->
-            <div class="abt-cta-section" style="border-radius:2rem; text-align:center;">
-                <h2 class="abt-cta-title">Ready to Experience It Yourself?</h2>
-                <p class="abt-cta-desc">Don't just read about it. Let us take you there.</p>
-                <div class="abt-cta-buttons">
-                    <a href="booking.html" class="abt-cta-btn-primary">Book Your Tour</a>
-                    <a href="https://wa.me/995579088537" class="abt-cta-btn-wa"><i class="fa-brands fa-whatsapp"></i> Chat With Us</a>
-                </div>
-            </div>
+            </a>
 
-        </main>
-    </section>
+            <!-- Card 3 -->
+            <a href="article-is-georgia-safe.html" style="text-decoration: none; display: block; height: 100%;">
+                <article class="premium-card">
+                    <div class="premium-card-img-wrap">
+                        <div class="premium-card-badge"><i class="fa-solid fa-shield-halved"></i> Safety</div>
+                        <img src="https://images.unsplash.com/photo-1539656206689-d4198db85834?auto=format&fit=crop&w=800&q=80" class="premium-card-img" alt="Safety in Georgia" decoding="async">
+                    </div>
+                    <div class="premium-card-content">
+                        <h2 class="premium-card-title">Is Georgia Safe for Tourists?</h2>
+                        <p class="premium-card-excerpt">Consistently ranked as one of the safest countries globally, find out what you need to know about navigating the cities, rural areas, and transportation.</p>
+                        <div class="premium-card-footer">
+                            <div class="premium-card-meta">
+                                <div class="premium-card-avatar"><i class="fa-solid fa-mountain"></i></div>
+                                <div class="premium-card-author-info">
+                                    <span class="premium-card-author">Georgia Hills Team</span>
+                                    <span class="premium-card-date">Updated Guide</span>
+                                </div>
+                            </div>
+                            <span class="premium-card-link">Read <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </article>
+            </a>
+
+        </div>
+
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; padding: 4rem 0;">
                 <div>
-                    <div class="footer-brand">
-                        <div class="footer-brand-icon"><i class="fa-solid fa-mountain"></i></div>
-                        <span class="footer-brand-text">Georgia Hills</span>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; color: #fff; font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700;">
+                        <i class="fa-solid fa-mountain" style="color: #C29B57;"></i>
+                        <span>Georgia Hills</span>
                     </div>
-                    <p style="color:var(--color-gray-300); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem;">Professional transport solutions in Georgia focused on safety, comfort, and local expertise.</p>
-                    <div class="footer-social">
-                        <a href="https://instagram.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://facebook.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <button onclick="App.share()" class="social-btn" aria-label="Share Website"><i class="fa-solid fa-share-nodes"></i></button>
-                    </div>
+                    <p style="color: var(--color-gray-300); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Professional transport solutions in Georgia focused on safety, comfort, and local expertise.</p>
                 </div>
                 <div>
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="guide.html">Guide</a></li>
-                        <li><a href="booking.html">Book Now</a></li>
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Quick Links</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="index.html" style="color: var(--color-gray-400); text-decoration: none;">Home</a></li>
+                        <li><a href="services.html" style="color: var(--color-gray-400); text-decoration: none;">Services</a></li>
+                        <li><a href="guide.html" style="color: var(--color-gray-400); text-decoration: none;">Guide</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3>Contact</h3>
-                    <ul style="color:var(--color-gray-400);">
-                        <li class="footer-contact-item"><i class="fa-solid fa-phone text-accent"></i> <a href="tel:+995579088537" dir="ltr" style="color:inherit;">+995 579 08 85 37</a></li>
-                        <li class="footer-contact-item"><i class="fa-brands fa-whatsapp text-accent"></i> <a href="https://wa.me/995579088537" target="_blank" rel="noopener noreferrer" dir="ltr" style="color:inherit;">+995 579 08 85 37</a></li>
-                        <li class="footer-contact-item"><i class="fa-solid fa-envelope text-accent"></i> info@georgiahills.com</li>
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Contact</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem; color: var(--color-gray-400);">
+                        <li><i class="fa-solid fa-phone" style="color: #C29B57; width: 20px;"></i> <a href="tel:+995579088537" dir="ltr" style="color: inherit; text-decoration: none;">+995 579 08 85 37</a></li>
+                        <li><i class="fa-brands fa-whatsapp" style="color: #C29B57; width: 20px;"></i> <a href="https://wa.me/995579088537" target="_blank" rel="noopener noreferrer" dir="ltr" style="color: inherit; text-decoration: none;">+995 579 08 85 37</a></li>
                     </ul>
-                </div>
-                <div>
-                    <div class="footer-map-container">
-                        <span class="footer-map-overlay"><i class="fa-solid fa-map-location-dot"></i> <span>Our Location</span></span>
-                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">&copy; <span id="year">2026</span> Georgia Hills. All rights reserved.</div>
         </div>
     </footer>
 </body>
 </html>
-
 
