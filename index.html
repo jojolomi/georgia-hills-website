@@ -277,7 +277,7 @@
             <div class="hero-badge">
                 <i class="fa-solid fa-star" style="color:#facc15; font-size:0.75rem;"></i> #1 FOR FAMILIES
             </div>
-            <h1 id="hero-title" class="hero-title">Discover Georgia <br><span class="text-accent-light italic font-serif">Without Limits</span></h1>
+            <h1 id="hero-title" class="hero-title">Georgia Private Driver <br><span class="text-accent-light italic font-serif">&amp; Premium Family Tours</span></h1>
             <p id="hero-subtitle" class="hero-subtitle">Premium chauffeured services and self-drive rentals. From Tbilisi to Kazbegi, experience the journey in absolute comfort.</p>
             <div class="hero-buttons">
                 <a href="booking.html" class="btn-hero btn-hero-primary">Get a Quote</a>
@@ -592,7 +592,7 @@
     
 
     <!-- FAQ Preview -->
-    <section id="faq" class="section-py" itemscope itemtype="https://schema.org/FAQPage">
+    <section id="faq" class="section-py">
         <div class="container faq-container">
             <div class="text-center reveal" style="margin-bottom:2rem;">
                 <h2 class="section-title">Frequently Asked Questions</h2>
@@ -663,119 +663,6 @@
                         <a href="article-is-georgia-safe.html" class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Booking Section -->
-    <section id="booking" class="booking-section">
-        <div class="container relative z-10">
-            <div class="reveal text-center" style="margin-bottom:2rem; color:white;">
-                <h2 class="font-bold" style="font-size:2.25rem; margin-bottom:1rem;">Start Your Journey</h2>
-                <p class="opacity-80">Get a custom quote directly to your WhatsApp in seconds.</p>
-            </div>
-
-            <div id="booking-container" class="booking-card reveal">
-                <form id="bookingForm" onsubmit="BookingManager.handleSubmit(event)" novalidate>
-                    <input type="text" id="companyWebsite" name="companyWebsite" autocomplete="off" tabindex="-1" aria-hidden="true" class="hidden">
-                    <div class="form-grid">
-                        <!-- Name -->
-                        <div>
-                            <label for="name" class="form-label">Full Name</label>
-                            <input type="text" id="name" name="user_name" autocomplete="name" class="form-input" placeholder="Your Name" required aria-required="true">
-                            <span class="error-text hidden" id="nameError">Please enter your name</span>
-                        </div>
-
-                        <!-- Contact -->
-                        <div>
-                            <label for="phone" class="form-label">WhatsApp Number</label>
-                            <input type="tel" id="phone" name="user_phone" autocomplete="tel" inputmode="tel" class="form-input" placeholder="+995 579 08 85 37" required aria-required="true">
-                            <span class="error-text hidden" id="phoneError">Enter a valid phone</span>
-                        </div>
-
-                        <!-- Vehicle & Passengers -->
-                        <div class="form-row-responsive">
-                            <!-- Added Language Preference -->
-                            <div>
-                                <label for="prefLang" class="form-label">Preferred Language</label>
-                                <select id="prefLang" name="pref_lang" class="form-select">
-                                    <option value="English">English</option>
-                                    <option value="Arabic">Arabic</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="vehicle" class="form-label">Vehicle</label>
-                                <select id="vehicle" name="vehicle" onchange="BookingManager.updateEstimate()" class="form-select">
-                                    <option value="Sedan">Sedan</option>
-                                    <option value="Minivan">Minivan</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="passengers" class="form-label">Passengers</label>
-                                <input type="number" id="passengers" name="passengers" min="1" inputmode="numeric" pattern="[0-9]*" class="form-input" placeholder="2"> 
-                                <span class="error-text hidden" id="passengersError">Min 1 passenger</span>
-                            </div>
-                        </div>
-
-                        <!-- Service Type -->
-                         <div>
-                            <label class="form-label">Service Type</label>
-                            <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="driver" value="with_driver" checked class="radio-input hidden">
-                                    <span class="radio-content">With Driver</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="driver" value="no_driver" class="radio-input hidden">
-                                    <span class="radio-content">Self Drive</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Dates (Flatpickr Range) -->
-                        <div class="col-span-full">
-                            <label for="dateRange" class="form-label">
-                                <span>Trip Dates</span>
-                                <span id="dates-helper" class="text-primary text-xs font-normal ml-2 hidden"></span>
-                            </label>
-                            <input type="text" id="dateRange" class="form-input" placeholder="Select Pick-up & Drop-off Dates" required aria-required="true">
-                            <span class="error-text hidden" id="dateError">Please select date range</span>
-                        </div>
-                        
-                        <div class="col-span-full">
-                            <label for="notes" class="form-label">Notes</label>
-                            <textarea id="notes" rows="3" class="form-textarea"></textarea>
-                        </div>
-
-                        <div class="col-span-full">
-                            <label style="display:flex; align-items:flex-start; gap:0.5rem;">
-                                <input type="checkbox" id="bookingConsent" style="margin-top:0.2rem;">
-                                <span style="font-size:0.85rem; color:var(--color-gray-600);">I agree to be contacted about this booking request.</span>
-                            </label>
-                            <span class="error-text hidden" id="consentError">Please confirm consent</span>
-                        </div>
-                    </div>
-
-                    <!-- Live Price Estimate -->
-                    <div id="price-estimate" class="hidden price-estimate-box">
-                         <div>
-                            <span style="font-size:0.875rem; font-weight:700; color:var(--color-gray-600);">Estimated Total:</span>
-                            <span style="font-size:1.5rem; font-weight:800; color:var(--color-primary);" class="price-display" id="total-price-display">0 GEL</span>
-                        </div>
-                        <!-- Added Duration Display -->
-                        <div id="trip-duration" class="text-sm text-gray-600 mt-1" style="font-weight: 600;"></div>
-                        <!-- What's Included -->
-                        <div class="col-span-full text-xs text-gray-500 mt-2" style="font-weight: normal;">
-                            <i class="fa-solid fa-info-circle"></i> Includes: Fuel, Insurance, Parking. Excludes: Driver Tip.
-                        </div>
-                    </div>
-
-                    <button type="submit" id="submitBtn" class="btn-submit">
-                         <span id="btnText">Get WhatsApp Quote</span>
-                         <i id="btnIcon" class="fa-brands fa-whatsapp" style="font-size:1.5rem;"></i>
-                         <div id="btnSpinner" class="hidden"><i class="fa-solid fa-circle-notch animate-spin"></i></div>
-                    </button>
-                </form>
             </div>
         </div>
     </section>
