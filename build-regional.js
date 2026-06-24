@@ -12,6 +12,7 @@ const regions = [
 const arTemplateContent = fs.readFileSync('itineraries-hub-ar.html', 'utf8');
 const $arTmpl = cheerio.load(arTemplateContent);
 const arMainHtml = $arTmpl('main').html();
+const arHeroHtml = $arTmpl.html($arTmpl('.itinerary-hero'));
 let arStyleHtml = $arTmpl('style').html();
 
 const backBtnCss = `
@@ -52,6 +53,10 @@ function buildRegional(region) {
     }
 
     $('main').html(arMainHtml);
+    $('.itinerary-hero').remove();
+    if (arHeroHtml) {
+        $('main').before(arHeroHtml);
+    }
     
     $('.itinerary-hero-title').text(region.title);
     $('.itinerary-hero-subtitle').text(region.desc);
@@ -61,6 +66,22 @@ function buildRegional(region) {
         const src = $(this).attr('src');
         if (src && !src.startsWith('http') && !src.startsWith('../')) {
             $(this).attr('src', '../' + src);
+        }
+    });
+
+    $('img, source').each(function() {
+        const srcset = $(this).attr('srcset');
+        if (srcset) {
+            const newSrcset = srcset.split(',').map(s => {
+                const parts = s.trim().split(' ');
+                let url = parts[0];
+                if (url && !url.startsWith('http') && !url.startsWith('../')) {
+                    url = '../' + url;
+                }
+                parts[0] = url;
+                return parts.join(' ');
+            }).join(', ');
+            $(this).attr('srcset', newSrcset);
         }
     });
 
