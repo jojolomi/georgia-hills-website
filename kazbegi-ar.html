@@ -1,216 +1,250 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
     <link rel="preload" as="style" href="style.min.css?v=16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>كازبيجي: قمم تعانق السحاب | Georgia Hills</title>
     <meta name="description" content="رحلة عبر الطريق العسكري الجورجي إلى قلب جبال القوقاز العظمى وزيارة كنسية الثالوث جيرجيتي.">
-    <meta property="og:title" content="كازبيجي: قمم تعانق السحاب">
-    <meta property="og:description" content="رحلة عبر الطريق العسكري الجورجي إلى قلب جبال القوقاز العظمى وزيارة كنسية الثالوث جيرجيتي.">
-    <meta property="og:image" content="https://georgiahills.com/Kazbegi.webp">
-    <link rel="canonical" href="https://georgiahills.com/kazbegi-ar.html">
-    <link rel="alternate" hreflang="en" href="https://georgiahills.com/kazbegi.html">
-    <link rel="alternate" hreflang="ar" href="https://georgiahills.com/kazbegi-ar.html">
-    <link rel="alternate" hreflang="x-default" href="https://georgiahills.com/kazbegi.html">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0F172A">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <style>
-        :root{--color-gray-400:#9CA3AF}
-        html,body{height:auto;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;background:#fff}
-        .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
-        .skip-link:focus{left:0;top:0;width:auto;height:auto;padding:.5rem;background:#111;color:#fff;z-index:9999}
-        .navbar{position:relative;z-index:50;background:transparent}
-        .hero-img{width:100%;height:auto;display:block;object-fit:cover}
-        .hero{position:relative;overflow:hidden}
-        .container{max-width:1200px;margin-left:auto;margin-right:auto;padding:0 1rem}
-    </style>
+    
     <link rel="stylesheet" href="style.min.css?v=16">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .premium-hero-bg {
+            background-image: url('kazbegi.webp') !important;
+            opacity: 1 !important;
+            filter: none !important; 
+        }
+        body { font-family: 'Cairo', sans-serif; }
+        .premium-title, .section-heading, h2, h3, .magazine-split h2, .dest-img-overlay h3 { font-family: 'Cairo', sans-serif; font-weight: 800; }
+        .premium-subtitle { font-family: 'Cairo', sans-serif; font-weight: 600; }
+        .btn-premium { font-family: 'Cairo', sans-serif; font-weight: 700; }
+    </style>
     <script src="shared-navbar.min.js" defer></script>
-    <script src="destination-script.js" defer></script>
-    <script type="application/ld+json">
-    { "@context": "https://schema.org", "@type": "TouristAttraction", "name": "كازبيجي: قمم تعانق السحاب", "description": "رحلة عبر الطريق العسكري الجورجي إلى قلب جبال القوقاز العظمى وزيارة كنسية الثالوث جيرجيتي.", "image": "https://georgiahills.com/Kazbegi.webp", "address": { "@type": "PostalAddress", "addressCountry": "GE", "addressLocality": "kazbegi" } }
-    </script>
+    <script src="script.min.js" defer></script>
 </head>
-<body class="page-destination secondary-page">
-    <a href="#main-content" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
+<body class="page-destination secondary-page light-premium">
+
     <nav id="navbar" class="navbar"></nav>
-<!-- Premium Hero -->
-    <header class="dest-hero">
-        <div class="dest-hero-bg" style="background-image: url('Kazbegi.webp');"></div>
-        <div class="dest-overlay"></div>
-        <div class="dest-hero-content">
-            <span class="dest-badge"><i class="fa-solid fa-mountain"></i> مغامرة جبلية</span>
-            <h1 class="dest-title">كازبيجي</h1>
-            <p class="dest-subtitle">رحلة عبر الطريق العسكري الجورجي إلى قلب جبال القوقاز العظمى.</p>
-            <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-                <a href="#highlights" class="btn-book-nav" style="background:white; color:var(--color-dark);">اكتشف المزيد</a>
-                <a href="booking-ar.html" class="btn-book-nav">احجز سائق</a>
-            </div>
+
+    <header class="premium-hero">
+        <div class="premium-hero-bg"></div>
+        <div class="premium-hero-vignette"></div>
+        
+        <div class="premium-hero-content reveal-item">
+            <div class="hero-badge"><i class="fa-solid fa-mountain" style="color: #C29B57;"></i> مغامرة جبلية</div>
+            <h1 class="premium-title">كازبيجي.</h1>
+            <p class="premium-subtitle">رحلة عبر الطريق العسكري الجورجي إلى قلب جبال القوقاز العظمى.</p>
+            
+            <a href="#explore" class="btn-premium hero-btn">اكتشف الوجهة <i class="fa-solid fa-arrow-down" style="margin-right: 0.5rem; margin-left: 0;"></i></a>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="scroll-text" style="font-family:'Cairo', sans-serif;">قم بالتمرير للاستكشاف</span>
+            <div class="scroll-line"></div>
         </div>
     </header>
 
-    <!-- Floating Stats -->
-    <div class="container relative">
-        <div class="dest-stats-bar">
-            <div class="dest-stat-item">
-                <i class="fa-solid fa-temperature-half dest-stat-icon"></i>
-                <span class="dest-stat-value">بارد</span>
-                <span class="dest-stat-label">المناخ</span>
-            </div>
-            <div class="dest-stat-item">
-                <i class="fa-solid fa-mountain dest-stat-icon"></i>
-                <span class="dest-stat-value">1740m</span>
-                <span class="dest-stat-label">الارتفاع</span>
-            </div>
-            <div class="dest-stat-item">
-                <i class="fa-solid fa-road dest-stat-icon"></i>
-                <span class="dest-stat-value">3 ساعات</span>
-                <span class="dest-stat-label">من تبليسي</span>
-            </div>
-            <div class="dest-stat-item">
-                <i class="fa-solid fa-clock dest-stat-icon"></i>
-                <span class="dest-stat-value">1-2 يوم</span>
-                <span class="dest-stat-label">المدة المقترحة</span>
-            </div>
-        </div>
-    </div>
-
-    <main class="container dest-layout" id="main-content">
-        <!-- Content Column -->
-        <div class="dest-content">
-            <div class="pro-breadcrumbs">
-                <a href="arabic.html">الرئيسية</a> <i class="fa-solid fa-chevron-left"></i>
-                <a href="arabic.html#destinations">الوجهات</a> <i class="fa-solid fa-chevron-left"></i>
-                <span>كازبيجي</span>
-            </div>
-
-            <h2 class="section-heading" style="margin-top:0;">جوهرة القوقاز</h2>
-            <p class="lead-text" style="color:var(--color-gray-600); line-height:1.8; margin-bottom:1.5rem;">
-                استمتع بمشهد خيالي يشبه البطاقات البريدية في ستيبانتسميندا (كازبيجي). تعد هذه المنطقة موطناً لجبل كازبيك الخلاب وكنيسة الثالوث جيرجيتي الأيقونية، التي تتربع عالياً على ارتفاع 2170 متراً تحت النهر الجليدي.
-            </p>
-            <p style="margin-bottom:3rem; line-height:1.8;">
-                تعتبر القيادة عبر الطريق العسكري الجورجي مغامرة بحد ذاتها، حيث تمر بقلعة أنانوري ونصب الصداقة الروسية الجورجية. إنها وجهة مثالية لمحبي الطبيعة، والمتنزهين، ولكل من يبحث عن هواء الجبل النقي.
-            </p>
-
-            <!-- Highlights Grid -->
-            <div id="highlights" style="scroll-margin-top: 100px;">
-                <h3 class="section-heading" style="font-size:1.75rem; margin-bottom:2rem;">أبرز المعالم</h3>
-                <div class="highlight-grid">
-                    <div class="highlight-card">
-                        <img src="https://images.unsplash.com/photo-1566650554919-44ec6bbe2518?q=80&w=1000&auto=format&fit=crop" class="highlight-img" alt="Gergeti Trinity Church">
-                        <div class="highlight-overlay">
-                            <h4 class="highlight-title">كنيسة الثالوث جيرجيتي</h4>
-                            <p class="highlight-desc">كنيسة أيقونية بخلفية جبلية.</p>
+    <main class="premium-grid" id="explore">
+        
+        <!-- Magazine Overview Card -->
+        <div class="soft-card col-12 reveal-item" style="padding: 0; overflow: hidden;">
+            <div class="magazine-split">
+                <div class="magazine-text" style="padding: 4rem 4rem 4rem 0;">
+                    <h2 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 2rem;">جبال القوقاز العظمى</h2>
+                    <p style="font-size: 1.2rem; line-height: 1.8;">استمتع بمشهد خيالي يشبه البطاقات البريدية في ستيبانتسميندا (كازبيجي). تعد هذه المنطقة موطناً لجبل كازبيك الخلاب وكنيسة الثالوث جيرجيتي الأيقونية، التي تتربع عالياً على ارتفاع 2170 متراً تحت النهر الجليدي.</p>
+                    <div style="display: flex; gap: 2rem; margin-top: 3rem;">
+                        <div>
+                            <span style="display: block; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #112d1e; font-weight: 700; line-height: 1;">1-2</span>
+                            <span style="color: #475569; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'Cairo', sans-serif; font-weight: 600;">يوم المقترحة</span>
                         </div>
-                    </div>
-                    <div class="highlight-card">
-                        <img src="https://images.unsplash.com/photo-1594199201980-df6456209ee8?q=80&w=1000&auto=format&fit=crop" class="highlight-img" alt="Ananuri Fortress">
-                        <div class="highlight-overlay">
-                            <h4 class="highlight-title">قلعة أنانوري</h4>
-                            <p class="highlight-desc">حصن تاريخي على الطريق العسكري.</p>
+                        <div>
+                            <span style="display: block; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #112d1e; font-weight: 700; line-height: 1;">3hr</span>
+                            <span style="color: #475569; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'Cairo', sans-serif; font-weight: 600;">من تبليسي</span>
                         </div>
-                    </div>
-                    <div class="highlight-card">
-                        <img src="https://images.unsplash.com/photo-1628172828245-56543q2675d1?q=80&w=1000&auto=format&fit=crop" class="highlight-img" alt="Gveleti Waterfall">
-                        <div class="highlight-overlay">
-                            <h4 class="highlight-title">شلال جفيليتي</h4>
-                            <p class="highlight-desc">جوهرة طبيعية مخفية.</p>
-                        </div>
-                    </div>
-                    <div class="highlight-card">
-                        <img src="https://images.unsplash.com/photo-1605218439567-95r130638r45?q=80&w=1000&auto=format&fit=crop" class="highlight-img" alt="Dariali Gorge">
-                        <div class="highlight-overlay">
-                            <h4 class="highlight-title">مضيق داريالي</h4>
-                            <p class="highlight-desc">مضيق دراماتيكي عند الحدود.</p>
+                        <div>
+                            <span style="display: block; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #112d1e; font-weight: 700; line-height: 1;">5054m</span>
+                            <span style="color: #475569; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'Cairo', sans-serif; font-weight: 600;">جبل كازبيك</span>
                         </div>
                     </div>
                 </div>
+                <div class="magazine-img" style="height: 600px; border-radius: 0; box-shadow: none;">
+                    <img src="kazbegi-hero-1024.webp" alt="Kazbegi Mountains">
+                </div>
             </div>
-
         </div>
 
-        <!-- Sticky Sidebar -->
-        <aside>
-            <div class="sticky-book-card">
-                <span class="dest-badge" style="background:var(--color-primary-light); color:var(--color-primary); margin-bottom:1rem; border:none;">سائق خاص</span>
-                <h3 style="margin-top:0; margin-bottom:0.5rem;">استكشف كازبيجي براحة</h3>
-                <p style="font-size:0.9rem; color:var(--color-gray-500); margin-bottom:1.5rem;">تجنب عناء المواصلات العامة واستمتع بجولات خاصة.</p>
-                
-                <div style="margin-bottom:1.5rem;">
-                    <span class="price-period">يبدأ من</span>
-                    <div class="price-tag-large">180 <span style="font-size:1rem; font-weight:400; color:var(--color-gray-500);">لاري / يوم</span></div>
+        <!-- Stunning Visual Highlights Gallery -->
+        <div class="soft-card col-12 reveal-item">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem;">
+                <div>
+                    <span style="color: #C29B57; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; font-family: 'Cairo', sans-serif;">ماذا ترى</span>
+                    <h2 style="margin: 0.5rem 0 0; font-size: 3rem;">أبرز المعالم</h2>
                 </div>
-
-                <ul class="fa-ul" style="font-size:0.9rem; margin-bottom:2rem; margin-right:1.5rem;">
-                    <li style="margin-bottom:0.5rem;"><span class="fa-li"><i class="fa-solid fa-check text-success"></i></span>استقبال من الفندق</li>
-                    <li style="margin-bottom:0.5rem;"><span class="fa-li"><i class="fa-solid fa-check text-success"></i></span>جدول زمني مرن</li>
-                    <li style="margin-bottom:0.5rem;"><span class="fa-li"><i class="fa-solid fa-check text-success"></i></span>سيارات دفع رباعي</li>
-                    <li style="margin-bottom:0.5rem;"><span class="fa-li"><i class="fa-solid fa-check text-success"></i></span>سائقون محترفون</li>
-                </ul>
-
-                <a href="booking-ar.html" class="btn-book-nav" style="width:100%; text-align:center; justify-content:center; padding:1rem;">احجز الآن <i class="fa-solid fa-arrow-left"></i></a>
-                <a href="https://wa.me/995579088537" class="action-btn" style="width:100%; text-align:center; justify-content:center; margin-top:0.75rem; background: #f0fdf4; color:#166534; border:1px solid #bbf7d0;"><i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب</a>
             </div>
-            
-            <div class="sticky-book-card" style="margin-top:2rem;">
-                <h4 style="margin-top:0;">نصائح السفر</h4>
-                <div style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-start;">
-                    <i class="fa-solid fa-temperature-snowflake text-accent" style="margin-top:3px;"></i>
+            <div class="photo-gallery-grid">
+                <div class="gallery-item">
+                    <img src="kazbegi.webp" alt="Gergeti Trinity Church">
+                    <div class="gallery-overlay">
+                        <h3 style="margin: 0 0 0.25rem; font-family: 'Cairo', sans-serif; color: #fff; font-weight: 700;">كنيسة الثالوث جيرجيتي</h3>
+                        <p style="margin: 0; font-size: 0.9rem; color: rgba(255,255,255,0.8);">كنيسة أيقونية من القرن الرابع عشر.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="kazbegi-hero-640.webp" alt="Friendship Monument">
+                    <div class="gallery-overlay">
+                        <h3 style="margin: 0 0 0.25rem; font-family: 'Cairo', sans-serif; color: #fff; font-weight: 700;">نصب الصداقة</h3>
+                        <p style="margin: 0; font-size: 0.9rem; color: rgba(255,255,255,0.8);">إطلالات بانورامية على وادي الشيطان.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="image.webp" alt="Gveleti Waterfalls">
+                    <div class="gallery-overlay">
+                        <h3 style="margin: 0 0 0.25rem; font-family: 'Cairo', sans-serif; color: #fff; font-weight: 700;">شلال جفيليتي</h3>
+                        <p style="margin: 0; font-size: 0.9rem; color: rgba(255,255,255,0.8);">جوهرة طبيعية مخفية.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Visit -->
+        <div class="soft-card col-12 reveal-item">
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">لماذا تزور كازبيجي؟</h2>
+            <div class="bento-itinerary" style="max-width: 800px; margin: 0 auto;">
+                <div class="bento-itinerary-item">
+                    <div class="day-badge" style="font-family: 'Cairo', sans-serif;">مغامرة</div>
                     <div>
-                        <strong>الطقس</strong>
-                        <p style="margin:0; font-size:0.9rem; color:var(--color-gray-600);">احضر ملابس دافئة دائماً، الطقس يتغير بسرعة.</p>
+                        <h3 style="margin-top: 0; font-family: 'Cairo', sans-serif; font-size: 1.8rem;">المشي لمسافات طويلة</h3>
+                        <p style="margin: 0; font-size: 1.1rem; color: #475569; font-family: 'Cairo', sans-serif; line-height: 1.6;">من المشي السهل إلى كنيسة جيرجيتي وحتى الرحلات الشاقة للنهر الجليدي.</p>
+                    </div>
+                </div>
+                <div class="bento-itinerary-item">
+                    <div class="day-badge" style="font-family: 'Cairo', sans-serif;">إثارة</div>
+                    <div>
+                        <h3 style="margin-top: 0; font-family: 'Cairo', sans-serif; font-size: 1.8rem;">الطيران المظلي</h3>
+                        <p style="margin: 0; font-size: 1.1rem; color: #475569; font-family: 'Cairo', sans-serif; line-height: 1.6;">حلق فوق منتجع جوداوري للتزلج واستمتع بمشهد الجبال من السماء.</p>
+                    </div>
+                </div>
+                <div class="bento-itinerary-item">
+                    <div class="day-badge" style="font-family: 'Cairo', sans-serif;">استكشاف</div>
+                    <div>
+                        <h3 style="margin-top: 0; font-family: 'Cairo', sans-serif; font-size: 1.8rem;">جولات الدفع الرباعي</h3>
+                        <p style="margin: 0; font-size: 1.1rem; color: #475569; font-family: 'Cairo', sans-serif; line-height: 1.6;">استكشف وديان جبلية نائية مثل تروسو وجوتا مع سائقينا المحترفين.</p>
                     </div>
                 </div>
             </div>
-        </aside>
+        </div>
+
+        <!-- Booking CTA (Massive Beauty Banner) -->
+        <div class="col-12 reveal-item" style="position: relative; padding: 6rem 4rem; overflow: hidden; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 3rem; border-radius: 2rem; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);">
+            <div style="position: absolute; inset: 0; background: url('kazbegi.webp') center/cover; opacity: 0.15; z-index: 0;"></div>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to left, #112d1e 30%, transparent); z-index: 1;"></div>
+            <div style="position: absolute; inset: 0; background: #112d1e; opacity: 0.85; z-index: 1;"></div>
+            
+            <div style="position: relative; z-index: 2; flex: 2; min-width: 300px;">
+                <h2 style="color: #ffffff !important; font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 3.5rem; margin-bottom: 1rem;">استكشف كازبيجي بأمان.</h2>
+                <p style="color: rgba(255,255,255,0.9) !important; font-size: 1.25rem; max-width: 600px; font-family: 'Cairo', sans-serif; line-height: 1.8;">تتطلب الطرق الجبلية خبرة. احجز سائقاً خاصاً محترفاً لرحلة مريحة وآمنة تماماً.</p>
+            </div>
+            <div style="position: relative; z-index: 2; flex: 1; min-width: 250px; text-align: left;">
+                <span style="display: block; font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 700; color: #C29B57; line-height: 1; margin-bottom: 1.5rem;">290 <span style="font-size: 2rem; font-family: 'Cairo', sans-serif;">لاري</span></span>
+                <a href="booking-ar.html" class="btn-premium" style="background: #C29B57 !important; color: #fff !important; font-size: 1.25rem !important; padding: 1.5rem 3rem !important;">احجز سائقك</a>
+            </div>
+        </div>
+
+        <!-- More Destinations -->
+        <div class="col-12 reveal-item" style="margin-top: 4rem;">
+            <h2 style="font-family: 'Cairo', sans-serif; font-size: 3rem; font-weight: 800; text-align: center; margin-bottom: 3rem;">أكمل رحلتك</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem;">
+                <a href="tbilisi-ar.html" class="dest-card-link">
+                    <div class="dest-img-bento">
+                        <img src="tbilisi.webp" alt="Tbilisi">
+                        <div class="dest-img-overlay">
+                            <h3 style="font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 2rem; margin: 0; color: #fff !important;">تبليسي</h3>
+                            <p style="margin: 0; color: rgba(255,255,255,0.9) !important; font-size: 1.1rem; font-family: 'Cairo', sans-serif;">العاصمة النابضة بالحياة</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="batumi-ar.html" class="dest-card-link">
+                    <div class="dest-img-bento">
+                        <img src="batumi.webp" alt="Batumi">
+                        <div class="dest-img-overlay">
+                            <h3 style="font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 2rem; margin: 0; color: #fff !important;">باتومي</h3>
+                            <p style="margin: 0; color: rgba(255,255,255,0.9) !important; font-size: 1.1rem; font-family: 'Cairo', sans-serif;">لؤلؤة البحر الأسود</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="martvili-ar.html" class="dest-card-link">
+                    <div class="dest-img-bento">
+                        <img src="martvili.webp" alt="Martvili">
+                        <div class="dest-img-overlay">
+                            <h3 style="font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 2rem; margin: 0; color: #fff !important;">مارتفيلي</h3>
+                            <p style="margin: 0; color: rgba(255,255,255,0.9) !important; font-size: 1.1rem; font-family: 'Cairo', sans-serif;">الوديان والمساحات الخضراء</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div id="footer-content" class="footer-grid">
+    <footer class="footer" style="background: #020617; padding-top: 5rem; padding-bottom: 2rem; color: #94a3b8; font-family: 'Cairo', sans-serif; margin-top: 4rem;">
+        <div style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
                 <div>
-                    <div class="footer-brand">
-                        <div class="footer-brand-icon"><i class="fa-solid fa-mountain"></i></div>
-                        <span class="footer-brand-text">Georgia Hills</span>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; color: #fff; font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700;">
+                        <i class="fa-solid fa-mountain" style="color: #C29B57;"></i>
+                        <span style="font-family: 'Cairo', sans-serif;">Georgia Hills</span>
                     </div>
-                    <p style="color:var(--color-gray-300); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem;">حلول نقل احترافية في جورجيا مع تركيز على الأمان والراحة والخبرة المحلية.</p>
-                    <div class="footer-social">
-                        <a href="https://instagram.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://facebook.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <button onclick="if(navigator.share){navigator.share({title:'Georgia Hills',url:window.location.href})}else{alert('Link copied to clipboard!');navigator.clipboard.writeText(window.location.href)}" class="social-btn" aria-label="Share Website"><i class="fa-solid fa-share-nodes"></i></button>
-                    </div>
+                    <p style="font-size:0.95rem; line-height:1.6; margin-bottom:1.5rem; font-weight: 600;">حلول نقل احترافية في جورجيا مع تركيز على الأمان والراحة والخبرة المحلية.</p>
                 </div>
                 <div>
-                    <h3>روابط سريعة</h3>
-                    <ul>
-                        <li><a href="arabic.html">الرئيسية</a></li>
-                        <li><a href="services-ar.html">الخدمات</a></li>
-                        <li><a href="guide-ar.html">الدليل</a></li>
-                        <li><a href="booking-ar.html">احجز الآن</a></li>
+                    <h3 style="color: #fff; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 800;">روابط سريعة</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="arabic.html" style="color: #94a3b8; text-decoration: none;">الرئيسية</a></li>
+                        <li><a href="booking-ar.html" style="color: #94a3b8; text-decoration: none;">احجز الآن</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3>اتصل بنا</h3>
-                    <ul style="color:var(--color-gray-400);">
-                        <li class="footer-contact-item"><i class="fa-solid fa-phone text-accent"></i> <span dir="ltr">+995 579 08 85 37</span></li>
-                        <li class="footer-contact-item"><i class="fa-brands fa-whatsapp text-accent"></i> <span dir="ltr">+995 579 08 85 37</span></li>
+                    <h3 style="color: #fff; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 800;">اتصل بنا</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
+                        <li style="display: flex; align-items: center; gap: 0.75rem;"><i class="fa-solid fa-phone" style="color: #C29B57;"></i> <a href="tel:+995579088537" dir="ltr" style="color: #94a3b8; text-decoration: none;">+995 579 08 85 37</a></li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem;"><i class="fa-brands fa-whatsapp" style="color: #C29B57;"></i> <a href="https://wa.me/995579088537" dir="ltr" style="color: #94a3b8; text-decoration: none;">+995 579 08 85 37</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                 &copy; <span id="year">2026</span> Georgia Hills. جميع الحقوق محفوظة.
+            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; text-align: center; font-size: 0.85rem;">
+                &copy; <span id="year">2026</span> جورجيا هيلز. جميع الحقوق محفوظة.
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.hero-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('#explore').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-item').forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(40px)';
+                observer.observe(item);
+            });
+        });
+    </script>
 </body>
 </html>
-
