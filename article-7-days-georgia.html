@@ -4,268 +4,437 @@
     <link rel="preload" as="style" href="style.min.css?v=16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <title>7 Days in Georgia: Practical Itinerary | Georgia Hills Blog</title>
     <meta name="description" content="A practical 7-day Georgia itinerary including Tbilisi, Kazbegi, and Batumi with transfer planning tips.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://georgiahills.com/article-7-days-georgia.html">
     <meta property="og:title" content="7 Days in Georgia: Practical Itinerary">
-    <meta property="og:description" content="A complete week-long guide to Tbilisi, Mountains, and the Black Sea.">
-    <meta property="og:image" content="https://georgiahills.com/image-1600.webp">
+    <meta property="og:description" content="Discover how to seamlessly explore the ancient streets of Tbilisi, the breathtaking peaks of Kazbegi, and the coastal charm of Batumi in exactly one week.">
+    <meta property="og:image" content="https://georgiahills.com/signagi.webp">
 
     <link rel="canonical" href="https://georgiahills.com/article-7-days-georgia.html">
     <link rel="alternate" hreflang="en" href="https://georgiahills.com/article-7-days-georgia.html" />
     <link rel="alternate" hreflang="ar" href="https://georgiahills.com/article-7-days-georgia-ar.html" />
     <link rel="alternate" hreflang="x-default" href="https://georgiahills.com/article-7-days-georgia.html" />
     
-    <style>:root{--color-gray-400:#9CA3AF}.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{left:0;top:0;width:auto;height:auto;padding:.5rem;background:#111;color:#fff;z-index:9999}.navbar{position:relative;z-index:50;background:transparent}.container{max-width:1200px;margin-left:auto;margin-right:auto;padding:0 1rem}</style>
     <link rel="stylesheet" href="style.min.css?v=16">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- Blog Redesign Specific Styles -->
+    <style>
+        :root {
+            --blog-bg: #f8fafc;
+            --blog-card-bg: rgba(255, 255, 255, 0.85);
+            --blog-text: #334155;
+            --blog-title: #0f172a;
+            --blog-accent: #C29B57;
+            --blog-accent-hover: #b08c4e;
+        }
+
+        body.page-blog-premium {
+            background-color: var(--blog-bg);
+            font-family: 'Outfit', sans-serif;
+            color: var(--blog-text);
+        }
+
+        /* Immersive Hero */
+        .blog-hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: 1;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
+            z-index: -1;
+        }
+
+        /* Glassmorphism Title Card */
+        .glass-title-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px 24px 0 0;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            transform: translateY(20px);
+            text-align: center;
+        }
+
+        .glass-title-card h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .glass-title-card p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Layout Grid */
+        .blog-layout {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 4rem;
+        }
+
+        @media (max-width: 900px) {
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+            .blog-sidebar {
+                display: none;
+            }
+        }
+
+        /* Sticky Sidebar */
+        .blog-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-left: 2px solid #e2e8f0;
+        }
+
+        .toc-list li {
+            margin-bottom: 1rem;
+        }
+
+        .toc-list a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            display: block;
+            padding-left: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .toc-list a::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--blog-accent);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: top;
+        }
+
+        .toc-list a:hover {
+            color: var(--blog-accent);
+        }
+
+        .toc-list a:hover::before, .toc-list a.active::before {
+            transform: scaleY(1);
+        }
+
+        .toc-list a.active {
+            color: var(--blog-accent);
+            font-weight: 600;
+        }
+
+        /* Content Area */
+        .blog-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+
+        .blog-content p {
+            margin-bottom: 2rem;
+        }
+
+        .blog-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.25rem;
+            color: var(--blog-title);
+            margin: 4rem 0 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Rich Timeline Blocks */
+        .day-block {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .day-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+        }
+
+        .day-badge {
+            display: inline-block;
+            background: var(--blog-accent);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .day-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        /* CTA Widget */
+        .booking-widget {
+            background: var(--blog-title);
+            color: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-widget::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(194, 155, 87, 0.15) 0%, transparent 70%);
+        }
+        
+        .booking-widget h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background: var(--blog-accent);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+
+        .btn-gold:hover {
+            background: var(--blog-accent-hover);
+        }
+    </style>
+
     <script src="shared-navbar.min.js" defer></script>
     <script src="script.min.js" defer></script>
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="7 Days in Georgia: Practical Itinerary | Georgia Hills Blog">
-    <meta name="twitter:description" content="A practical 7-day Georgia itinerary including Tbilisi, Kazbegi, and Batumi with transfer planning tips.">
-    <meta name="twitter:image" content="https://georgiahills.com/kazbegi-hero-1024.webp">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "name": "Georgia Hills",
-          "url": "https://georgiahills.com",
-          "logo": "https://georgiahills.com/logo-512.webp",
-          "telephone": "+995579088537",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Tbilisi",
-            "addressCountry": "GE"
-          },
-          "areaServed": [
-            {
-              "@type": "Country",
-              "name": "Saudi Arabia"
-            },
-            {
-              "@type": "Country",
-              "name": "United Arab Emirates"
-            },
-            {
-              "@type": "Country",
-              "name": "Qatar"
-            },
-            {
-              "@type": "Country",
-              "name": "Kuwait"
-            },
-            {
-              "@type": "Country",
-              "name": "Oman"
-            },
-            {
-              "@type": "Country",
-              "name": "Bahrain"
-            }
-          ],
-          "knowsLanguage": [
-            "en",
-            "ar"
-          ],
-          "sameAs": []
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://georgiahills.com"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "7 Days in Georgia: Practical Itinerary",
-              "item": "https://georgiahills.com/article-7-days-georgia.html"
-            }
-          ]
-        },
-        {
-          "@type": "AboutPage",
-          "name": "7 Days in Georgia: Practical Itinerary | Georgia Hills Blog",
-          "description": "A practical 7-day Georgia itinerary including Tbilisi, Kazbegi, and Batumi with transfer planning tips.",
-          "url": "https://georgiahills.com/article-7-days-georgia.html"
-        }
-      ]
-    }
-    </script>
 </head>
-<body class="secondary-page page-about page-article">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    <div id="network-toast"><i class="fa-solid fa-wifi-slash"></i> <span>You are offline</span></div>
-
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="text-center">
-            <div class="preloader-circle animate-bounce">
-                <img src="logo-256.webp" width="80" height="80" style="object-fit:contain;" alt="Georgia Hills Logo" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden')">
-                <i class="fa-solid fa-mountain-sun text-primary hidden" style="font-size:2.25rem;"></i>
-            </div>
-            <div class="preloader-text">Loading</div>
-        </div>
-    </div>
-
+<body class="page-blog-premium">
+    
     <!-- Navbar -->
     <nav id="navbar" class="navbar"></nav>
 
     <!-- Premium Hero -->
-    <section class="about-premium-hero" aria-labelledby="article-title">
-        <div class="about-premium-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1920&q=80');"></div>
-        <div class="hero-overlay-gradient"></div>
-        <div class="container hero-content-container">
-            <div class="hero-text-content fade-in-up">
-                <div class="breadcrumbs-hero">
-                    <a href="blog.html" class="hero-badge-link"><i class="fa-solid fa-arrow-left"></i> Back to Blog</a>
-                </div>
-                <h1 class="section-title about-premium-title" id="article-title">
-                    7 Days in<br>
-                    <span class="text-gradient-gold">Georgia.</span>
-                </h1>
-                <p class="section-desc about-premium-subtitle">
-                    A balanced week-long journey through Tbilisi, the Mountains, and the Black Sea coast.
-                    <span class="highlight-text">Perfect for first-time visitors.</span>
+    <header class="blog-hero">
+        <div class="glass-title-card">
+            <h1>7 Days in Georgia:<br>The Ultimate Road Trip</h1>
+            <p>From the ancient streets of Tbilisi to the high peaks of Kazbegi and the pebbled beaches of Batumi. A balanced week-long journey.</p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="blog-layout">
+        
+        <!-- Sticky Sidebar (Table of Contents) -->
+        <aside class="blog-sidebar">
+            <h4 style="font-family:'Playfair Display', serif; font-size:1.25rem; color:var(--blog-title); margin-bottom:1.5rem;">In This Article</h4>
+            <ul class="toc-list">
+                <li><a href="#intro" class="active">Overview</a></li>
+                <li><a href="#day-1">Day 1-2: Tbilisi Exploration</a></li>
+                <li><a href="#day-3">Day 3: Kazbegi Mountains</a></li>
+                <li><a href="#day-4">Day 4: Relax & Transit</a></li>
+                <li><a href="#day-5">Day 5-6: Batumi Coast</a></li>
+                <li><a href="#day-7">Day 7: Departure</a></li>
+            </ul>
+        </aside>
+
+        <!-- Article Content -->
+        <main class="blog-content">
+            
+            <div id="intro" style="margin-bottom: 4rem;">
+                <p class="lead-text" style="font-size:1.3rem; color:#475569;">
+                    Planning a trip to Georgia? This balanced route covers culture, nature, and relaxation perfectly. Whether you are traveling as a family, a couple, or solo, this 7-day itinerary provides a comprehensive overview of what the Caucasus has to offer.
+                </p>
+                <p>
+                    Georgia is incredibly diverse. In one week, you can soak in centuries-old thermal baths, hike at the foot of a 5,000-meter glacier, and watch the sunset over the Black Sea. Let's break down the optimal route.
                 </p>
             </div>
-        </div>
-    </section>
 
-    <!-- Article Content -->
-    <section class="section-py about-premium-content">
-        <main class="container" id="main-content">
-            
-            <div class="content-card article-container" style="max-width:800px; margin:0 auto; padding:3rem 2rem;">
-                
-                <!-- Intro -->
-                <div class="article-header" style="margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid var(--color-gray-200);">
-                    <span class="trust-item-pro" style="color:var(--color-primary); font-weight:600; font-size:0.9rem; letter-spacing:1px; text-transform:uppercase;">Itinerary Guide</span>
-                    <p class="lead-text" style="font-size:1.25rem; line-height:1.7; color:var(--color-gray-700); margin-top:1rem;">
-                        Planning a trip to Georgia? This balanced route covers culture, nature, and relaxation. From the historic baths of Tbilisi to the high peaks of Kazbegi and the pebbled beaches of Batumi.
-                    </p>
-                </div>
-
-                <!-- Timeline -->
-                <div class="itinerary-timeline" style="position:relative; border-left: 2px solid var(--color-gray-200); padding-left: 2rem; margin-left: 1rem;">
-                    
-                    <!-- Day 1-2 -->
-                    <div class="timeline-item" style="margin-bottom: 3rem; position: relative;">
-                        <span style="position: absolute; left: -2.6rem; top: 0; background: var(--color-primary); color:white; width: 1.2rem; height: 1.2rem; border-radius: 50%; border:2px solid white; box-shadow:0 0 0 2px var(--color-gray-200);"></span>
-                        <h2 style="font-size: 1.5rem; font-family:var(--font-header); font-weight: 700; color:var(--color-dark); margin-bottom: 1rem;">Day 1-2: Tbilisi Exploration</h2>
-                        <p style="color:var(--color-gray-600); line-height:1.8;">
-                            Start your journey in the vibrant capital. Explore the narrow streets of the <strong>Old Town</strong>, relax in the famous sulfur baths at Abanotubani, and take the cable car up to <em>Narikala Fortress</em> for panoramic views. In the evening, enjoy a walk along Rustaveli Avenue to feel the city's pulse.
-                        </p>
-                    </div>
-
-                    <!-- Day 3 -->
-                    <div class="timeline-item" style="margin-bottom: 3rem; position: relative;">
-                        <span style="position: absolute; left: -2.6rem; top: 0; background: var(--color-primary); color:white; width: 1.2rem; height: 1.2rem; border-radius: 50%; border:2px solid white; box-shadow:0 0 0 2px var(--color-gray-200);"></span>
-                        <h2 style="font-size: 1.5rem; font-family:var(--font-header); font-weight: 700; color:var(--color-dark); margin-bottom: 1rem;">Day 3: The Mountains of Kazbegi</h2>
-                        <p style="color:var(--color-gray-600); line-height:1.8;">
-                            Head north along the Georgian Military Highway. Stop at the Ananuri Fortress and the Russia-Georgia Friendship Monument. Upon reaching Stepantsminda, visit the iconic <strong>Gergeti Trinity Church</strong>. This day offers some of the most breathtaking mountain views in the country.
-                        </p>
-                    </div>
-
-                    <!-- Day 4 -->
-                    <div class="timeline-item" style="margin-bottom: 3rem; position: relative;">
-                        <span style="position: absolute; left: -2.6rem; top: 0; background: var(--color-primary); color:white; width: 1.2rem; height: 1.2rem; border-radius: 50%; border:2px solid white; box-shadow:0 0 0 2px var(--color-gray-200);"></span>
-                        <h2 style="font-size: 1.5rem; font-family:var(--font-header); font-weight: 700; color:var(--color-dark); margin-bottom: 1rem;">Day 4: Relax & Transit</h2>
-                        <p style="color:var(--color-gray-600); line-height:1.8;">
-                            Return from the mountains and take a breather. Use this as a flexible day to visit local markets like the Dry Bridge Market in Tbilisi, or start your journey towards the west. Recharging is key for the second half of the trip to avoid fatigue.
-                        </p>
-                    </div>
-
-                    <!-- Day 5-6 -->
-                    <div class="timeline-item" style="margin-bottom: 3rem; position: relative;">
-                        <span style="position: absolute; left: -2.6rem; top: 0; background: var(--color-primary); color:white; width: 1.2rem; height: 1.2rem; border-radius: 50%; border:2px solid white; box-shadow:0 0 0 2px var(--color-gray-200);"></span>
-                        <h2 style="font-size: 1.5rem; font-family:var(--font-header); font-weight: 700; color:var(--color-dark); margin-bottom: 1rem;">Day 5-6: Batumi & Black Sea</h2>
-                        <p style="color:var(--color-gray-600); line-height:1.8;">
-                            Travel to the Black Sea coast. <strong>Batumi</strong> offers a contrast to Tbilisi with its modern architecture, long coastal promenade, and beautiful Botanical Garden. Enjoy seafood, visit the Ali & Nino statue, and relax by the sea.
-                        </p>
-                    </div>
-
-                    <!-- Day 7 -->
-                    <div class="timeline-item" style="position: relative;">
-                        <span style="position: absolute; left: -2.6rem; top: 0; background: var(--color-primary); color:white; width: 1.2rem; height: 1.2rem; border-radius: 50%; border:2px solid white; box-shadow:0 0 0 2px var(--color-gray-200);"></span>
-                        <h2 style="font-size: 1.5rem; font-family:var(--font-header); font-weight: 700; color:var(--color-dark); margin-bottom: 1rem;">Day 7: Departure</h2>
-                        <p style="color:var(--color-gray-600); line-height:1.8;">
-                            Transfer to the airport. Whether you fly out of Batumi or return to Tbilisi, ensure you leave plenty of buffer time for travel and check-in procedures. Traffic in Tbilisi can be unpredictable.
-                        </p>
-                    </div>
-
-                </div>
-
-                <!-- Article CTA -->
-                <div class="abt-cta-section" style="margin-top:4rem; padding:2.5rem; background:var(--color-gray-50); border-radius:1.5rem; text-align:center;">
-                    <div style="font-size:2rem; color:var(--color-primary); margin-bottom:1rem;"><i class="fa-solid fa-route"></i></div>
-                    <h3 style="font-size:1.5rem; font-family:var(--font-header); font-weight:700; color:var(--color-dark); margin-bottom:0.5rem;">Want this trip hassle-free?</h3>
-                    <p style="color:var(--color-gray-600); margin-bottom:1.5rem;">Hire a private driver with Georgia Hills for a smooth 7-day experience.</p>
-                    <div class="abt-cta-buttons" style="justify-content:center;">
-                        <a href="booking.html" class="abt-cta-btn-primary">Get a Quote</a>
-                        <a href="https://wa.me/995579088537" class="abt-cta-btn-wa" style="color:var(--color-dark); border:1px solid var(--color-gray-300); background:white;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                    </div>
-                </div>
-
+            <!-- Day 1 & 2 -->
+            <div class="day-block" id="day-1">
+                <span class="day-badge">Day 1 & 2</span>
+                <h2 style="margin-top:0; border:none; padding:0;">Tbilisi Exploration</h2>
+                <img src="https://images.unsplash.com/photo-1544465544-1b71aee9dfa3?auto=format&fit=crop&w=1200&q=80" alt="Tbilisi Old Town" class="day-image">
+                <p>
+                    Start your journey in the vibrant capital. Explore the narrow, winding streets of the <strong>Old Town (Abanotubani)</strong>, where you can relax in the famous subterranean sulfur baths.
+                </p>
+                <p>
+                    Take the aerial cable car up to the <em>Narikala Fortress</em> for panoramic views of the city spanning the Mtkvari River. In the evening, enjoy a walk along Rustaveli Avenue to feel the city's modern pulse, stopping for a traditional dinner of Khinkali and Khachapuri.
+                </p>
             </div>
+
+            <!-- Day 3 -->
+            <div class="day-block" id="day-3">
+                <span class="day-badge">Day 3</span>
+                <h2 style="margin-top:0; border:none; padding:0;">The Mountains of Kazbegi</h2>
+                <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=80" alt="Kazbegi Mountains" class="day-image">
+                <p>
+                    Leave the city behind and head north along the historic <strong>Georgian Military Highway</strong>. Make essential stops at the Ananuri Fortress, perched over the turquoise Zhinvali Reservoir, and the Russia-Georgia Friendship Monument for breathtaking valley views.
+                </p>
+                <p>
+                    Upon reaching Stepantsminda (Kazbegi), hire a 4x4 or hike up to the iconic <strong>Gergeti Trinity Church</strong>. Sitting at 2,170 meters right below Mount Kazbek, this is the most famous viewpoint in Georgia.
+                </p>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="day-block" id="day-4">
+                <span class="day-badge">Day 4</span>
+                <h2 style="margin-top:0; border:none; padding:0;">Relax & Transit West</h2>
+                <p>
+                    Return from the mountains and take a breather. Use this as a flexible transit day. We recommend stopping at the <strong>Dry Bridge Market</strong> in Tbilisi for antique souvenirs before boarding the fast train (or hiring a driver) to the western region of Adjara. Recharging is key for the second half of the trip to avoid travel fatigue.
+                </p>
+            </div>
+
+            <!-- Day 5 & 6 -->
+            <div class="day-block" id="day-5">
+                <span class="day-badge">Day 5 & 6</span>
+                <h2 style="margin-top:0; border:none; padding:0;">Batumi & The Black Sea</h2>
+                <img src="https://images.unsplash.com/photo-1621217646194-eeb18d539578?auto=format&fit=crop&w=1200&q=80" alt="Batumi Coastline" class="day-image">
+                <p>
+                    Welcome to the Black Sea coast. <strong>Batumi</strong> offers a stark contrast to Tbilisi with its modern, quirky architecture, Las Vegas-style casinos, and long coastal promenade.
+                </p>
+                <p>
+                    Spend your days exploring the massive Batumi Botanical Garden, riding the Argo Cable Car, and visiting the moving Ali & Nino statue at sunset. The pebbled beaches are perfect for relaxing during the summer months.
+                </p>
+            </div>
+
+            <!-- Day 7 -->
+            <div class="day-block" id="day-7">
+                <span class="day-badge">Day 7</span>
+                <h2 style="margin-top:0; border:none; padding:0;">Departure</h2>
+                <p>
+                    Transfer to the airport. Whether you fly out of Batumi (BUS) or return to Tbilisi (TBS), ensure you leave plenty of buffer time for travel and check-in procedures. If driving from Batumi to Tbilisi for your flight, allocate at least 5.5 hours for the journey.
+                </p>
+            </div>
+
+            <!-- Booking Widget CTA -->
+            <div class="booking-widget">
+                <h3>Want this trip completely hassle-free?</h3>
+                <p style="font-size:1.1rem; color:rgba(255,255,255,0.8); max-width:500px; margin:0 auto;">
+                    Hire a private driver with Georgia Hills. We handle the routes, the navigation, and the safety, so you can focus entirely on the experience.
+                </p>
+                <a href="booking.html" class="btn-gold">Get a Transfer Quote</a>
+            </div>
+
         </main>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; padding: 4rem 0;">
                 <div>
-                    <div class="footer-brand">
-                        <div class="footer-brand-icon"><i class="fa-solid fa-mountain"></i></div>
-                        <span class="footer-brand-text">Georgia Hills</span>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; color: #fff; font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700;">
+                        <i class="fa-solid fa-mountain" style="color: #C29B57;"></i>
+                        <span>Georgia Hills</span>
                     </div>
-                    <p style="color:var(--color-gray-300); font-size:0.875rem; line-height:1.6; margin-bottom:1.5rem;">Professional transport solutions in Georgia focused on safety, comfort, and local expertise.</p>
-                    <div class="footer-social">
-                        <a href="https://instagram.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://facebook.com/georgiahills" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <button onclick="App.share()" class="social-btn" aria-label="Share Website"><i class="fa-solid fa-share-nodes"></i></button>
-                    </div>
+                    <p style="color: var(--color-gray-300); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Professional transport solutions in Georgia focused on safety, comfort, and local expertise.</p>
                 </div>
                 <div>
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="guide.html">Guide</a></li>
-                        <li><a href="booking.html">Book Now</a></li>
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Quick Links</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="index.html" style="color: var(--color-gray-400); text-decoration: none;">Home</a></li>
+                        <li><a href="services.html" style="color: var(--color-gray-400); text-decoration: none;">Services</a></li>
+                        <li><a href="guide.html" style="color: var(--color-gray-400); text-decoration: none;">Guide</a></li>
                     </ul>
-                </div>
-                <div>
-                    <h3>Contact</h3>
-                    <ul style="color:var(--color-gray-400);">
-                        <li class="footer-contact-item"><i class="fa-solid fa-phone text-accent"></i> <a href="tel:+995579088537" dir="ltr" style="color:inherit;">+995 579 08 85 37</a></li>
-                        <li class="footer-contact-item"><i class="fa-brands fa-whatsapp text-accent"></i> <a href="https://wa.me/995579088537" target="_blank" rel="noopener noreferrer" dir="ltr" style="color:inherit;">+995 579 08 85 37</a></li>
-                        <li class="footer-contact-item"><i class="fa-solid fa-envelope text-accent"></i> info@georgiahills.com</li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="footer-map-container">
-                        <span class="footer-map-overlay"><i class="fa-solid fa-map-location-dot"></i> <span>Our Location</span></span>
-                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">&copy; <span id="year">2026</span> Georgia Hills. All rights reserved.</div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; color: var(--color-gray-400); text-align:center;">
+                &copy; 2026 Georgia Hills. All rights reserved.
+            </div>
         </div>
     </footer>
+
+    <!-- Simple script for TOC highlighting -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.day-block, #intro');
+            const navLinks = document.querySelectorAll('.toc-list a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollY >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-
